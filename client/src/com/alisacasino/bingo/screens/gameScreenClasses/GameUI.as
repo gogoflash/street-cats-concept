@@ -221,6 +221,8 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 				//Game.current.gameScreen.gameScreenController.dropScores(Room.current.stakeData.scorePowerupsDropped, Player.current.cards.length > 2 ? 1.45 : 1.05);
 			}
 			
+			
+			
 			charV.x = - 50;
 			charV.alpha = 1;
 			
@@ -241,7 +243,9 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			TutorialManager.fillCats(gameManager.enemyCats);
 			TutorialManager.refreshCatTargets(gameManager.enemyCats, gameManager.playerCats);
 			
-			foodCount = 2 + Math.round(Math.random()*4);
+			foodCount = 12//2 + Math.round(Math.random()*4);
+			takeFood();
+			
 			
 			playerCatsViews.splice(0, playerCatsViews.length);
 			enemyCatsViews.splice(0, enemyCatsViews.length);
@@ -467,34 +471,39 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 				(playerCatsViews[i] as CatView).showSelected = false;
 			}
 			
-			
-			if (!foodTaken)
-			{
-				var foodImageScale:Number = 0.7;
-				var foodImage:Image;
-				var shiftX:int = (-150 * Math.min(foodCount, 2) * foodImageScale)/2 /*- (172 * foodImageScale) / 2*/;
-				for (i = 0; i < foodCount; i++) 
-				{
-					foodImage = new Image(AtlasAsset.CommonAtlas.getTexture('cats/fish_chest'));
-					foodImage.alignPivot();
-					foodImage.scale = foodImageScale;
-					foodImage.x = shiftX + i%3 * 150* foodImageScale;
-					foodImage.y = -layoutHelper.stageHeight/2 - foodImage.height/2 + 104;
-					foodImage.touchable = false;
-						
-					foodViewsContainer.addChild(foodImage);
-					
-					Starling.juggler.tween(foodImage, 0.6, {delay:(i*0.05) + 0.01, transition:Transitions.EASE_OUT_BACK, y:(Math.floor(i/3)*95* foodImageScale)});
-				}
-				
-				foodTaken = true;
-			}
-			
 				
 			
 			Starling.juggler.delayCall(nextFightAction, 1.8);
 		}
 		
+		private function takeFood():void
+		{
+			var i:int;
+			if (foodTaken)
+				return;
+			
+			var columns:int = 4;	
+			var foodImageScale:Number = 0.7;
+			var foodImage:Image;
+			var shiftX:int = (-150 * Math.min(foodCount, columns-1) * foodImageScale)/2 /*- (172 * foodImageScale) / 2*/;
+			for (i = 0; i < foodCount; i++) 
+			{
+				foodImage = new Image(AtlasAsset.CommonAtlas.getTexture('cats/fish_chest'));
+				foodImage.alignPivot();
+				foodImage.scale = foodImageScale;
+				foodImage.x = shiftX + i % columns * 150 * foodImageScale;
+				foodImage.alpha = 0;
+				foodImage.y = -layoutHelper.stageHeight/2 - foodImage.height/2 + 104;
+				foodImage.touchable = false;
+					
+				foodViewsContainer.addChild(foodImage);
+				
+				Starling.juggler.tween(foodImage, 0.5, {delay:(i*0.02) + 0.3, alpha:20, transition:Transitions.EASE_OUT_BACK, y:(Math.floor(i/columns)*95* foodImageScale)});
+			}
+			
+			foodTaken = true;
+			
+		}
 		
 		private function hideVSandStartButton():void 
 		{
