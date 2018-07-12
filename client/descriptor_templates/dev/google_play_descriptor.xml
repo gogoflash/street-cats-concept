@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<application xmlns="http://ns.adobe.com/air/application/@AIR_VERSION@">
+
+<!-- Adobe AIR Application Descriptor File Template.
+
+	Specifies parameters for identifying, installing, and launching AIR applications.
+
+	xmlns - The Adobe AIR namespace: http://ns.adobe.com/air/application/3.5
+			The last segment of the namespace specifies the version 
+			of the AIR runtime required for this application to run.
+			
+	minimumPatchLevel - The minimum patch level of the AIR runtime required to run 
+			the application. Optional.
+-->
+
+	<!-- A universally unique application identifier. Must be unique across all AIR applications.
+	Using a reverse DNS-style name as the id is recommended. (Eg. com.example.ExampleApplication.) Required. -->
+	<id>@DEV_APP_ID@</id>
+
+	<!-- Used as the filename for the application. Required. -->
+	<filename>StreetCatsDEV</filename>
+
+	<!-- The name that is displayed in the AIR application installer. 
+	May have multiple values for each language. See samples or xsd schema file. Optional. -->
+	<name>StreetCats Dev</name>
+	
+	<!-- A string value of the format <0-999>.<0-999>.<0-999> that represents application version which can be used to check for application upgrade. 
+	Values can also be 1-part or 2-part. It is not necessary to have a 3-part value.
+	An updated version of application must have a versionNumber value higher than the previous version. Required for namespace >= 2.5 . -->
+	<versionNumber>@VERSION@</versionNumber>
+		         
+	<!-- A string value (such as "v1", "2.5", or "Alpha 1") that represents the version of the application, as it should be shown to users. Optional. -->
+	<versionLabel>@VERSION@</versionLabel>
+	
+	
+
+	<!-- Description, displayed in the AIR application installer.
+	May have multiple values for each language. See samples or xsd schema file. Optional. -->
+	<!-- <description></description> -->
+
+	<!-- Copyright information. Optional -->
+	<copyright>© 2017 Alisa LLC</copyright>
+
+	<!-- Settings for the application's initial window. Required. -->
+	<initialWindow>
+		<content>StreetCats.swf</content>
+		<title>StreetCats Dev</title>
+        <aspectRatio>landscape</aspectRatio>
+        <renderMode>direct</renderMode>
+		<autoOrients>true</autoOrients>
+        <fullScreen>true</fullScreen>
+        <visible>true</visible>
+		<depthAndStencil>true</depthAndStencil>
+    </initialWindow>
+	
+	<icon>
+		<image48x48>icons/icon_48.png</image48x48>
+		<image57x57>icons/icon_57.png</image57x57>
+		<image72x72>icons/icon_72.png</image72x72>
+		<image76x76>icons/icon_76.png</image76x76>
+		<image114x114>icons/icon_114.png</image114x114>
+		<image120x120>icons/icon_120.png</image120x120>
+		<image144x144>icons/icon_144.png</image144x144>
+		<image152x152>icons/icon_152.png</image152x152>
+		<image512x512>icons/icon_512.png</image512x512>
+		<image1024x1024>icons/icon_1024.png</image1024x1024>
+	</icon>
+	
+	<android>
+        <manifestAdditions><![CDATA[
+			<manifest android:installLocation="auto">
+				<uses-sdk android:minSdkVersion="16" android:targetSdkVersion="19" />
+	            <uses-permission android:name="com.android.vending.BILLING" />
+	            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+			    <uses-permission android:name="android.permission.INTERNET"/>
+			    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+			    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
+			    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+			    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+			    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+			    <uses-permission android:name="android.permission.VIBRATE"/>
+			    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+			    <permission android:name="air.com.alisagaming.arenabingodev.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+				<uses-permission android:name="air.com.alisagaming.arenabingodev.permission.C2D_MESSAGE" />
+				<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+			    <application>
+
+                    <activity android:name="com.freshplanet.ane.AirPushNotification.NotificationActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+                    <receiver android:name="com.freshplanet.ane.AirPushNotification.C2DMBroadcastReceiver"
+						android:permission="com.google.android.c2dm.permission.SEND">
+
+						<!-- Receive the actual message -->
+						<intent-filter>
+							<action android:name="com.google.android.c2dm.intent.RECEIVE" />
+							<category android:name="air.com.alisagaming.arenabingodev" />
+						</intent-filter>
+
+						<!-- Receive the registration id -->
+						<intent-filter>
+							<action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+							<category android:name="air.com.alisagaming.arenabingodev" />
+						</intent-filter>
+					</receiver>
+
+					<!-- Local notification -->
+					<service android:name="com.freshplanet.ane.AirPushNotification.LocalNotificationService"/>
+					<receiver android:name="com.freshplanet.ane.AirPushNotification.LocalBroadcastReceiver" android:process=":remote"></receiver>
+
+                    <activity android:name="com.arellomobile.android.push.PushWebview"/>
+                    <activity android:name="com.arellomobile.android.push.MessageActivity"/>
+                    <activity android:name="com.arellomobile.android.push.PushHandlerActivity"/>
+                    <activity android:name="com.pushwoosh.nativeExtensions.PushActivity">
+                        <intent-filter>
+                            <action android:name="air.com.alisagaming.arenabingodev.MESSAGE"/>
+                            <category android:name="android.intent.category.DEFAULT"/>
+                        </intent-filter>
+                    </activity>
+                    <service android:name="com.arellomobile.android.push.PushGCMIntentService"/>
+                    <receiver android:name="com.arellomobile.android.push.AlarmReceiver"></receiver>
+
+					<activity android:excludeFromRecents="false">
+						<intent-filter>
+							<action android:name="android.intent.action.MAIN"/>
+							<category android:name="android.intent.category.LAUNCHER"/>
+						</intent-filter>
+						<intent-filter>
+                			<action android:name="android.intent.action.VIEW" />
+                			<category android:name="android.intent.category.BROWSABLE" />
+                			<category android:name="android.intent.category.DEFAULT" />
+                			<data android:scheme="fb1759615694368865" />
+            			</intent-filter>
+					</activity>
+
+					<receiver android:name="com.appsflyer.MultipleInstallBroadcastReceiver" android:exported="true">
+					  <intent-filter>
+						 <action android:name="com.android.vending.INSTALL_REFERRER" />
+					  </intent-filter>
+					</receiver>
+					
+					<provider android:authorities="com.facebook.app.FacebookContentProvider1759615694368865" android:name="com.facebook.FacebookContentProvider" android:exported="true" />
+					<meta-data android:name="com.facebook.sdk.ApplicationId" android:value="fb1759615694368865"/>
+					<meta-data android:name="com.facebook.sdk.ApplicationName" android:value="StreetCats Dev" />
+					<activity android:name="com.facebook.FacebookActivity"
+							  android:theme="@android:style/Theme.Translucent.NoTitleBar"
+							  android:label="Login" />
+					
+					<activity android:name="com.milkmangames.extensions.android.PurchaseWrapActivity" android:configChanges="keyboardHidden|orientation|screenSize" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
+					
+					<meta-data android:name="air.com.alisagaming.arenabingodev" android:value="1759615694368865"/>
+                </application>
+			</manifest>
+			
+		]]></manifestAdditions>
+    </android>
+	
+	<extensions>
+	    <extensionID>com.milkmangames.extensions.AndroidIAB</extensionID>
+    	
+    	<extensionID>com.amazon.device.iap.cpt.AmazonIapV2Extension</extensionID>
+    	<extensionID>com.milkmangames.extensions.StoreKit</extensionID>
+    	
+    	<extensionID>com.appsflyer.adobeair</extensionID>
+
+    	<extensionID>com.milkmangames.extensions.GoViral</extensionID>
+    	<extensionID>com.mesmotronic.ane.fullscreen</extensionID>
+		<extensionID>com.freshplanet.ane.AirPushNotification</extensionID>
+		<extensionID>com.digitalstrawberry.ane.deviceUtils</extensionID>
+    </extensions>
+</application>

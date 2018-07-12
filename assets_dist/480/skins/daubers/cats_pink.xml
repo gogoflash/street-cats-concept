@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:6080852bef4433c9fd51046dac9c41e9:12c30a65ab83143d210bbf5ba74b14c9:151c4f7905393fa0d296e2ef5fde69e3$ -->
+<TextureAtlas imagePath="cats_pink.png" width="128" height="256">
+    <SubTexture name="daub" x="1" y="1" width="57" height="57"/>
+    <SubTexture name="icon" x="60" y="60" width="47" height="41" frameX="-5" frameY="-8" frameWidth="57" frameHeight="57"/>
+    <SubTexture name="magicdaub" x="60" y="1" width="57" height="57"/>
+    <SubTexture name="magicdaub_2x" x="1" y="60" width="57" height="57"/>
+    <SubTexture name="particle_0" x="60" y="103" width="20" height="20"/>
+    <SubTexture name="particle_1" x="82" y="103" width="20" height="20"/>
+    <SubTexture name="particle_2" x="104" y="103" width="20" height="20"/>
+    <SubTexture name="particle_x2_0" x="1" y="119" width="20" height="20"/>
+    <SubTexture name="particle_x2_1" x="23" y="119" width="20" height="20"/>
+    <SubTexture name="particle_x2_2" x="45" y="125" width="20" height="20"/>
+</TextureAtlas>

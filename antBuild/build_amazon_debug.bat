@@ -1,0 +1,2 @@
+CALL ant build_amazon_debug
+PAUSE

@@ -1,0 +1,537 @@
+<?xml version="1.0"?>
+<project name="Bingo packaging" default="main" basedir="." xmlns:if="ant:if" xmlns:unless="ant:unless">
+
+    <import file="platform_targets/android.xml"/>
+
+    <property file="build.properties"/>
+    <property file="version.properties"/>
+
+    <property name="local_build" value="false"/>
+    <property name="telemetry" value="false"/>
+    <property name="dev_build" value="false"/>
+    <property name="debug_build" value="false"/>
+    <property name="is_ios_build" value="false"/>
+    <property name="is_google_play_build" value="false"/>
+    <property name="is_amazon_build" value="false"/>
+    <property name="is_android_build" value="false"/>
+    <property name="is_facebook_build" value="false"/>
+
+
+    <target name="main" depends="simulator"/>
+
+
+    <target name="full_build" depends="prepare_dist_dir, build_ios, build_google_play, build_amazon, build_facebook"/>
+	
+	<target name="full_build_dev">
+        <antcall target="full_build">
+            <param name="dev_build" value="true"/>
+        </antcall>
+    </target>
+
+    <target name="full_build_debug">
+        <antcall target="full_build">
+            <param name="dev_build" value="true"/>
+            <param name="debug_build" value="true"/>
+        </antcall>
+    </target>
+	
+	<target name="simulator" depends="prepare_dist_dir" >
+		<antcall target="compile_swf">
+			<param name="debug_build" value="true"/>
+		</antcall>
+		<copy tofile="${RELEASE_DIR}/temp_assets/StreetCats.swf">
+			<file file="${RELEASE_DIR}/StreetCats.swf"/>
+		</copy>
+		<exec executable="${AIR_ADL}" failonerror="true">
+			<arg line="-profile mobileDevice"/>
+			<arg line="-extdir ${ANE_DIR}/unpacked/"/>  
+			<arg line="${RELEASE_DIR}/temp_descriptors/sim_descriptor.xml"/>
+			<arg line="-root-directory ${RELEASE_DIR}/temp_assets"/>  
+		</exec>
+	</target>
+
+    <target name="build_ios_dev">
+        <antcall target="build_ios">
+            <param name="dev_build" value="true"/>
+        </antcall>
+    </target>
+	
+	<target name="build_ios_dev_debug">
+        <antcall target="build_ios">
+            <param name="dev_build" value="true"/>
+            <param name="debug_build" value="true"/>
+        </antcall>
+    </target>
+	
+	<target name="build_ios_debug">
+        <antcall target="build_ios">
+            <param name="debug_build" value="true"/>
+        </antcall>
+    </target>
+	
+	<target name="build_ios_telemetry">
+        <antcall target="build_ios">
+            <param name="telemetry" value="true"/>
+        </antcall>
+    </target>
+
+    <target name="build_ios">
+        <antcall target="build_ios_internal">
+            <param name="is_ios_build" value="true"/>
+        </antcall>
+    </target>
+	
+	<target name="build_ios_internal" depends="prepare_dist_dir">
+        <antcall target="build_and_package">
+            <param name="is_ios_build" value="true"/>
+        </antcall>
+    </target>
+
+    <target name="build_amazon_debug">
+        <antcall target="build_amazon">
+            <param name="dev_build" value="true"/>
+            <param name="debug_build" value="true"/>
+        </antcall>
+    </target>
+
+    <target name="build_amazon">
+        <antcall target="build_android">
+            <param name="is_amazon_build" value="true"/>
+        </antcall>
+    </target>
+	
+	 <target name="build_amazon_dev">
+        <antcall target="build_android">
+            <param name="is_amazon_build" value="true"/>
+            <param name="dev_build" value="true"/>
+        </antcall>
+    </target>
+
+    <target name="build_google_play">
+        <antcall target="build_android">
+            <param name="is_google_play_build" value="true"/>
+        </antcall>
+    </target>
+	
+	<target name="build_google_play_dev">
+        <antcall target="build_android">
+            <param name="is_google_play_build" value="true"/>
+            <param name="dev_build" value="true"/>
+        </antcall>
+    </target>
+
+    <target name="build_android" depends="prepare_dist_dir">
+        <antcall target="build_and_package">
+            <param name="is_android_build" value="true"/>
+        </antcall>
+    </target>
+
+    <target name="build_facebook" depends="prepare_dist_dir">
+        <antcall target="compile_swf">
+            <param name="is_facebook_build" value="true"/>
+        </antcall>
+    </target>
+	
+	<target name="build_facebook_dev" depends="prepare_dist_dir">
+        <antcall target="compile_swf">
+            <param name="dev_build" value="true"/>
+            <param name="is_facebook_build" value="true"/>
+        </antcall>
+    </target>
+
+    <target name="build_facebook_debug">
+        <antcall target="compile_swf">
+            <param name="dev_build" value="true"/>
+            <param name="is_facebook_build" value="true"/>
+        </antcall>
+    </target>
+
+    <target name="build_and_package">
+        <antcall target="compile_swf"/>
+        <antcall target="package_android" if:true="${is_android_build}"/>
+		<antcall target="modify_amazon" if:true="${is_amazon_build}"/>
+        <antcall target="package_ios" if:true="${is_ios_build}"/>
+    </target>
+
+
+    <target name="prepare_dist_dir" depends="create_dir, cleanup, transfer_assets, transfer_descriptors"/>
+
+    <target name="create_dir">
+        <mkdir dir="${RELEASE_DIR}"/>
+    </target>
+
+
+    <target name="cleanup">
+        <echo>Cleanup target called</echo>
+        <delete dir="${RELEASE_DIR}/temp_assets"/>
+		<delete dir="${RELEASE_DIR}/temp_descriptors"/>
+    </target>
+
+    <target name="transfer_assets" depends="cleanup">
+        <copy todir="${RELEASE_DIR}/temp_assets">
+            <fileset dir="${ASSET_DIR}">
+                <!-- Helper images -->
+                <include name="/*.png" />
+				
+				<!-- Fonts -->
+				<include name="**/fonts/SharkLatin.png" />
+                <include name="**/fonts/SharkLatin.fnt" />
+
+                <!-- All animations -->
+                <include name="**/animations/**/*.zip" />
+
+                <!-- Necessary atlases -->
+                <include name="**/atlases/common.atf" />
+                <include name="**/atlases/common.xml" />
+				
+				<include name="**/atlases/common2.atf" />
+                <include name="**/atlases/common2.xml" />
+                
+				<include name="**/atlases/digits_font.fnt"/>
+				<include name="**/atlases/digits_font.png"/>
+				
+                <include name="**/atlases/dude.atf" />
+                <include name="**/atlases/dude.xml" />
+				
+                <include name="**/atlases/game.atf" />
+                <include name="**/atlases/game.xml" />
+				
+                <include name="**/atlases/loading.atf" />
+                <include name="**/atlases/loading.xml" />
+				
+                <include name="**/atlases/lobby.atf" />
+                <include name="**/atlases/lobby.xml" />
+				
+				<include name="**/atlases/slots_minigame.atf" />
+                <include name="**/atlases/slots_minigame.xml" />
+				
+				<include name="**/atlases/scratch_card.atf" />
+                <include name="**/atlases/scratch_card.xml" />
+				
+				<include name="**/atlases/wbt.atf" />
+                <include name="**/atlases/wbt.xml" />
+				
+				
+                <!-- Backgrounds  -->
+                <include name="**/backgrounds/*.jpg" />
+
+				<!-- Default customizers -->
+				
+				<include name="**/images/customizers/cards/classic_blue.png" />
+				<include name="**/images/customizers/daubers/classic_blue.png" />
+				<include name="**/images/customizers/voiceovers/default.png" />
+
+				<include name="**/skins/daubers/classic_blue.atf" />
+				<include name="**/skins/daubers/classic_blue.xml" />
+				<include name="**/skins/mobile/cards/classic_blue.atf" />
+				<include name="**/skins/mobile/cards/classic_blue.xml" />
+				<include name="**/skins/tablet/cards/classic_blue.atf" />
+				<include name="**/skins/tablet/cards/classic_blue.xml" />
+				
+				<include name="**/cards/x2.atf" />
+				<include name="**/cards/x2.xml" />
+				
+                <!-- App icons -->
+                <include name="**/icons/**" />
+
+                <!-- SFX and voiceovers-->
+                <include name="**/sounds/sfx/**" />
+                <include name="**/sounds/voiceover/default.zip" />
+				<include name="**/sounds/voiceover/default.mp3" />
+				
+				<include name="**/sounds/voiceover/charles.mp3" />
+				<include name="**/sounds/voiceover/jessica.mp3" />
+				<include name="**/sounds/voiceover/john.mp3" />
+				<include name="**/sounds/voiceover/ricardo.mp3" />
+				
+				<!-- Particles-->
+				<include name="**/particles/**" />
+
+                <!-- Music -->
+				<include name="**/sounds/tracks/*.mp3"/>
+				
+				<!-- Collectible card shirts -->
+				<include name="**/shirt.png"/>
+                
+            </fileset>
+        </copy>
+		
+		
+		<copy todir="${RELEASE_DIR}/temp_assets" if:true="${is_ios_build}">
+            <fileset dir="${ASSET_DIR}">
+				<include name="**/Assets.car"/>
+            </fileset>
+        </copy>
+		
+		<copy todir="${RELEASE_DIR}/temp_assets" if:true="${is_amazon_build}">
+            <fileset dir="${ASSET_DIR}">
+				<include name="**/api_key.txt"/>
+            </fileset>
+        </copy>
+		
+		
+    </target>
+
+    <target name="transfer_descriptors">
+        <copy todir="${RELEASE_DIR}/temp_descriptors" force="true">
+            <fileset dir="${DESCRIPTOR_TEMPLATE_DIR}/prod" unless:true="${dev_build}">
+                <include name="*.xml"/>
+            </fileset>
+            <fileset dir="${DESCRIPTOR_TEMPLATE_DIR}/dev" if:true="${dev_build}">
+                <include name="*.xml"/>
+            </fileset>
+            <filterset>
+                <filter token="VERSION" value="${VERSION_NUMBER}"/>
+                <filter token="APP_ID" value="${APP_ID}"/>
+                <filter token="DEV_APP_ID" value="${DEV_APP_ID}"/>
+                <filter token="AIR_VERSION" value="${AIR_VERSION}"/>
+            </filterset>
+        </copy>
+    </target>
+
+    <target name="compile_swf">
+        <echo>Compiling swf</echo>
+        <echo if:true="${is_google_play_build}">for Google Play</echo>
+        <echo if:true="${is_amazon_build}">for Amazon</echo>
+        <echo if:true="${is_ios_build}">for iOS</echo>
+        <echo if:true="${is_facebook_build}">for Facebook</echo>
+        <echo>Dev build: ${dev_build}</echo>
+        <echo>Debug build: ${debug_build}</echo>
+
+        <tstamp>
+            <format property="BUILD_TIMESTAMP" pattern="yyyy-MM-dd-HH-mm" timezone="UTC"/>
+        </tstamp>
+
+        <exec executable="${AIR_MXMLC}" failonerror="true">
+            <arg line="+configname=air"/>
+
+            <arg line="'${SOURCE_DIR}/com/alisacasino/bingo/Preloader.as'"/>
+            <arg line="-output='${RELEASE_DIR}/StreetCats.swf'"/>
+
+            <arg line="-source-path='${SOURCE_DIR}'"/>
+            <arg line="-source-path='${LIB_SOURCE_DIR}'"/>
+
+            <arg line="-library-path+=${SWC_DIR}"/>
+			
+			<arg line="-frame=MainFrameLabel,com.alisacasino.bingo.Main"/>
+
+            <arg line="-external-library-path+=${ANE_DIR}/shared"/>
+            <arg line="-external-library-path+=${ANE_DIR}/android" unless:true="${is_ios_build}"/>
+            <!--<arg line="-external-library-path+=${ANE_DIR}/ios" if:true="${is_ios_build}"/>-->
+
+            <arg line="-debug=true" if:true="${debug_build}"/>
+            <arg line="-debug=false" unless:true="${debug_build}"/>
+
+            <arg line="-define+=CONFIG::devBuild,true" if:true="${dev_build}"/>
+            <arg line="-define+=CONFIG::devBuild,false" unless:true="${dev_build}"/>
+
+            <arg line="-define+=CONFIG::amazonBuild,true" if:true="${is_amazon_build}"/>
+            <arg line="-define+=CONFIG::amazonBuild,false" unless:true="${is_amazon_build}"/>
+
+            <arg line="-advanced-telemetry" if:true="${telemetry}" /> 
+            <arg line="-inline"/>
+            <arg line="-omit-trace-statements=true"/>
+
+            <arg line=""/>
+        </exec>
+        <copy tofile="${RELEASE_DIR}/Main-${BUILD_TIMESTAMP}.swf" if:true="${is_facebook_build}">
+			<file file="${RELEASE_DIR}/StreetCats.swf"/>
+		</copy>
+		<copy tofile="${RELEASE_DIR}/Main.swf" if:true="${is_facebook_build}">
+			<file file="${RELEASE_DIR}/StreetCats.swf"/>
+		</copy>
+		
+		<exec executable="${AIR_MXMLC}" failonerror="true">
+            <arg line="+configname=air"/>
+
+            <arg line="'${WORKER_SOURCE_DIR}/BingoWorker.as'"/>
+            <arg line="-output='${WORKER_RELEASE_DIR}/${WORKER_NAME}.swf'"/>
+
+            <arg line="-source-path='${WORKER_SOURCE_DIR}'"/>
+
+            <arg line="-debug=true" if:true="${debug_build}"/>
+            <arg line="-debug=false" unless:true="${debug_build}"/>
+
+            <arg line="-advanced-telemetry" if:true="${telemetry}" /> 
+            <arg line="-inline"/>
+            <arg line="-omit-trace-statements=true"/>
+		</exec>
+		
+		<copy tofile="${RELEASE_DIR}/${WORKER_NAME}.swf">
+			<file file="${WORKER_RELEASE_DIR}/${WORKER_NAME}.swf"/>
+		</copy>
+		
+    </target>
+
+    <target name="package_android">
+
+        <condition property="google_play_dev">
+            <and>
+                <istrue value="${is_google_play_build}"/>
+                <istrue value="${dev_build}"/>
+            </and>
+        </condition>
+        <condition property="google_play_release">
+            <and>
+                <istrue value="${is_google_play_build}"/>
+                <isfalse value="${dev_build}"/>
+            </and>
+        </condition>
+        <condition property="amazon_dev">
+            <and>
+                <istrue value="${is_amazon_build}"/>
+                <istrue value="${dev_build}"/>
+            </and>
+        </condition>
+        <condition property="amazon_release">
+            <and>
+                <istrue value="${is_amazon_build}"/>
+                <isfalse value="${dev_build}"/>
+            </and>
+        </condition>
+
+        <echo>Packaging</echo>
+        <echo if:true="${google_play_dev}">Google Play dev</echo>
+        <echo if:true="${google_play_release}">Google Play release</echo>
+        <echo if:true="${amazon_dev}">Amazon dev</echo>
+        <echo if:true="${amazon_release}">Amazon release</echo>
+        <echo if:true="${debug_build}">Debug</echo>
+		
+		
+		<echo if:true="${is_amazon_build}">Copying api_key.txt</echo>
+		<copy todir="${RELEASE_DIR}/temp_assets" force="true" if:true="${is_amazon_build}">
+            <fileset dir="${DESCRIPTOR_TEMPLATE_DIR}">
+                <include name="api_key.txt"/>
+            </fileset>
+        </copy>
+
+        <exec executable="${AIR_ADT}" failonerror="true">
+            <!-- To package debug apk -->
+            <arg line="-package"/>
+
+            <arg line="-target apk-captive-runtime" unless:true="${debug_build}"/>
+            <arg line="-target apk-debug" if:true="${debug_build}"/>
+            
+			
+
+
+            <arg line="-storetype ${AIR_STORETYPE}"/>
+            <arg line="-keystore ${CERT_DIR}/${ANDROID_CERT_FILE}" unless:true="${dev_build}"/>
+            <arg line="-keystore ${CERT_DIR}/${ANDROID_DEV_CERT_FILE}" if:true="${dev_build}"/>
+            <arg line="-storepass ${ANDROID_CERT_PASS}" unless:true="${dev_build}"/>
+            <arg line="-storepass ${ANDROID_DEV_CERT_PASS}" if:true="${dev_build}"/>
+
+            <!--Path to package-->
+
+            <arg line="${RELEASE_DIR}/${VERSION_NUMBER}-GooglePlay.apk" if:true="${google_play_release}"/>
+            <arg line="${RELEASE_DIR}/${VERSION_NUMBER}-GooglePlay-dev.apk" if:true="${google_play_dev}"/>
+            <arg line="${RELEASE_DIR}/${VERSION_NUMBER}-Amazon.apk" if:true="${amazon_release}"/>
+            <arg line="${RELEASE_DIR}/${VERSION_NUMBER}-Amazon-dev.apk" if:true="${amazon_dev}"/>
+
+            <!-- Descriptor XMLs -->
+            <arg line="${RELEASE_DIR}/temp_descriptors/${GOOGLE_PLAY_DESCRIPTOR}" if:true="${is_google_play_build}"/>
+            <arg line="${RELEASE_DIR}/temp_descriptors/${AMAZON_DESCRIPTOR}" if:true="${is_amazon_build}"/>
+
+            <!-- Source swf and asset dir -->
+            <arg line="-C ${RELEASE_DIR} ${APP_NAME}.swf" />
+            <arg line="-C ${RELEASE_DIR}/temp_assets ." />
+			<arg line="-C ${RELEASE_DIR} ${WORKER_NAME}.swf" />
+
+            <!-- ANE dirs -->
+            <arg line="-extdir ${APP_HOME_DIR}/ane/shared" />
+            <arg line="-extdir ${APP_HOME_DIR}/ane/android"/>
+        </exec>
+    </target>
+		
+	<target name="modify_amazon">
+		<property name="AMAZON_RELEASE_PATH" value="${RELEASE_DIR}/${VERSION_NUMBER}-Amazon" unless:true="${dev_build}"/>
+		<property name="AMAZON_RELEASE_PATH" value="${RELEASE_DIR}/${VERSION_NUMBER}-Amazon-dev" if:true="${dev_build}"/>
+		
+		<delete dir="${AMAZON_RELEASE_PATH}"/>
+		
+		<sleep seconds="2"/>
+		
+		<exec executable="${APKTOOL}" failonerror="true">
+			<arg line="d -f ${AMAZON_RELEASE_PATH}.apk -o ${AMAZON_RELEASE_PATH}"/>
+		</exec>
+		
+		<echo>Appending amazon-specific tags to manifest</echo>
+		<replace file="${AMAZON_RELEASE_PATH}/AndroidManifest.xml" failOnNoReplacements="true">
+			<replacetoken><![CDATA[xmlns:android="http://schemas.android.com/apk/res/android"]]></replacetoken>
+			<replacevalue><![CDATA[xmlns:android="http://schemas.android.com/apk/res/android" xmlns:amazon="http://schemas.amazon.com/apk/res/android"]]></replacevalue>
+		</replace>
+		<replace file="${AMAZON_RELEASE_PATH}/AndroidManifest.xml" failOnNoReplacements="true">
+			<replacetoken><![CDATA[<application android:hardwareAccelerated="false" android:icon="@mipmap/icon" android:label="@string/app_name">]]></replacetoken>
+			<replacevalue><![CDATA[<application android:hardwareAccelerated="false" android:icon="@mipmap/icon" android:label="@string/app_name">\n<amazon:enable-feature android:name="com.amazon.device.messaging" android:required="true"/>]]></replacevalue>
+		</replace>
+		<echo>Done appending</echo>
+		 
+		<exec executable="${APKTOOL}" failonerror="true">
+			<arg line="b ${AMAZON_RELEASE_PATH} -o ${AMAZON_RELEASE_PATH}-unaligned.apk"/>
+		</exec>
+		
+		<exec executable="${JARSIGNER}" failonerror="true">
+			<arg line="-verbose"/>
+			<arg line="-storetype ${AIR_STORETYPE}"/>
+			<arg line="-keystore ${CERT_DIR}/${ANDROID_CERT_FILE}" unless:true="${dev_build}"/>
+            <arg line="-keystore ${CERT_DIR}/${ANDROID_DEV_CERT_FILE}" if:true="${dev_build}"/>
+			<arg line="-storepass ${ANDROID_CERT_PASS}" unless:true="${dev_build}"/>
+            <arg line="-storepass ${ANDROID_DEV_CERT_PASS}" if:true="${dev_build}"/>
+			<arg line="${AMAZON_RELEASE_PATH}-unaligned.apk"/>
+			<arg line="1"/> <!-- keystore alias, not used anywhere else -->
+		</exec>
+		
+		<exec executable="${ZIPALIGN}" failonerror="true">
+			<arg line="-f -v 4"/>
+			<arg line="${AMAZON_RELEASE_PATH}-unaligned.apk"/>
+			<arg line="${AMAZON_RELEASE_PATH}.apk"/>
+		</exec>
+		
+		<delete dir="${AMAZON_RELEASE_PATH}"/>
+		<delete file="${AMAZON_RELEASE_PATH}-unaligned.apk"/>
+		
+	</target>
+
+    <!--<target name="debug_ios_package" depends="set_ios_properties, package_ios"/>-->
+
+    <target name="package_ios">
+        <exec executable="${AIR_ADT}" failonerror="true">
+            <!-- To package debug apk -->
+            <arg line="-package"/>
+
+            <arg line="-target ipa-app-store" unless:true="${debug_build}"/>
+            <arg line="-target ipa-debug" if:true="${debug_build}"/>
+			
+			<arg line="-sampler" if:true="${telemetry}"/>
+
+            <arg line="-storetype ${AIR_STORETYPE}"/>
+            <arg line="-keystore ${CERT_DIR}/${IOS_CERT_FILE}" unless:true="${dev_build}"/>
+            <arg line="-keystore ${CERT_DIR}/${IOS_DEV_CERT_FILE}" if:true="${dev_build}"/>
+            <arg line="-storepass ${IOS_CERT_PASS}" unless:true="${dev_build}"/>
+            <arg line="-storepass ${IOS_DEV_CERT_PASS}" if:true="${dev_build}"/>
+
+            <arg line="-provisioning-profile ${CERT_DIR}/${IOS_PROVISIONING_FILE_DEV}" if:true="${dev_build}"/>
+            <arg line="-provisioning-profile ${CERT_DIR}/${IOS_PROVISIONING_FILE}" unless:true="${dev_build}"/>
+
+            <!--Path to package-->
+            <arg line="${RELEASE_DIR}/${VERSION_NUMBER}-iOS.ipa" unless:true="${dev_build}"/>
+            <arg line="${RELEASE_DIR}/${VERSION_NUMBER}-iOS-dev.ipa" if:true="${dev_build}"/>
+
+            <!-- Descriptor XMLs -->
+            <arg line="${RELEASE_DIR}/temp_descriptors/${IOS_DESCRIPTOR}"/>
+
+            <!-- Source swf and asset dir -->
+            <arg line="-C ${RELEASE_DIR} ${APP_NAME}.swf" />
+            <arg line="-C ${RELEASE_DIR}/temp_assets ." />
+			<arg line="-C ${RELEASE_DIR} ${WORKER_NAME}.swf" />
+
+            <!-- ANE dirs -->
+            <arg line="-extdir ${APP_HOME_DIR}/ane/shared" />
+            <!--<arg line="-extdir ${APP_HOME_DIR}/ane/ios"/>-->
+			
+			
+        </exec>
+    </target>
+
+
+</project>

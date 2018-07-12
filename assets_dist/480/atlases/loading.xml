@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker https://www.codeandweb.com/texturepacker -->
+<!-- $TexturePacker:SmartUpdate:5c9d20bd1e6728ae264015f11fa11434:87e4f074f893a99ed3c824bb3647d2dd:bf474e6deddfb213345187fa4d0f9838$ -->
+<TextureAtlas imagePath="loading.png" width="256" height="512">
+    <SubTexture name="dialogs/back_bg" x="50" y="378" width="21" height="21"/>
+    <SubTexture name="dialogs/buttons/blue_base" x="1" y="352" rotated="true" width="47" height="88"/>
+    <SubTexture name="dialogs/buttons/close" x="28" y="442" width="38" height="39"/>
+    <SubTexture name="dialogs/buttons/empty_square" x="236" y="63" width="3" height="3" frameX="0" frameY="0" frameWidth="7" frameHeight="7"/>
+    <SubTexture name="dialogs/buttons/green_button_big_slice" x="1" y="442" width="25" height="53"/>
+    <SubTexture name="dialogs/window_bg" x="236" y="28" width="15" height="3"/>
+    <SubTexture name="logo_full" x="1" y="1" width="233" height="125" frameX="-47" frameY="-23" frameWidth="335" frameHeight="169"/>
+    <SubTexture name="logo_glow" x="236" y="63" width="3" height="3" frameX="0" frameY="0" frameWidth="252" frameHeight="165"/>
+    <SubTexture name="misc/progress_ball" x="236" y="17" width="15" height="9"/>
+    <SubTexture name="misc/progress_bg" x="236" y="33" rotated="true" width="12" height="28"/>
+    <SubTexture name="misc/progress_line" x="250" y="40" rotated="true" width="4" height="310" frameX="-2" frameY="0" frameWidth="312" frameHeight="4"/>
+    <SubTexture name="misc/star_0" x="50" y="352" rotated="true" width="23" height="24" frameX="0" frameY="-1" frameWidth="24" frameHeight="24"/>
+    <SubTexture name="misc/star_1" x="250" y="33" width="5" height="5"/>
+    <SubTexture name="misc/star_2" x="28" y="483" rotated="true" width="27" height="28" frameX="0" frameY="-1" frameWidth="28" frameHeight="28"/>
+    <SubTexture name="misc/star_4" x="57" y="483" rotated="true" width="27" height="28" frameX="0" frameY="-1" frameWidth="28" frameHeight="28"/>
+    <SubTexture name="misc/white_star" x="236" y="1" width="15" height="14"/>
+</TextureAtlas>

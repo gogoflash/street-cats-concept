@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:07cc0475fc86bded0fb0510be76ec3f3:49864bae304408bf4cbf2d8ccfe847a1:1debc98b261a4b7907a06433f58199e6$ -->
+<TextureAtlas imagePath="alisa_bingo.png" width="256" height="256">
+    <SubTexture name="daub" x="1" y="1" width="86" height="86"/>
+    <SubTexture name="icon" x="1" y="177" width="65" height="73" frameX="-10" frameY="-7" frameWidth="86" frameHeight="86"/>
+    <SubTexture name="magicdaub" x="1" y="89" width="86" height="86"/>
+    <SubTexture name="magicdaub_2x" x="102" y="1" width="86" height="86"/>
+    <SubTexture name="particle_0" x="68" y="212" rotated="true" width="32" height="33"/>
+    <SubTexture name="particle_1" x="190" y="35" width="32" height="32"/>
+    <SubTexture name="particle_2" x="190" y="1" width="33" height="32"/>
+    <SubTexture name="particle_3" x="225" y="1" width="30" height="27"/>
+    <SubTexture name="particle_x2_0" x="190" y="69" width="32" height="32"/>
+    <SubTexture name="particle_x2_1" x="224" y="59" width="31" height="31"/>
+    <SubTexture name="particle_x2_2" x="68" y="177" width="32" height="33"/>
+    <SubTexture name="particle_x2_3" x="225" y="30" width="30" height="27"/>
+</TextureAtlas>

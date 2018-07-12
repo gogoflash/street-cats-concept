@@ -1,0 +1,17 @@
+	<extension xmlns="http://ns.adobe.com/air/extension/3.5">
+	  <id>com.milkmangames.extensions.AndroidIAB</id>
+	  <versionNumber>1</versionNumber>
+	  <platforms>
+		<platform name="Android-ARM">
+	      <applicationDeployment>
+	        <nativeLibrary>AndroidIABAPI.jar</nativeLibrary>
+	        <initializer>com.milkmangames.extensions.android.iab.IABExtension</initializer>
+	        <finalizer>com.milkmangames.extensions.android.iab.IABExtension</finalizer>
+	      </applicationDeployment>
+	    </platform>
+		<platform name="default"> 
+	      <applicationDeployment>
+	      </applicationDeployment>
+		</platform> 
+	  </platforms>
+	</extension>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<application xmlns="http://ns.adobe.com/air/application/@AIR_VERSION@">
+
+<!-- Adobe AIR Application Descriptor File Template.
+
+	Specifies parameters for identifying, installing, and launching AIR applications.
+
+	xmlns - The Adobe AIR namespace: http://ns.adobe.com/air/application/3.5
+			The last segment of the namespace specifies the version 
+			of the AIR runtime required for this application to run.
+			
+	minimumPatchLevel - The minimum patch level of the AIR runtime required to run 
+			the application. Optional.
+-->
+
+	<!-- A universally unique application identifier. Must be unique across all AIR applications.
+	Using a reverse DNS-style name as the id is recommended. (Eg. com.example.ExampleApplication.) Required. -->
+	<id>@APP_ID@</id>
+
+	<!-- Used as the filename for the application. Required. -->
+	<filename>ArenaBingo@POSTFIX@</filename>
+
+	<!-- The name that is displayed in the AIR application installer. 
+	May have multiple values for each language. See samples or xsd schema file. Optional. -->
+	<name>Arena Bingo</name>
+	
+	<!-- A string value of the format <0-999>.<0-999>.<0-999> that represents application version which can be used to check for application upgrade. 
+	Values can also be 1-part or 2-part. It is not necessary to have a 3-part value.
+	An updated version of application must have a versionNumber value higher than the previous version. Required for namespace >= 2.5 . -->
+	<versionNumber>@VERSION@</versionNumber>
+		         
+	<!-- A string value (such as "v1", "2.5", or "Alpha 1") that represents the version of the application, as it should be shown to users. Optional. -->
+	<versionLabel>@VERSION@</versionLabel>
+
+	<!-- Description, displayed in the AIR application installer.
+	May have multiple values for each language. See samples or xsd schema file. Optional. -->
+	<!-- <description></description> -->
+
+	<!-- Copyright information. Optional -->
+	<copyright>© 2017 Alisa LLC</copyright>
+
+	<!-- Settings for the application's initial window. Required. -->
+	<initialWindow>
+		<content>Bingo.swf</content>
+		<title>Arena Bingo</title>
+        <aspectRatio>landscape</aspectRatio>
+        <renderMode>direct</renderMode>
+		<autoOrients>true</autoOrients>
+        <fullScreen>true</fullScreen>
+        <visible>true</visible>
+		<depthAndStencil>true</depthAndStencil>
+    </initialWindow>
+	
+	<icon>
+		<image48x48>icons/icon_48.png</image48x48>
+		<image57x57>icons/icon_57.png</image57x57>
+		<image72x72>icons/icon_72.png</image72x72>
+		<image76x76>icons/icon_76.png</image76x76>
+		<image114x114>icons/icon_114.png</image114x114>
+		<image120x120>icons/icon_120.png</image120x120>
+		<image144x144>icons/icon_144.png</image144x144>
+		<image152x152>icons/icon_152.png</image152x152>
+		<image512x512>icons/icon_512.png</image512x512>
+		<image1024x1024>icons/icon_1024.png</image1024x1024>
+	</icon>
+	
+	<iPhone>
+        <InfoAdditions><![CDATA[
+        	<key>FacebookAppID</key>
+			<string>128427124377299</string>
+			<key>FacebookDisplayName</key>
+			<string>Arena Bingo</string>
+			<key>UIDeviceFamily</key>
+			<array>
+				<string>1</string>
+				<string>2</string>
+			</array>
+			<key>MinimumOSVersion</key>
+			<string>9.0</string>
+			<key>UIPrerenderedIcon</key>
+			<true />
+			
+			<key>UIApplicationExitsOnSuspend</key> <false/>
+
+			<key>CFBundleURLTypes</key>
+			<array>
+				<dict>
+					<key>CFBundleURLSchemes</key>
+					<array>
+						<string>fb128427124377299</string>
+					</array>
+				</dict>
+			</array>
+			
+			<key>LSApplicationQueriesSchemes</key>
+			<array>
+					<string>fbapi</string>
+					<string>fb-messenger-api</string>
+					<string>fbauth2</string>
+					<string>fbshareextension</string>
+			</array>
+			
+			
+			<key>UILaunchImages</key>
+			<array>
+				<dict>
+					<key>UILaunchImageMinimumOSVersion</key>
+					<string>8.0</string>
+					<key>UILaunchImageName</key>
+					<string>Default-414w-736h@3x~iphone</string>
+					<key>UILaunchImageOrientation</key>
+					<string>Portrait</string>
+					<key>UILaunchImageSize</key>
+					<string>{414, 736}</string>
+				</dict>
+				<dict>
+					<key>UILaunchImageMinimumOSVersion</key>
+					<string>8.0</string>
+					<key>UILaunchImageName</key>
+					<string>Default-375w-667h@2x~iphone</string>
+					<key>UILaunchImageOrientation</key>
+					<string>Portrait</string>
+					<key>UILaunchImageSize</key>
+					<string>{375, 667}</string>
+				</dict>
+				<dict>
+					<key>UILaunchImageMinimumOSVersion</key>
+					<string>7.0</string>
+					<key>UILaunchImageName</key>
+					<string>Default@2x</string>
+					<key>UILaunchImageOrientation</key>
+					<string>Portrait</string>
+					<key>UILaunchImageSize</key>
+					<string>{320, 480}</string>
+				</dict>
+				<dict>
+					<key>UILaunchImageMinimumOSVersion</key>
+					<string>7.0</string>
+					<key>UILaunchImageName</key>
+					<string>Default-568h@2x</string>
+					<key>UILaunchImageOrientation</key>
+					<string>Portrait</string>
+					<key>UILaunchImageSize</key>
+					<string>{320, 568}</string>
+				</dict>
+				<dict>
+					<key>UILaunchImageMinimumOSVersion</key>
+					<string>8.0</string>
+					<key>UILaunchImageName</key>
+					<string>Default-812h@3x~iphone</string>
+					<key>UILaunchImageOrientation</key>
+					<string>Portrait</string>
+					<key>UILaunchImageSize</key>
+					<string>{375, 812}</string>
+				</dict>
+				<dict>
+					<key>UILaunchImageMinimumOSVersion</key>
+					<string>7.0</string>
+					<key>UILaunchImageName</key>
+					<string>Default-Landscape</string>
+					<key>UILaunchImageOrientation</key>
+					<string>Landscape</string>
+					<key>UILaunchImageSize</key>
+					<string>{1024, 768	}</string>
+				</dict>
+			</array>
+			
+			<key>NSAppTransportSecurity</key>
+			<dict>
+				<key>NSAllowsArbitraryLoads</key><true/>
+					
+				<key>NSExceptionDomains</key>
+				<dict>
+					<key>facebook.com</key>
+					<dict>
+						<key>NSIncludesSubdomains</key>
+						<true/>                
+						<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+						<false/>
+					</dict>
+					<key>fbcdn.net</key>
+					<dict>
+						<key>NSIncludesSubdomains</key>
+						<true/>
+						<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+						<false/>
+					</dict>
+					<key>akamaihd.net</key>
+					<dict>
+						<key>NSIncludesSubdomains</key>
+						<true/>
+						<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+						<false/>
+					</dict>
+				</dict>
+			</dict>
+		]]></InfoAdditions>
+		<Entitlements>
+			<![CDATA[
+				<key>application-identifier</key>
+				<string>5KXG558XCL.com.alisagaming.arenabingo</string>
+				<key>aps-environment</key>
+				<string>production</string>
+				<key>keychain-access-groups</key>
+				<array>
+				<string>5KXG558XCL.com.alisagaming.arenabingo</string>
+				</array>
+				
+				<key>beta-reports-active</key>
+				<true/>
+			]]>
+		</Entitlements>
+        <requestedDisplayResolution>high</requestedDisplayResolution>
+    </iPhone>
+	
+	<extensions>
+	    <extensionID>com.milkmangames.extensions.AndroidIAB</extensionID>
+    	
+    	<extensionID>com.amazon.device.iap.cpt.AmazonIapV2Extension</extensionID>
+    	<extensionID>com.milkmangames.extensions.StoreKit</extensionID>
+
+    	<extensionID>com.milkmangames.extensions.GoViral</extensionID>
+
+		<extensionID>com.freshplanet.ane.AirPushNotification</extensionID>
+		<extensionID>com.digitalstrawberry.ane.deviceUtils</extensionID>
+		<extensionID>com.appsflyer.adobeair</extensionID>
+    </extensions>
+</application>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:87530abb807c1cd68ad9a526ca671af1:f19be3d1bb2b2458ebf49ef129571e10:9b5383cdbb8640bfa6c18a2c703f5719$ -->
+<TextureAtlas imagePath="bell.png" width="256" height="256">
+    <SubTexture name="daub" x="1" y="1" width="86" height="86"/>
+    <SubTexture name="icon" x="1" y="177" width="52" height="65" frameX="-17" frameY="-11" frameWidth="86" frameHeight="86"/>
+    <SubTexture name="magicdaub" x="1" y="89" width="86" height="86"/>
+    <SubTexture name="magicdaub_2x" x="92" y="1" width="86" height="86"/>
+    <SubTexture name="particle_0" x="218" y="1" width="36" height="34"/>
+    <SubTexture name="particle_1" x="180" y="38" width="33" height="31"/>
+    <SubTexture name="particle_2" x="218" y="37" width="35" height="35"/>
+    <SubTexture name="particle_3" x="180" y="71" width="33" height="31"/>
+    <SubTexture name="particle_x2_0" x="55" y="177" rotated="true" width="35" height="36"/>
+    <SubTexture name="particle_x2_1" x="55" y="215" rotated="true" width="35" height="36"/>
+    <SubTexture name="particle_x2_2" x="180" y="1" width="36" height="35"/>
+</TextureAtlas>

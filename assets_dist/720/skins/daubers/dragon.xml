@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:9c34cb2003dfe8b257ccab262efcc091:a8d6060ac0079d0520df728410e9d9d8:6fd59d4023edb8c13eef42f3077db00d$ -->
+<TextureAtlas imagePath="dragon.png" width="256" height="256">
+    <SubTexture name="daub" x="1" y="1" width="86" height="86"/>
+    <SubTexture name="icon" x="1" y="177" width="48" height="56" frameX="-19" frameY="-15" frameWidth="86" frameHeight="86"/>
+    <SubTexture name="magicdaub" x="1" y="89" width="86" height="86"/>
+    <SubTexture name="magicdaub_2x" x="119" y="1" width="86" height="86"/>
+    <SubTexture name="particle_0" x="51" y="177" width="32" height="46"/>
+    <SubTexture name="particle_1" x="207" y="35" rotated="true" width="46" height="31"/>
+    <SubTexture name="particle_2" x="85" y="177" width="32" height="46"/>
+    <SubTexture name="particle_3" x="207" y="68" rotated="true" width="46" height="31"/>
+    <SubTexture name="particle_x2_0" x="207" y="1" rotated="true" width="46" height="32"/>
+    <SubTexture name="particle_x2_1" x="89" y="101" width="31" height="46"/>
+    <SubTexture name="particle_x2_2" x="122" y="89" rotated="true" width="46" height="31"/>
+    <SubTexture name="particle_x2_3" x="170" y="89" width="31" height="46"/>
+</TextureAtlas>

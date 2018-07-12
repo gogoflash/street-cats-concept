@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding ="utf-8"?>
+<swc xmlns="http://www.adobe.com/flash/swccatalog/9">
+  <versions>
+    <swc version="1.2" />
+    <flex version="4.6.0" build="23201" minimumSupportedVersion="3.0.0" />
+  </versions>
+  <features>
+    <feature-script-deps />
+    <feature-files />
+  </features>
+  <libraries>
+    <library path="library.swf">
+      <script name="com/milkmangames/nativeextensions/ios/StoreKitProduct" mod="1326004038138" signatureChecksum="2723575421" >
+        <def id="com.milkmangames.nativeextensions.ios:StoreKitProduct" /> 
+        <dep id="Error" type="e" /> 
+        <dep id="XML" type="s" /> 
+        <dep id="Error" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="_354385df4738b0b22a1e28b629d61a70b4b40edd0d77b1b1923e776dc288e143_flash_display_Sprite" mod="1442952111243" signatureChecksum="2895739229" >
+        <def id="_354385df4738b0b22a1e28b629d61a70b4b40edd0d77b1b1923e776dc288e143_flash_display_Sprite" /> 
+        <dep id="flash.system:Security" type="e" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.display:Sprite" type="i" /> 
+      </script>
+      <script name="com/milkmangames/nativeextensions/ios/events/StoreKitErrorEvent" mod="1414462813301" signatureChecksum="3491297078" >
+        <def id="com.milkmangames.nativeextensions.ios.events:StoreKitErrorEvent" /> 
+        <dep id="flash.events:Event" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.events:ErrorEvent" type="i" /> 
+      </script>
+      <script name="com/milkmangames/nativeextensions/ios/StoreKit" mod="1426111955593" signatureChecksum="3031499837" >
+        <def id="com.milkmangames.nativeextensions.ios:StoreKit" /> 
+        <dep id="ArgumentError" type="e" /> 
+        <dep id="com.milkmangames.nativeextensions.ios.events:StoreKitEvent" type="e" /> 
+        <dep id="__AS3__.vec:Vector" type="e" /> 
+        <dep id="flash.events:StatusEvent" type="e" /> 
+        <dep id="flash.utils:getDefinitionByName" type="e" /> 
+        <dep id="com.milkmangames.nativeextensions.ios.events:StoreKitErrorEvent" type="e" /> 
+        <dep id="XML" type="e" /> 
+        <dep id="flash.external:ExtensionContext" type="e" /> 
+        <dep id="com.milkmangames.nativeextensions.ios:StoreKitProduct" type="e" /> 
+        <dep id="Error" type="e" /> 
+        <dep id="flash.events:Event" type="s" /> 
+        <dep id="com.milkmangames.nativeextensions.ios.events:StoreKitEvent" type="s" /> 
+        <dep id="__AS3__.vec:Vector" type="s" /> 
+        <dep id="flash.events:StatusEvent" type="s" /> 
+        <dep id="com.milkmangames.nativeextensions.ios.events:StoreKitErrorEvent" type="s" /> 
+        <dep id="XML" type="s" /> 
+        <dep id="flash.external:ExtensionContext" type="s" /> 
+        <dep id="com.milkmangames.nativeextensions.ios:StoreKitProduct" type="s" /> 
+        <dep id="Error" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.events:EventDispatcher" type="i" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="com/milkmangames/nativeextensions/ios/events/StoreKitEvent" mod="1414462809566" signatureChecksum="307858585" >
+        <def id="com.milkmangames.nativeextensions.ios.events:StoreKitEvent" /> 
+        <dep id="__AS3__.vec:Vector" type="s" /> 
+        <dep id="com.milkmangames.nativeextensions.ios:StoreKitProduct" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.events:Event" type="i" /> 
+      </script>
+      <digests>
+        <digest type="SHA-256" signed="false" value="5668ae10459fa1add57c4534df6c59e3e29100f53c62a242334f370187051ec1"   />
+      </digests>
+    </library>
+  </libraries>
+  <files>
+  </files>
+</swc>

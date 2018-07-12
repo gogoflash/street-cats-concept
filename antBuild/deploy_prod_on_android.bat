@@ -1,0 +1,2 @@
+CALL ant deploy_prod_on_android
+PAUSE

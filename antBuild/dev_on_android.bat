@@ -1,0 +1,2 @@
+CALL ant dev_on_android
+PAUSE

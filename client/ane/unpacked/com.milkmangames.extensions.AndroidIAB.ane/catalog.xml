@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding ="utf-8"?>
+<swc xmlns="http://www.adobe.com/flash/swccatalog/9">
+  <versions>
+    <swc version="1.2" />
+    <flex version="4.5.1" build="21328" minimumSupportedVersion="3.0.0" />
+  </versions>
+  <features>
+    <feature-script-deps />
+    <feature-files />
+  </features>
+  <libraries>
+    <library path="library.swf">
+      <script name="_096c27fce73424f2634f9e193b56cfc0d609061740408415cec50f9242606bc2_flash_display_Sprite" mod="1372138852449" signatureChecksum="60782669" >
+        <def id="_096c27fce73424f2634f9e193b56cfc0d609061740408415cec50f9242606bc2_flash_display_Sprite" /> 
+        <dep id="flash.system:Security" type="e" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.display:Sprite" type="i" /> 
+      </script>
+      <script name="com/milkmangames/nativeextensions/android/events/AndroidBillingEvent" mod="1362344853458" signatureChecksum="1748052989" >
+        <def id="com.milkmangames.nativeextensions.android.events:AndroidBillingEvent" /> 
+        <dep id="__AS3__.vec:Vector" type="s" /> 
+        <dep id="com.milkmangames.nativeextensions.android:AndroidItemDetails" type="s" /> 
+        <dep id="com.milkmangames.nativeextensions.android:AndroidPurchase" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.events:Event" type="i" /> 
+      </script>
+      <script name="com/milkmangames/nativeextensions/android/events/AndroidBillingErrorEvent" mod="1362350118588" signatureChecksum="2471276179" >
+        <def id="com.milkmangames.nativeextensions.android.events:AndroidBillingErrorEvent" /> 
+        <dep id="flash.events:Event" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.events:ErrorEvent" type="i" /> 
+      </script>
+      <script name="com/milkmangames/nativeextensions/android/AndroidItemDetails" mod="1362285128118" signatureChecksum="843144712" >
+        <def id="com.milkmangames.nativeextensions.android:AndroidItemDetails" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="com/milkmangames/nativeextensions/android/AndroidIAB" mod="1372138696117" signatureChecksum="474122770" >
+        <def id="com.milkmangames.nativeextensions.android:AndroidIAB" /> 
+        <dep id="ArgumentError" type="e" /> 
+        <dep id="flash.net:URLRequest" type="e" /> 
+        <dep id="trace" type="e" /> 
+        <dep id="flash.net:navigateToURL" type="e" /> 
+        <dep id="com.milkmangames.nativeextensions.android:AndroidPurchase" type="e" /> 
+        <dep id="flash.external:ExtensionContext" type="e" /> 
+        <dep id="Error" type="e" /> 
+        <dep id="flash.desktop:NativeApplication" type="e" /> 
+        <dep id="flash.utils:setTimeout" type="e" /> 
+        <dep id="com.milkmangames.nativeextensions.android.events:AndroidBillingErrorEvent" type="e" /> 
+        <dep id="Date" type="e" /> 
+        <dep id="__AS3__.vec:Vector" type="e" /> 
+        <dep id="com.milkmangames.nativeextensions.android:AndroidItemDetails" type="e" /> 
+        <dep id="flash.events:StatusEvent" type="e" /> 
+        <dep id="com.milkmangames.nativeextensions.android.events:AndroidBillingEvent" type="e" /> 
+        <dep id="flash.utils:getDefinitionByName" type="e" /> 
+        <dep id="flash.events:Event" type="s" /> 
+        <dep id="Date" type="s" /> 
+        <dep id="com.milkmangames.nativeextensions.android.events:AndroidBillingErrorEvent" type="s" /> 
+        <dep id="__AS3__.vec:Vector" type="s" /> 
+        <dep id="com.milkmangames.nativeextensions.android:AndroidItemDetails" type="s" /> 
+        <dep id="flash.events:StatusEvent" type="s" /> 
+        <dep id="com.milkmangames.nativeextensions.android.events:AndroidBillingEvent" type="s" /> 
+        <dep id="com.milkmangames.nativeextensions.android:AndroidPurchase" type="s" /> 
+        <dep id="flash.external:ExtensionContext" type="s" /> 
+        <dep id="Error" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.events:EventDispatcher" type="i" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="com/milkmangames/nativeextensions/android/events/AndroidBillingErrorID" mod="1362350082796" signatureChecksum="3413973457" >
+        <def id="com.milkmangames.nativeextensions.android.events:AndroidBillingErrorID" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="com/milkmangames/nativeextensions/android/AndroidItemType" mod="1362344931263" signatureChecksum="2717334263" >
+        <def id="com.milkmangames.nativeextensions.android:AndroidItemType" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="com/milkmangames/nativeextensions/android/AndroidPurchase" mod="1362280409799" signatureChecksum="1293778294" >
+        <def id="com.milkmangames.nativeextensions.android:AndroidPurchase" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <digests>
+        <digest type="SHA-256" signed="false" value="1fde9331d70ee98a9373d6f566f3e66ccd7240b70062ab8e43b6f2728343fdb2"   />
+      </digests>
+    </library>
+  </libraries>
+  <files>
+  </files>
+</swc>

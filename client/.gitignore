@@ -1,0 +1,9 @@
+*.iml
+*.ipr
+*.iws
+
+bin-debug/*
+*.DS_Store
+*.apk
+*.ipa
+/bin-debug

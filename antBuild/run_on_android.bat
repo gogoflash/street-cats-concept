@@ -1,0 +1,2 @@
+CALL ant run_on_android
+PAUSE

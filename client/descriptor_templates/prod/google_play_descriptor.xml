@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<application xmlns="http://ns.adobe.com/air/application/@AIR_VERSION@">
+
+	<id>@APP_ID@</id>
+	<filename>ArenaBingo</filename>
+	<name>Arena Bingo</name>
+	<versionNumber>@VERSION@</versionNumber>
+	<versionLabel>@VERSION@</versionLabel>
+	<copyright>© 2017 Alisa LLC</copyright>
+
+	<initialWindow>
+		<content>Bingo.swf</content>
+		<title>Arena Bingo</title>
+        <aspectRatio>landscape</aspectRatio>
+        <renderMode>direct</renderMode>
+		<autoOrients>true</autoOrients>
+        <fullScreen>true</fullScreen>
+        <visible>true</visible>
+		<depthAndStencil>true</depthAndStencil>
+    </initialWindow>
+	
+	<icon>
+		<image48x48>icons/icon_48.png</image48x48>
+		<image57x57>icons/icon_57.png</image57x57>
+		<image72x72>icons/icon_72.png</image72x72>
+		<image76x76>icons/icon_76.png</image76x76>
+		<image114x114>icons/icon_114.png</image114x114>
+		<image120x120>icons/icon_120.png</image120x120>
+		<image144x144>icons/icon_144.png</image144x144>
+		<image152x152>icons/icon_152.png</image152x152>
+		<image512x512>icons/icon_512.png</image512x512>
+		<image1024x1024>icons/icon_1024.png</image1024x1024>
+	</icon>
+	
+	<android>
+        <manifestAdditions><![CDATA[
+			<manifest android:installLocation="auto">
+				<uses-sdk android:minSdkVersion="16" android:targetSdkVersion="19" />
+	            <uses-permission android:name="com.android.vending.BILLING" />
+	            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+			    <uses-permission android:name="android.permission.INTERNET"/>
+			    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+			    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
+			    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+			    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+			    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+			    <uses-permission android:name="android.permission.VIBRATE"/>
+			    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+			    <permission android:name="air.com.alisagaming.arenabingo.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+				<uses-permission android:name="air.com.alisagaming.arenabingo.permission.C2D_MESSAGE" />
+				<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+			    <application>
+
+                    <activity android:name="com.freshplanet.ane.AirPushNotification.NotificationActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+                    <receiver android:name="com.freshplanet.ane.AirPushNotification.C2DMBroadcastReceiver"
+						android:permission="com.google.android.c2dm.permission.SEND">
+
+						<!-- Receive the actual message -->
+						<intent-filter>
+							<action android:name="com.google.android.c2dm.intent.RECEIVE" />
+							<category android:name="air.com.alisagaming.arenabingo" />
+						</intent-filter>
+
+						<!-- Receive the registration id -->
+						<intent-filter>
+							<action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+							<category android:name="air.com.alisagaming.arenabingo" />
+						</intent-filter>
+					</receiver>
+					
+					
+
+					<!-- Local notification -->
+					<service android:name="com.freshplanet.ane.AirPushNotification.LocalNotificationService"/>
+					<receiver android:name="com.freshplanet.ane.AirPushNotification.LocalBroadcastReceiver" android:process=":remote"></receiver>
+
+                    <activity android:name="com.arellomobile.android.push.PushWebview"/>
+                    <activity android:name="com.arellomobile.android.push.MessageActivity"/>
+                    <activity android:name="com.arellomobile.android.push.PushHandlerActivity"/>
+
+                    <service android:name="com.arellomobile.android.push.PushGCMIntentService"/>
+                    <receiver android:name="com.arellomobile.android.push.AlarmReceiver"></receiver>
+
+					<activity android:excludeFromRecents="false">
+						<intent-filter>
+							<action android:name="android.intent.action.MAIN"/>
+							<category android:name="android.intent.category.LAUNCHER"/>
+						</intent-filter>
+						<intent-filter>
+                			<action android:name="android.intent.action.VIEW" />
+                			<category android:name="android.intent.category.BROWSABLE" />
+                			<category android:name="android.intent.category.DEFAULT" />
+                			<data android:scheme="fb128427124377299" />
+            			</intent-filter>
+					</activity>
+
+					<receiver android:name="com.appsflyer.MultipleInstallBroadcastReceiver" android:exported="true">
+					  <intent-filter>
+						 <action android:name="com.android.vending.INSTALL_REFERRER" />
+					  </intent-filter>
+					</receiver>
+					
+					<provider android:authorities="com.facebook.app.FacebookContentProvider128427124377299" android:name="com.facebook.FacebookContentProvider" android:exported="true" />
+
+					<meta-data android:name="com.facebook.sdk.ApplicationId" android:value="fb128427124377299"/>
+					<meta-data android:name="com.facebook.sdk.ApplicationName" android:value="Arena Bingo" />
+					<activity android:name="com.facebook.FacebookActivity"
+							  android:theme="@android:style/Theme.Translucent.NoTitleBar"
+							  android:label="Login" />
+					
+					<activity android:name="com.milkmangames.extensions.android.PurchaseWrapActivity" android:configChanges="keyboardHidden|orientation|screenSize" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
+					
+					<meta-data android:name="air.com.alisagaming.arenabingo" android:value="128427124377299"/>
+                </application>
+			</manifest>
+			
+		]]></manifestAdditions>
+    </android>
+	
+	<extensions>
+	    <extensionID>com.milkmangames.extensions.AndroidIAB</extensionID>
+    	
+    	<extensionID>com.amazon.device.iap.cpt.AmazonIapV2Extension</extensionID>
+    	<extensionID>com.milkmangames.extensions.StoreKit</extensionID>
+    	
+    	<extensionID>com.appsflyer.adobeair</extensionID>
+
+    	<extensionID>com.milkmangames.extensions.GoViral</extensionID>
+    	<extensionID>com.mesmotronic.ane.fullscreen</extensionID>
+		<extensionID>com.freshplanet.ane.AirPushNotification</extensionID>
+		<extensionID>com.digitalstrawberry.ane.deviceUtils</extensionID>
+    </extensions>
+</application>

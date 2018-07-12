@@ -1,0 +1,105 @@
+<project name="android targets"  xmlns:if="ant:if" xmlns:unless="ant:unless">
+
+    <target name="debug_on_android">
+		<antcall target="build_and_upload">
+			<param name="debug_build" value="true"/>
+            <param name="dev_build" value="true"/>
+            <param name="telemetry" value="true"/>
+		</antcall>
+    </target>
+	
+	<target name="deploy_dev_on_android">
+		<antcall target="deploy_on_android">
+            <param name="dev_build" value="true"/>
+            <param name="telemetry" value="true"/>
+		</antcall>
+    </target>
+	
+	<target name="deploy_prod_on_android">
+		<antcall target="deploy_on_android">
+            <param name="telemetry" value="true"/>
+		</antcall>
+    </target>
+	
+	<target name="dev_on_android">
+		<antcall target="build_and_upload">
+            <param name="dev_build" value="true"/>
+            <param name="telemetry" value="true"/>
+		</antcall>
+    </target>
+	
+	<target name="dev_on_amazon">
+		<antcall target="build_and_upload_amazon">
+            <param name="dev_build" value="true"/>
+            <param name="telemetry" value="true"/>
+		</antcall>
+    </target>
+	
+	<target name="build_and_upload_amazon">
+		<antcall target="build_amazon"/>
+		<antcall target="deploy_on_android"/>
+	</target>
+	
+	<target name="deploy_amazon_dev">
+		<antcall target="deploy_on_android">
+			<param name="is_amazon_build" value="true"/>
+            <param name="dev_build" value="true"/>
+            <param name="telemetry" value="true"/>
+		</antcall>
+    </target>
+	
+	
+	<target name="run_on_android">
+		<antcall target="build_and_upload">
+            <param name="telemetry" value="true"/>
+		</antcall>
+    </target>
+	
+	<target name="build_and_upload">
+		<antcall target="build_google_play"/>
+		<antcall target="deploy_on_android"/>
+	</target>
+	
+	<target name="deploy_on_android">
+		<antcall target="uninstall_from_android"/>
+        <antcall target="install_on_android" unless:true="${is_amazon_build}" />
+        <antcall target="install_on_amazon" if:true="${is_amazon_build}" />
+        <antcall target="launch_on_android"/>
+	</target>
+	
+    <target name="uninstall_from_android">
+        <exec executable="${AIR_ADT}">
+            <arg line="-uninstallApp"/>
+            <arg line="-platform android"/>
+            <arg line="-appid ${DEV_APP_ID}" if:true="${dev_build}" />
+            <arg line="-appid ${APP_ID}" unless:true="${dev_build}"/>
+        </exec>
+    </target>
+
+    <target name="install_on_android">
+        <exec executable="${AIR_ADT}" failonerror="true">
+            <arg line="-installApp"/>
+            <arg line="-platform android"/>
+            <arg line="-package ${RELEASE_DIR}/${VERSION_NUMBER}-GooglePlay-dev.apk" if:true="${dev_build}" />
+            <arg line="-package ${RELEASE_DIR}/${VERSION_NUMBER}-GooglePlay.apk" unless:true="${dev_build}" />
+        </exec>
+    </target>
+	
+	<target name="install_on_amazon">
+        <exec executable="${AIR_ADT}" failonerror="true">
+            <arg line="-installApp"/>
+            <arg line="-platform android"/>
+            <arg line="-package ${RELEASE_DIR}/${VERSION_NUMBER}-Amazon-dev.apk" if:true="${dev_build}" />
+            <arg line="-package ${RELEASE_DIR}/${VERSION_NUMBER}-Amazon.apk" unless:true="${dev_build}" />
+        </exec>
+    </target>
+
+    <target name="launch_on_android">
+        <exec executable="${AIR_ADT}" failonerror="true">
+            <arg line="-launchApp"/>
+            <arg line="-platform android"/>
+            <arg line="-appid ${DEV_APP_ID}" if:true="${dev_build}" />
+            <arg line="-appid ${APP_ID}" unless:true="${dev_build}"/>
+        </exec>
+    </target>
+</project>

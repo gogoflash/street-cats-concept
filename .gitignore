@@ -1,0 +1,20 @@
+# Mac extras#
+.DS_Store
+
+# Idea Files #
+.idea/
+.idea/*
+*.ipr
+*.iml
+*.iws
+*.ids
+workspace.xml
+tasks.xml
+
+dist
+.idea
+__pycache__
+client/generate_proto_as3_new.py
+antBuild/build.properties
+client_worker/Worker/bin/Worker.swf
+desktop.ini

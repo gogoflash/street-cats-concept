@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:e79ee1c3227be9e50f1669058b3aa433:b09798df1236f16a960eff42d372371f:97349301f775eeed3ddaf25c1a70bce4$ -->
+<TextureAtlas imagePath="dogs_purple.png" width="128" height="128">
+    <SubTexture name="daub" x="1" y="1" width="57" height="57"/>
+    <SubTexture name="icon" x="60" y="60" width="49" height="43" frameX="-4" frameY="-7" frameWidth="57" frameHeight="57"/>
+    <SubTexture name="magicdaub" x="1" y="60" width="57" height="57"/>
+    <SubTexture name="magicdaub_2x" x="60" y="1" width="57" height="57"/>
+    <SubTexture name="particle_0" x="75" y="105" rotated="true" width="11" height="19"/>
+    <SubTexture name="particle_1" x="88" y="105" rotated="true" width="11" height="19"/>
+    <SubTexture name="particle_2" x="101" y="105" rotated="true" width="11" height="19"/>
+    <SubTexture name="particle_3" x="60" y="105" rotated="true" width="13" height="20"/>
+    <SubTexture name="particle_x2_0" x="114" y="60" rotated="true" width="11" height="19"/>
+    <SubTexture name="particle_x2_1" x="114" y="81" rotated="true" width="11" height="19"/>
+    <SubTexture name="particle_x2_2" x="114" y="102" rotated="true" width="11" height="19"/>
+</TextureAtlas>

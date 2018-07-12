@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:36733df6d5f909faa30f8c8b5f4dbaa4:b9e8d953545dead3c11f08e8566fc48e:653048d8a59d334e5d3819432c7c71f0$ -->
+<TextureAtlas imagePath="skull_black.png" width="128" height="256">
+    <SubTexture name="daub" x="1" y="1" width="57" height="57"/>
+    <SubTexture name="icon" x="60" y="60" rotated="true" width="45" height="41" frameX="-8" frameY="-6" frameWidth="57" frameHeight="57"/>
+    <SubTexture name="magicdaub" x="60" y="1" width="57" height="57"/>
+    <SubTexture name="magicdaub_2x" x="1" y="60" width="57" height="57"/>
+    <SubTexture name="particle_0" x="107" y="60" width="19" height="21"/>
+    <SubTexture name="particle_1" x="107" y="83" width="19" height="21"/>
+    <SubTexture name="particle_2" x="85" y="103" width="19" height="21"/>
+    <SubTexture name="particle_3" x="106" y="106" rotated="true" width="21" height="19"/>
+    <SubTexture name="particle_x2_0" x="60" y="103" rotated="true" width="23" height="21"/>
+    <SubTexture name="particle_x2_1" x="1" y="119" rotated="true" width="17" height="15"/>
+</TextureAtlas>

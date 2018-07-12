@@ -1,0 +1,46 @@
+<extension xmlns="http://ns.adobe.com/air/extension/4.0">
+	<id>com.milkmangames.extensions.GoViral</id>
+	<versionNumber>4</versionNumber>
+	<platforms>
+
+	<platform name="iPhone-ARM">
+	        <applicationDeployment>
+	          <nativeLibrary>libGoViralAPI.a</nativeLibrary>
+	          <initializer>MmgGoViralApiExtInitializer</initializer>
+	          <finalizer>MmgGoViralApiExtFinalizer</finalizer>
+	        </applicationDeployment>
+	      </platform>
+		  
+	<platform name="iPhone-x86">
+	        <applicationDeployment>
+	          <nativeLibrary>libGoViralAPI.a</nativeLibrary>
+	          <initializer>MmgGoViralApiExtInitializer</initializer>
+	          <finalizer>MmgGoViralApiExtFinalizer</finalizer>
+	        </applicationDeployment>
+	      </platform>
+		  
+
+		<platform name="Android-ARM">
+	      <applicationDeployment>
+	       <nativeLibrary>GoViralAPI.jar</nativeLibrary>
+	        <initializer>com.milkmangames.extensions.android.goviral.GoViralExtension</initializer>
+	        <finalizer>com.milkmangames.extensions.android.goviral.GoViralExtension</finalizer>
+			
+	      </applicationDeployment>
+	    </platform>
+		
+		<platform name="Android-x86">
+	      <applicationDeployment>
+	       <nativeLibrary>GoViralAPI.jar</nativeLibrary>
+	        <initializer>com.milkmangames.extensions.android.goviral.GoViralExtension</initializer>
+	        <finalizer>com.milkmangames.extensions.android.goviral.GoViralExtension</finalizer>
+			
+	      </applicationDeployment>
+	    </platform>
+	  
+		<platform name="default"> 
+	      <applicationDeployment>
+	      </applicationDeployment>
+		</platform> 
+	  </platforms>
+	</extension>

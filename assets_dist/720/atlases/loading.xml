@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker https://www.codeandweb.com/texturepacker -->
+<!-- $TexturePacker:SmartUpdate:bda8be014b4ede32a1fe6fe393b9ad1d:87e4f074f893a99ed3c824bb3647d2dd:bf474e6deddfb213345187fa4d0f9838$ -->
+<TextureAtlas imagePath="loading.png" width="256" height="512">
+    <SubTexture name="dialogs/back_bg" x="9" y="1" width="32" height="32"/>
+    <SubTexture name="dialogs/buttons/blue_base" x="45" y="357" rotated="true" width="70" height="132"/>
+    <SubTexture name="dialogs/buttons/close" x="198" y="357" width="57" height="59"/>
+    <SubTexture name="dialogs/buttons/empty_square" x="242" y="92" width="3" height="3" frameX="0" frameY="0" frameWidth="10" frameHeight="10"/>
+    <SubTexture name="dialogs/buttons/green_button_big_slice" x="117" y="357" rotated="true" width="79" height="38"/>
+    <SubTexture name="dialogs/window_bg" x="233" y="16" width="22" height="5"/>
+    <SubTexture name="logo_full" x="45" y="1" rotated="true" width="186" height="354" frameX="-66" frameY="-35" frameWidth="503" frameHeight="253"/>
+    <SubTexture name="logo_glow" x="242" y="92" width="3" height="3" frameX="0" frameY="0" frameWidth="378" frameHeight="247"/>
+    <SubTexture name="misc/progress_ball" x="233" y="1" width="22" height="13"/>
+    <SubTexture name="misc/progress_bg" x="233" y="48" rotated="true" width="18" height="42"/>
+    <SubTexture name="misc/progress_line" x="1" y="1" rotated="true" width="6" height="465" frameX="-3" frameY="0" frameWidth="468" frameHeight="6"/>
+    <SubTexture name="misc/star_0" x="161" y="397" rotated="true" width="35" height="36" frameX="0" frameY="-1" frameWidth="36" frameHeight="36"/>
+    <SubTexture name="misc/star_1" x="233" y="92" width="7" height="7"/>
+    <SubTexture name="misc/star_2" x="1" y="468" width="42" height="42"/>
+    <SubTexture name="misc/star_4" x="117" y="397" width="42" height="42"/>
+    <SubTexture name="misc/white_star" x="233" y="23" rotated="true" width="21" height="23"/>
+</TextureAtlas>

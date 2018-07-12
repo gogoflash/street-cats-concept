@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:009588e4449f0015659b2debe9b50c25:f9406b0e3fa4a1be0607b5b4aec1c539:8c5785ff584182820cc5c6b1ec88ef8c$ -->
+<TextureAtlas imagePath="usa.png" width="256" height="256">
+    <SubTexture name="daub" x="1" y="1" width="86" height="86"/>
+    <SubTexture name="icon" x="1" y="177" rotated="true" width="63" height="68" frameX="-9" frameY="-15" frameWidth="86" frameHeight="86"/>
+    <SubTexture name="magicdaub" x="1" y="89" width="86" height="86"/>
+    <SubTexture name="magicdaub_2x" x="91" y="1" rotated="true" width="86" height="85"/>
+    <SubTexture name="particle_0" x="66" y="177" width="23" height="24"/>
+    <SubTexture name="particle_1" x="66" y="203" width="23" height="24"/>
+    <SubTexture name="particle_2" x="66" y="229" width="23" height="24"/>
+    <SubTexture name="particle_x2_0" x="179" y="1" width="23" height="21"/>
+    <SubTexture name="particle_x2_1" x="204" y="1" width="23" height="21"/>
+    <SubTexture name="particle_x2_2" x="229" y="1" width="23" height="21"/>
+</TextureAtlas>

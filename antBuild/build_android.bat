@@ -1,0 +1,2 @@
+CALL ant build_google_play
+PAUSE

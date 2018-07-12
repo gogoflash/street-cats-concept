@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:f26a6cb7f7bd653d610a3b0da4f0f98c:b7acded2def02a4ae6edb392c7c927f6:58c08ee2e50ea9f24856f34268e7f639$ -->
+<TextureAtlas imagePath="fruits_pink.png" width="256" height="256">
+    <SubTexture name="daub" x="1" y="1" width="86" height="86"/>
+    <SubTexture name="icon" x="1" y="177" width="60" height="73" frameX="-13" frameY="-4" frameWidth="86" frameHeight="86"/>
+    <SubTexture name="magicdaub" x="1" y="89" width="86" height="86"/>
+    <SubTexture name="magicdaub_2x" x="109" y="1" width="86" height="86"/>
+    <SubTexture name="particle_0" x="63" y="177" width="21" height="25"/>
+    <SubTexture name="particle_1" x="63" y="204" width="21" height="25"/>
+    <SubTexture name="particle_x2_0" x="63" y="231" rotated="true" width="25" height="21"/>
+    <SubTexture name="particle_x2_1" x="86" y="177" width="21" height="25"/>
+    <SubTexture name="particle_x2_2" x="86" y="204" width="21" height="25"/>
+</TextureAtlas>

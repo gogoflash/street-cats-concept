@@ -1,0 +1,2 @@
+CALL ant full_build_dev
+PAUSE

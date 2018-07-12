@@ -1,0 +1,10 @@
+<platform xmlns="http://ns.adobe.com/air/extension/3.9">
+<sdkVersion>6.1</sdkVersion>
+	<linkerOptions> 
+            <option>-framework AdSupport</option>
+            <option>-liconv</option>  
+    </linkerOptions>
+    <packagedDependencies> 
+        <packagedDependency>libAppsFlyerLib.a</packagedDependency> 
+    </packagedDependencies> 
+</platform>

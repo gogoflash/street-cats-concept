@@ -1,0 +1,4 @@
+﻿animations_export.py  - нужно указать путь к GAF-CLI, нужно поставить PIL или форк для 3.х питона - https://python-pillow.org/, который встанет если поставить еще и https://github.com/decalage2/olefile
+atlas_exporter.py	- нужно указать путь к TexturePacker'у, в скрипте convert_to_atf указать путь к png2atf для платформы
+image_exporter.py
+sound_and_bg_export.py

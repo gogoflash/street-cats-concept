@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project version="2">
+  <!-- Output SWF options -->
+  <output>
+    <movie outputType="Application" />
+    <movie input="" />
+    <movie path="..\..\client\dist\StreetCats.swf" />
+    <movie fps="60" />
+    <movie width="800" />
+    <movie height="600" />
+    <movie version="21" />
+    <movie minorVersion="0" />
+    <movie platform="AIR" />
+    <movie background="#FFFFFF" />
+    <movie preferredSDK="AIR 23.0.0;23.0.0;" />
+  </output>
+  <!-- Other classes to be compiled into your SWF -->
+  <classpaths>
+    <class path="..\..\client\src" />
+    <class path="..\..\client\lib" />
+    <class path="..\..\client\assets" />
+    <class path="..\..\client\ane" />
+    <class path="..\..\antBuild" />
+    <class path="..\..\client\dist" />
+    <class path="..\..\client\descriptor_templates" />
+    <class path="..\..\client\libSource" />
+  </classpaths>
+  <!-- Build options -->
+  <build>
+    <option accessible="False" />
+    <option advancedTelemetry="True" />
+    <option allowSourcePathOverlap="False" />
+    <option benchmark="False" />
+    <option es="False" />
+    <option inline="False" />
+    <option locale="" />
+    <option loadConfig="" />
+    <option optimize="False" />
+    <option omitTraces="True" />
+    <option showActionScriptWarnings="True" />
+    <option showBindingWarnings="True" />
+    <option showInvalidCSS="True" />
+    <option showDeprecationWarnings="True" />
+    <option showUnusedTypeSelectorWarnings="True" />
+    <option strict="True" />
+    <option useNetwork="True" />
+    <option useResourceBundleMetadata="True" />
+    <option warnings="True" />
+    <option verboseStackTraces="False" />
+    <option linkReport="" />
+    <option loadExterns="" />
+    <option staticLinkRSL="True" />
+    <option additional="-inline=false&#xA;-frame=MainClassLabel,com.alisacasino.bingo.Main" />
+    <option compilerConstants="CONFIG::devBuild,true&#xA;CONFIG::amazonBuild,false" />
+    <option minorVersion="" />
+  </build>
+  <!-- SWC Include Libraries -->
+  <includeLibraries>
+    <!-- example: <element path="..." /> -->
+  </includeLibraries>
+  <!-- SWC Libraries -->
+  <libraryPaths>
+    <element path="..\..\client\lib\protobuf.swc" />
+    <element path="..\..\client\lib\blooddy_crypto.swc" />
+    <element path="..\..\client\lib\as3commons-collections-1.3.2.swc" />
+    <element path="..\..\client\ane\shared\com.milkmangames.extensions.AndroidIAB.ane" />
+    <element path="..\..\client\ane\shared\com.milkmangames.extensions.GoViral.ane" />
+    <element path="..\..\client\ane\shared\com.milkmangames.extensions.StoreKit.ane" />
+    <element path="..\..\client\ane\shared\PushNotification.ane" />
+    <element path="..\..\client\ane\ios\appsflyer.ane" />
+    <element path="..\..\client\ane\android\appsflyer.ane" />
+    <element path="..\..\client\ane\shared\AmazonIapV2Extension.ane" />
+    <element path="..\..\client\lib\FZip.swc" />
+    <element path="..\..\client\lib\robotlegs2.2.0-starling1.4.1-viewmap.swc" />
+    <element path="..\..\client\lib\robotlegs-framework-v2.2.1.swc" />
+    <element path="..\..\client\ane\shared\com.mesmotronic.ane.fullscreen.ane" />
+    <element path="..\..\client\ane\shared\AirPushNotification.ane" />
+    <element path="..\..\client\ane\shared\com.digitalstrawberry.ane.deviceUtils.ane" />
+    <element path="..\..\client\ane\shared\AppsFlyerAIRExtension.ane" />
+  </libraryPaths>
+  <!-- External Libraries -->
+  <externalLibraryPaths>
+    <!-- example: <element path="..." /> -->
+  </externalLibraryPaths>
+  <!-- Runtime Shared Libraries -->
+  <rslPaths>
+    <!-- example: <element path="..." /> -->
+  </rslPaths>
+  <!-- Intrinsic Libraries -->
+  <intrinsics>
+    <!-- example: <element path="..." /> -->
+  </intrinsics>
+  <!-- Assets to embed into the output SWF -->
+  <library>
+    <!-- example: <asset path="..." id="..." update="..." glyphs="..." mode="..." place="..." sharepoint="..." /> -->
+  </library>
+  <!-- Class files to compile (other referenced classes will automatically be included) -->
+  <compileTargets>
+    <compile path="..\..\client\src\com\alisacasino\bingo\Preloader.as" />
+  </compileTargets>
+  <!-- Paths to exclude from the Project Explorer tree -->
+  <hiddenPaths>
+    <hidden path="obj" />
+  </hiddenPaths>
+  <!-- Executed before build -->
+  <preBuildCommand />
+  <!-- Executed after build -->
+  <postBuildCommand alwaysRun="False" />
+  <!-- Other project options -->
+  <options>
+    <option showHiddenPaths="True" />
+    <option testMovie="Unknown" />
+    <option testMovieCommand="" />
+  </options>
+  <!-- Plugin storage -->
+  <storage />
+</project>

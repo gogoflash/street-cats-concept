@@ -1,0 +1,2 @@
+CALL ant build_facebook
+PAUSE

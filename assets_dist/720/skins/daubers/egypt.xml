@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:409b012cea0d7188ca4cc00592a2de89:b42f69176f57419d0d2f0213999b574f:f062093505981cc8443c5f46e19afaa4$ -->
+<TextureAtlas imagePath="egypt.png" width="256" height="256">
+    <SubTexture name="daub" x="1" y="1" width="86" height="86"/>
+    <SubTexture name="icon" x="1" y="177" width="62" height="66" frameX="-12" frameY="-12" frameWidth="86" frameHeight="86"/>
+    <SubTexture name="magicdaub" x="1" y="89" width="86" height="86"/>
+    <SubTexture name="magicdaub_2x" x="97" y="1" width="86" height="86"/>
+    <SubTexture name="particle_0" x="185" y="33" rotated="true" width="34" height="24"/>
+    <SubTexture name="particle_1" x="221" y="33" rotated="true" width="34" height="24"/>
+    <SubTexture name="particle_2" x="65" y="177" rotated="true" width="30" height="34"/>
+    <SubTexture name="particle_3" x="65" y="213" rotated="true" width="30" height="34"/>
+    <SubTexture name="particle_x2_0" x="185" y="59" rotated="true" width="34" height="24"/>
+    <SubTexture name="particle_x2_1" x="221" y="59" rotated="true" width="34" height="24"/>
+    <SubTexture name="particle_x2_2" x="185" y="1" width="34" height="30"/>
+    <SubTexture name="particle_x2_3" x="221" y="1" width="34" height="30"/>
+</TextureAtlas>

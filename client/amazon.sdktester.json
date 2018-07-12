@@ -1,0 +1,74 @@
+{
+
+ "com.alisacasino.bingo.tiny_coins_pack" : {
+    "itemType": "CONSUMABLE",
+    "price": 1.99,
+    "title": "Tiny coins pack (100 coins)",
+    "description": "Tiny coins pack (100 coins)",
+    "smallIconUrl": ""
+  },
+
+ "com.alisacasino.bingo.medium_coins_pack" : {
+    "itemType": "CONSUMABLE",
+    "price": 6.99,
+    "title": "Medium coins pack (400 coins)",
+    "description": "Medium coins pack (400 coins)",
+    "smallIconUrl": ""
+  },
+
+ "com.alisacasino.bingo.large_coins_pack" : {
+    "itemType": "CONSUMABLE",
+    "price": 19.99,
+    "title": "Large coins pack (1000 coins)",
+    "description": "Large coins pack (1000 coins)",
+    "smallIconUrl": ""
+  },
+
+ "com.alisacasino.bingo.xlarge_coins_pack" : {
+    "itemType": "CONSUMABLE",
+    "price": 49.99,
+    "title": "Extra large coins pack (3500 coins)",
+    "description": "Extra large coins pack (3500 coins)",
+    "smallIconUrl": ""
+  },
+
+ "com.alisacasino.bingo.tiny_tickets_pack" : {
+    "itemType": "CONSUMABLE",
+    "price": 4.99,
+    "title": "Tiny tickets pack (50 tickets)",
+    "description": "Tiny tickets pack (50 tickets)",
+    "smallIconUrl": ""
+  },
+
+ "com.alisacasino.bingo.medium_tickets_pack" : {
+    "itemType": "CONSUMABLE",
+    "price": 9.99,
+    "title": "Medium tickets pack (125 tickets)",
+    "description": "Medium tickets pack (125 tickets)",
+    "smallIconUrl": ""
+  },
+
+ "com.alisacasino.bingo.large_tickets_pack" : {
+    "itemType": "CONSUMABLE",
+    "price": 19.99,
+    "title": "Large tickets pack (300 tickets)",
+    "description": "Large tickets pack (300 tickets)",
+    "smallIconUrl": ""
+  },
+
+ "com.alisacasino.bingo.xlarge_tickets_pack" : {
+    "itemType": "CONSUMABLE",
+    "price": 59.99,
+    "title": "Extra large tickets pack (1000 tickets)",
+    "description": "Extra large tickets pack (1000 tickets)",
+    "smallIconUrl": ""
+  },
+
+ "com.alisacasino.bingo.starter_pack" : {
+    "itemType": "CONSUMABLE",
+    "price": 2.99,
+    "title": "Starter pack",
+    "description": "Starter pack (100 coins, 50 tickets, 35 coins, 35 keys)",
+    "smallIconUrl": ""
+  }
+}

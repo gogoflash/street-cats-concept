@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding ="utf-8"?>
+<swc xmlns="http://www.adobe.com/flash/swccatalog/9">
+  <versions>
+    <swc version="1.2" />
+    <flex version="4.6.0" build="23201" minimumSupportedVersion="3.0.0" />
+  </versions>
+  <features>
+    <feature-script-deps />
+    <feature-files />
+  </features>
+  <libraries>
+    <library path="library.swf">
+      <script name="com/milkmangames/nativeextensions/events/GVTwitterEvent" mod="1405039430625" signatureChecksum="1028230873" >
+        <def id="com.milkmangames.nativeextensions.events:GVTwitterEvent" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.events:Event" type="i" /> 
+      </script>
+      <script name="com/milkmangames/nativeextensions/events/GVFacebookEvent" mod="1423617083445" signatureChecksum="937478" >
+        <def id="com.milkmangames.nativeextensions.events:GVFacebookEvent" /> 
+        <dep id="trace" type="e" /> 
+        <dep id="__AS3__.vec:Vector" type="e" /> 
+        <dep id="flash.utils:getDefinitionByName" type="e" /> 
+        <dep id="com.milkmangames.nativeextensions:GVFacebookFriend" type="e" /> 
+        <dep id="Error" type="e" /> 
+        <dep id="__AS3__.vec:Vector" type="s" /> 
+        <dep id="com.milkmangames.nativeextensions:GVFacebookFriend" type="s" /> 
+        <dep id="Error" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.events:Event" type="i" /> 
+      </script>
+      <script name="com/milkmangames/nativeextensions/GVFacebookAppEvent" mod="1395269714057" signatureChecksum="2726499577" >
+        <def id="com.milkmangames.nativeextensions:GVFacebookAppEvent" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="com/milkmangames/nativeextensions/GVDispatcher" mod="1429312517129" signatureChecksum="278632863" >
+        <def id="com.milkmangames.nativeextensions:GVDispatcher" /> 
+        <dep id="Error" type="e" /> 
+        <dep id="flash.events:Event" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.events:EventDispatcher" type="i" /> 
+      </script>
+      <script name="com/milkmangames/nativeextensions/GVFacebookDispatcher" mod="1429312529871" signatureChecksum="2799521875" >
+        <def id="com.milkmangames.nativeextensions:GVFacebookDispatcher" /> 
+        <dep id="com.milkmangames.nativeextensions.events:GVFacebookEvent" type="e" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="com.milkmangames.nativeextensions:GVDispatcher" type="i" /> 
+      </script>
+      <script name="com/milkmangames/nativeextensions/GoViral" mod="1429305632951" signatureChecksum="4242198212" >
+        <def id="com.milkmangames.nativeextensions:GoViral" /> 
+        <dep id="com.milkmangames.nativeextensions:GVFacebookRequestActionType" type="e" /> 
+        <dep id="ArgumentError" type="e" /> 
+        <dep id="trace" type="e" /> 
+        <dep id="com.milkmangames.nativeextensions.events:GVShareEvent" type="e" /> 
+        <dep id="com.milkmangames.nativeextensions:GVDispatcher" type="e" /> 
+        <dep id="Math" type="e" /> 
+        <dep id="com.milkmangames.nativeextensions.events:GVFacebookEvent" type="e" /> 
+        <dep id="com.milkmangames.nativeextensions:GVTwitterDispatcher" type="e" /> 
+        <dep id="com.milkmangames.nativeextensions.events:GVMailEvent" type="e" /> 
+        <dep id="flash.external:ExtensionContext" type="e" /> 
+        <dep id="com.milkmangames.nativeextensions:GVShareDispatcher" type="e" /> 
+        <dep id="flash.desktop:NativeApplication" type="e" /> 
+        <dep id="Error" type="e" /> 
+        <dep id="com.milkmangames.nativeextensions:GVFacebookRequestFilter" type="e" /> 
+        <dep id="flash.utils:setTimeout" type="e" /> 
+        <dep id="com.milkmangames.nativeextensions.events:GVTwitterEvent" type="e" /> 
+        <dep id="com.milkmangames.nativeextensions:GVHttpMethod" type="e" /> 
+        <dep id="com.milkmangames.nativeextensions:GVFacebookDispatcher" type="e" /> 
+        <dep id="__AS3__.vec:Vector" type="e" /> 
+        <dep id="com.milkmangames.nativeextensions:GVMailDispatcher" type="e" /> 
+        <dep id="flash.events:StatusEvent" type="e" /> 
+        <dep id="flash.utils:getDefinitionByName" type="e" /> 
+        <dep id="flash.events:Event" type="s" /> 
+        <dep id="flash.utils:ByteArray" type="s" /> 
+        <dep id="flash.display:BitmapData" type="s" /> 
+        <dep id="com.milkmangames.nativeextensions:GVDispatcher" type="s" /> 
+        <dep id="com.milkmangames.nativeextensions.events:GVFacebookEvent" type="s" /> 
+        <dep id="com.milkmangames.nativeextensions:GVTwitterDispatcher" type="s" /> 
+        <dep id="com.milkmangames.nativeextensions.events:GVMailEvent" type="s" /> 
+        <dep id="flash.external:ExtensionContext" type="s" /> 
+        <dep id="com.milkmangames.nativeextensions:GVShareDispatcher" type="s" /> 
+        <dep id="Error" type="s" /> 
+        <dep id="com.milkmangames.nativeextensions:GVFacebookAppEvent" type="s" /> 
+        <dep id="com.milkmangames.nativeextensions.events:GVTwitterEvent" type="s" /> 
+        <dep id="com.milkmangames.nativeextensions:GVFacebookDispatcher" type="s" /> 
+        <dep id="__AS3__.vec:Vector" type="s" /> 
+        <dep id="com.milkmangames.nativeextensions:GVMailDispatcher" type="s" /> 
+        <dep id="flash.events:StatusEvent" type="s" /> 
+        <dep id="XML" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.events:EventDispatcher" type="i" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="com/milkmangames/nativeextensions/GVShareDispatcher" mod="1400649904526" signatureChecksum="472104512" >
+        <def id="com.milkmangames.nativeextensions:GVShareDispatcher" /> 
+        <dep id="com.milkmangames.nativeextensions.events:GVShareEvent" type="e" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="com.milkmangames.nativeextensions:GVDispatcher" type="i" /> 
+      </script>
+      <script name="com/milkmangames/nativeextensions/GVFacebookRequestFilter" mod="1398889181969" signatureChecksum="2103392692" >
+        <def id="com.milkmangames.nativeextensions:GVFacebookRequestFilter" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="com/milkmangames/nativeextensions/GVSocialServiceType" mod="1397786666607" signatureChecksum="997087035" >
+        <def id="com.milkmangames.nativeextensions:GVSocialServiceType" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="_01ce02de42845a44966dcdc08b06aea9541cd90112db24e179a241d56df2622f_flash_display_Sprite" mod="1429315450254" signatureChecksum="745044479" >
+        <def id="_01ce02de42845a44966dcdc08b06aea9541cd90112db24e179a241d56df2622f_flash_display_Sprite" /> 
+        <dep id="flash.system:Security" type="e" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.display:Sprite" type="i" /> 
+      </script>
+      <script name="com/milkmangames/nativeextensions/events/GVShareEvent" mod="1405039391809" signatureChecksum="2485685340" >
+        <def id="com.milkmangames.nativeextensions.events:GVShareEvent" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.events:Event" type="i" /> 
+      </script>
+      <script name="com/milkmangames/nativeextensions/GVFacebookRequestActionType" mod="1399794084678" signatureChecksum="2971877792" >
+        <def id="com.milkmangames.nativeextensions:GVFacebookRequestActionType" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="com/milkmangames/nativeextensions/GVTwitterDispatcher" mod="1400649944960" signatureChecksum="3872964599" >
+        <def id="com.milkmangames.nativeextensions:GVTwitterDispatcher" /> 
+        <dep id="com.milkmangames.nativeextensions.events:GVTwitterEvent" type="e" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="com.milkmangames.nativeextensions:GVDispatcher" type="i" /> 
+      </script>
+      <script name="com/milkmangames/nativeextensions/GVFacebookErrorCategory" mod="1400649829789" signatureChecksum="3193666964" >
+        <def id="com.milkmangames.nativeextensions:GVFacebookErrorCategory" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="com/milkmangames/nativeextensions/GVHttpMethod" mod="1340055350805" signatureChecksum="1222195935" >
+        <def id="com.milkmangames.nativeextensions:GVHttpMethod" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="com/milkmangames/nativeextensions/GVFacebookFriend" mod="1340055367382" signatureChecksum="2710212295" >
+        <def id="com.milkmangames.nativeextensions:GVFacebookFriend" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="com/milkmangames/nativeextensions/GVMailDispatcher" mod="1400649856593" signatureChecksum="2951794278" >
+        <def id="com.milkmangames.nativeextensions:GVMailDispatcher" /> 
+        <dep id="com.milkmangames.nativeextensions.events:GVMailEvent" type="e" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="com.milkmangames.nativeextensions:GVDispatcher" type="i" /> 
+      </script>
+      <script name="com/milkmangames/nativeextensions/events/GVMailEvent" mod="1405039348801" signatureChecksum="4180054465" >
+        <def id="com.milkmangames.nativeextensions.events:GVMailEvent" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.events:Event" type="i" /> 
+      </script>
+      <digests>
+        <digest type="SHA-256" signed="false" value="a951f1cfa011e8cd95b15714d8c23fb6e23faea475577072742069613484ded9"   />
+      </digests>
+    </library>
+  </libraries>
+  <files>
+  </files>
+</swc>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:c48eeb36e56168aeda8578fa441c49a7:0ed16a0a916380f0299f60d1c38a2f4c:8c5785ff584182820cc5c6b1ec88ef8c$ -->
+<TextureAtlas imagePath="usa.png" width="1024" height="1024">
+    <SubTexture name="bingo_button" x="51" y="603" rotated="true" width="70" height="304"/>
+    <SubTexture name="card_background" x="1" y="1" width="535" height="600"/>
+    <SubTexture name="title" x="1" y="603" rotated="true" width="48" height="364"/>
+</TextureAtlas>

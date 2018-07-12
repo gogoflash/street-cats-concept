@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:13040edbf64acd7d84e93c9dbb4e8f5b:01c69ca51356563d14b0a90434720e4d:aa1427e4e6d10be64918f6a21ffe5da1$ -->
+<TextureAtlas imagePath="maya_green.png" width="256" height="256">
+    <SubTexture name="daub" x="1" y="1" width="86" height="86"/>
+    <SubTexture name="icon" x="1" y="177" rotated="true" width="66" height="68" frameX="-9" frameY="-10" frameWidth="86" frameHeight="86"/>
+    <SubTexture name="magicdaub" x="1" y="89" width="86" height="86"/>
+    <SubTexture name="magicdaub_2x" x="92" y="1" width="86" height="86"/>
+    <SubTexture name="particle_0" x="69" y="177" width="21" height="21"/>
+    <SubTexture name="particle_1" x="69" y="200" width="21" height="21"/>
+</TextureAtlas>

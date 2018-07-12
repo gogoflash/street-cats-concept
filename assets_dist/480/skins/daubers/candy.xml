@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:8aa3025d1dbfabaea0f30028a8e1f87a:0e0d5eeefa3174fe3385a01548f7bf8a:5bb6f18579251a1ae12ba36eb5b8f237$ -->
+<TextureAtlas imagePath="candy.png" width="64" height="256">
+    <SubTexture name="daub" x="1" y="1" width="57" height="57"/>
+    <SubTexture name="icon" x="1" y="178" width="45" height="45" frameX="-6" frameY="-6" frameWidth="57" frameHeight="57"/>
+    <SubTexture name="magicdaub" x="1" y="60" width="57" height="57"/>
+    <SubTexture name="magicdaub_2x" x="1" y="119" width="57" height="57"/>
+    <SubTexture name="particle_0" x="48" y="178" rotated="true" width="14" height="24"/>
+    <SubTexture name="particle_1" x="48" y="204" rotated="true" width="14" height="24"/>
+    <SubTexture name="particle_2" x="1" y="230" rotated="true" width="14" height="24"/>
+    <SubTexture name="particle_x2_0" x="17" y="230" rotated="true" width="14" height="24"/>
+    <SubTexture name="particle_x2_1" x="33" y="230" rotated="true" width="14" height="24"/>
+    <SubTexture name="particle_x2_2" x="49" y="230" rotated="true" width="14" height="24"/>
+</TextureAtlas>

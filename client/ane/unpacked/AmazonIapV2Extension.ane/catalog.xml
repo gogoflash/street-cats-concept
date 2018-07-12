@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding ="utf-8"?>
+<swc xmlns="http://www.adobe.com/flash/swccatalog/9">
+  <versions>
+    <swc version="1.2" />
+    <flex version="4.14.1" build="20150325" minimumSupportedVersion="3.0.0" />
+  </versions>
+  <features>
+    <feature-script-deps />
+    <feature-files />
+  </features>
+  <libraries>
+    <library path="library.swf">
+      <script name="com/amazon/device/iap/cpt/SubscriptionExpiredEvent" mod="1435220590000" signatureChecksum="2964148182" >
+        <def id="com.amazon.device.iap.cpt:SubscriptionExpiredEvent" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="com/amazon/device/iap/cpt/SkuInput" mod="1435220590000" signatureChecksum="1472347159" >
+        <def id="com.amazon.device.iap.cpt:SkuInput" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="com/amazon/device/iap/cpt/GetPurchaseUpdatesResponse" mod="1435220590000" signatureChecksum="3266196449" >
+        <def id="com.amazon.device.iap.cpt:GetPurchaseUpdatesResponse" /> 
+        <dep id="__AS3__.vec:Vector" type="s" /> 
+        <dep id="com.amazon.device.iap.cpt:PurchaseReceipt" type="s" /> 
+        <dep id="com.amazon.device.iap.cpt:AmazonUserData" type="s" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="com/amazon/device/iap/cpt/AmazonError" mod="1435220590000" signatureChecksum="298657830" >
+        <def id="com.amazon.device.iap.cpt:AmazonError" /> 
+        <dep id="Error" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="com/amazon/device/iap/cpt/PurchaseResponse" mod="1435220590000" signatureChecksum="560000131" >
+        <def id="com.amazon.device.iap.cpt:PurchaseResponse" /> 
+        <dep id="com.amazon.device.iap.cpt:PurchaseReceipt" type="s" /> 
+        <dep id="com.amazon.device.iap.cpt:AmazonUserData" type="s" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="com/amazon/device/iap/cpt/AmazonUserData" mod="1435220590000" signatureChecksum="2989453462" >
+        <def id="com.amazon.device.iap.cpt:AmazonUserData" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="com/amazon/device/iap/cpt/GetUserDataResponse" mod="1435220590000" signatureChecksum="4264932052" >
+        <def id="com.amazon.device.iap.cpt:GetUserDataResponse" /> 
+        <dep id="com.amazon.device.iap.cpt:AmazonUserData" type="s" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="com/amazon/device/iap/cpt/PurchaseReceipt" mod="1435220590000" signatureChecksum="206040210" >
+        <def id="com.amazon.device.iap.cpt:PurchaseReceipt" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="com/amazon/device/iap/cpt/GetProductDataResponse" mod="1435220590000" signatureChecksum="1775692678" >
+        <def id="com.amazon.device.iap.cpt:GetProductDataResponse" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="com/amazon/device/iap/cpt/AmazonIapV2JsonDeserializer" mod="1435220590000" signatureChecksum="1005381733" >
+        <def id="com.amazon.device.iap.cpt:AmazonIapV2JsonDeserializer" /> 
+        <dep id="com.amazon.device.iap.cpt:GetUserDataResponse" type="s" /> 
+        <dep id="com.amazon.device.iap.cpt:SkusInput" type="s" /> 
+        <dep id="com.amazon.device.iap.cpt:SubscriptionExpiredEvent" type="s" /> 
+        <dep id="com.amazon.device.iap.cpt:ResetInput" type="s" /> 
+        <dep id="com.amazon.device.iap.cpt:GetPurchaseUpdatesResponse" type="s" /> 
+        <dep id="com.amazon.device.iap.cpt:NotifyFulfillmentInput" type="s" /> 
+        <dep id="com.amazon.device.iap.cpt:AmazonError" type="s" /> 
+        <dep id="__AS3__.vec:Vector" type="s" /> 
+        <dep id="com.amazon.device.iap.cpt:PurchaseReceipt" type="s" /> 
+        <dep id="com.amazon.device.iap.cpt:SkuInput" type="s" /> 
+        <dep id="com.amazon.device.iap.cpt:ProductData" type="s" /> 
+        <dep id="com.amazon.device.iap.cpt:PurchaseResponse" type="s" /> 
+        <dep id="com.amazon.device.iap.cpt:GetProductDataResponse" type="s" /> 
+        <dep id="com.amazon.device.iap.cpt:AmazonUserData" type="s" /> 
+        <dep id="com.amazon.device.iap.cpt:RequestOutput" type="s" /> 
+        <dep id="com.amazon.device.iap.cpt:GetUserDataResponse" type="e" /> 
+        <dep id="com.amazon.device.iap.cpt:SkusInput" type="e" /> 
+        <dep id="com.amazon.device.iap.cpt:SubscriptionExpiredEvent" type="e" /> 
+        <dep id="com.amazon.device.iap.cpt:ResetInput" type="e" /> 
+        <dep id="com.amazon.device.iap.cpt:GetPurchaseUpdatesResponse" type="e" /> 
+        <dep id="JSON" type="e" /> 
+        <dep id="com.amazon.device.iap.cpt:NotifyFulfillmentInput" type="e" /> 
+        <dep id="com.amazon.device.iap.cpt:AmazonError" type="e" /> 
+        <dep id="__AS3__.vec:Vector" type="e" /> 
+        <dep id="com.amazon.device.iap.cpt:PurchaseReceipt" type="e" /> 
+        <dep id="com.amazon.device.iap.cpt:SkuInput" type="e" /> 
+        <dep id="com.amazon.device.iap.cpt:ProductData" type="e" /> 
+        <dep id="com.amazon.device.iap.cpt:PurchaseResponse" type="e" /> 
+        <dep id="com.amazon.device.iap.cpt:GetProductDataResponse" type="e" /> 
+        <dep id="com.amazon.device.iap.cpt:AmazonUserData" type="e" /> 
+        <dep id="com.amazon.device.iap.cpt:RequestOutput" type="e" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="com/amazon/device/iap/cpt/SkusInput" mod="1435220590000" signatureChecksum="1066683189" >
+        <def id="com.amazon.device.iap.cpt:SkusInput" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="com/amazon/device/iap/cpt/AmazonIapV2Event" mod="1435220590000" signatureChecksum="2110315337" >
+        <def id="com.amazon.device.iap.cpt:AmazonIapV2Event" /> 
+        <dep id="com.amazon.device.iap.cpt:GetUserDataResponse" type="s" /> 
+        <dep id="com.amazon.device.iap.cpt:GetPurchaseUpdatesResponse" type="s" /> 
+        <dep id="com.amazon.device.iap.cpt:PurchaseResponse" type="s" /> 
+        <dep id="com.amazon.device.iap.cpt:GetProductDataResponse" type="s" /> 
+        <dep id="flash.events:Event" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="_180cba1589ae97b9e8ba743b0f6b3c6254312caeaf3baf0b6075c9414901702d_flash_display_Sprite" mod="1435198754394" signatureChecksum="2333637223" >
+        <def id="_180cba1589ae97b9e8ba743b0f6b3c6254312caeaf3baf0b6075c9414901702d_flash_display_Sprite" /> 
+        <dep id="flash.system:Security" type="e" /> 
+        <dep id="flash.display:Sprite" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="com/amazon/device/iap/cpt/AmazonIapV2" mod="1435220590000" signatureChecksum="3384801130" >
+        <def id="com.amazon.device.iap.cpt:AmazonIapV2" /> 
+        <dep id="com.amazon.device.iap.cpt:SkusInput" type="s" /> 
+        <dep id="flash.events:EventDispatcher" type="s" /> 
+        <dep id="flash.events:StatusEvent" type="s" /> 
+        <dep id="com.amazon.device.iap.cpt:AmazonIapV2Event" type="s" /> 
+        <dep id="com.amazon.device.iap.cpt:ResetInput" type="s" /> 
+        <dep id="com.amazon.device.iap.cpt:SkuInput" type="s" /> 
+        <dep id="flash.external:ExtensionContext" type="s" /> 
+        <dep id="com.amazon.device.iap.cpt:NotifyFulfillmentInput" type="s" /> 
+        <dep id="flash.events:Event" type="s" /> 
+        <dep id="com.amazon.device.iap.cpt:RequestOutput" type="s" /> 
+        <dep id="flash.events:EventDispatcher" type="e" /> 
+        <dep id="flash.events:StatusEvent" type="e" /> 
+        <dep id="com.amazon.device.iap.cpt:AmazonIapV2Event" type="e" /> 
+        <dep id="com.amazon.device.iap.cpt:AmazonIapV2JsonDeserializer" type="e" /> 
+        <dep id="JSON" type="e" /> 
+        <dep id="flash.external:ExtensionContext" type="e" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="com/amazon/device/iap/cpt/NotifyFulfillmentInput" mod="1435220590000" signatureChecksum="175278613" >
+        <def id="com.amazon.device.iap.cpt:NotifyFulfillmentInput" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="com/amazon/device/iap/cpt/ProductData" mod="1435220590000" signatureChecksum="4263510310" >
+        <def id="com.amazon.device.iap.cpt:ProductData" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="com/amazon/device/iap/cpt/ResetInput" mod="1435220590000" signatureChecksum="808927771" >
+        <def id="com.amazon.device.iap.cpt:ResetInput" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="com/amazon/device/iap/cpt/ResponseHandler" mod="1435220590000" signatureChecksum="901275251" >
+        <def id="com.amazon.device.iap.cpt:ResponseHandler" /> 
+        <dep id="com.amazon.device.iap.cpt:AmazonIapV2JsonDeserializer" type="e" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="com/amazon/device/iap/cpt/RequestOutput" mod="1435220590000" signatureChecksum="480594405" >
+        <def id="com.amazon.device.iap.cpt:RequestOutput" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <digests>
+        <digest type="SHA-256" signed="false" value="0fbc92533ece913eb8da6331ad7ee37a92b0fe41e62208411ae2be947cb52c5d"   />
+      </digests>
+    </library>
+  </libraries>
+  <files>
+  </files>
+</swc>
