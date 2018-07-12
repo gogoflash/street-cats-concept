@@ -35,8 +35,8 @@ package com.alisacasino.bingo.utils.sounds
 		public static var SOUNDS_VOLUME:Number = 1;
 		
 		
-		private var muteFXSoundOnLocal:Boolean = true;
-		private var muteBackgroundSoundOnLocal:Boolean = true;
+		private var muteFXSoundOnLocal:Boolean = false;
+		private var muteBackgroundSoundOnLocal:Boolean = false;
 		
 		private var soundTrackDelayCallsIds:Vector.<uint> = new <uint> [];
 		

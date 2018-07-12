@@ -81,7 +81,7 @@ package com.alisacasino.bingo.commands.gameLoading
 			//sosTrace( "LoadSettings.checkVersionAndMaintenance", SOSLog.INFO);
 			var settings:Settings = Settings.instance;
 			
-			if (PlatformServices.isMobile)
+			/*if (PlatformServices.isMobile)
 			{
 				var clientVersion:Number = AbsoluteVersion.fromString(gameManager.getVersionString());
 				var latestVersion:Number = AbsoluteVersion.fromString(settings.latestVersion);
@@ -96,7 +96,7 @@ package com.alisacasino.bingo.commands.gameLoading
 					showNewVersionDialog(true);
 					return;
 				}
-			}
+			}*/
 			
 			finish();
 		}

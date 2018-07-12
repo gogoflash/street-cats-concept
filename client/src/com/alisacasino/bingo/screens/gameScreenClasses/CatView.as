@@ -7,6 +7,8 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 	import com.alisacasino.bingo.models.cats.CatRole;
 	import com.alisacasino.bingo.utils.EffectsManager;
 	import com.alisacasino.bingo.utils.JumpWithHintHelper;
+	import starling.animation.Transitions;
+	import starling.core.Starling;
 	import starling.display.DisplayObjectContainer;
 	import starling.display.Image;
 	import starling.display.Sprite;
@@ -251,7 +253,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			
 		}
 		
-		public function showRoleAction(role:String, right:Boolean = true):void
+		public function showRoleAction(role:String, right:Boolean = true, animateCats:Boolean = false):void
 		{
 			if (role)
 			{
@@ -270,9 +272,13 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 					roleActionImage.alignPivot();
 				}
 				
-				roleActionImage.x = right ? 55 : -55;
+				roleActionImage.x = right ?  0: -0;
 				EffectsManager.jump(roleActionImage, 10000, 1, 1.08, 0.05, 0.05, 0.08, 0, 0, 1.3, true);
 				//roleActionImage.y = 85;
+				
+				if(animateCats)
+					Starling.juggler.tween(catImage, 0.25, {delay:0.0, alpha:0, scale:0.7, transition:Transitions.EASE_OUT, x:(right ? 100 : -100)});
+				
 			}
 			else
 			{
@@ -280,7 +286,9 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 					EffectsManager.removeJump(roleActionImage);
 					roleActionImage.removeFromParent();
 					roleActionImage = null;
-				}	
+				}
+				
+				Starling.juggler.tween(catImage, 0.2, {delay:0.0, alpha:4, scale:1, transition:Transitions.EASE_OUT, x:0});
 			}	
 			
 			refreshHP();

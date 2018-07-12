@@ -197,12 +197,12 @@
 		<Entitlements>
 			<![CDATA[
 				<key>application-identifier</key>
-				<string>5KXG558XCL.com.alisagaming.arenabingodev</string>
+				<string>5KXG558XCL.com.alisagaming.streetcatsdev</string>
 				<key>aps-environment</key>
 				<string>production</string>
 				<key>keychain-access-groups</key>
 				<array>
-				<string>5KXG558XCL.com.alisagaming.arenabingodev</string>
+				<string>5KXG558XCL.com.alisagaming.streetcatsdev</string>
 				</array>
 			]]>
 		</Entitlements>

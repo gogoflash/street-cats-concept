@@ -63,7 +63,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 		
 		public function init():void
 		{
-			soundManager.playSoundtrack(gameManager.tournamentData.collection.soundtrackAsset);
+			//soundManager.playSoundtrack(gameManager.tournamentData.collection.soundtrackAsset);
 			
 			platformInterceptor.setSystemIdleModeKeepAwake();
 			

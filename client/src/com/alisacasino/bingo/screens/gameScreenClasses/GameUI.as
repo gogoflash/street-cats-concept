@@ -155,7 +155,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			particleEffect = new ParticleExplosion(AtlasAsset.CommonAtlas, new <String>["effects/smoke_1", "effects/smoke_0"], colors);
 			particleEffect.x = layoutHelper.stageWidth / 2;
 			particleEffect.y = layoutHelper.stageHeight / 2;
-			particleEffect.setProperties(0, 50 * pxScale, +0.01, 0.028, 0.01, 0, 0.7, true);
+			particleEffect.setProperties(0, 90 * pxScale, +0.01, 0.028, 0.01, 0, 0.7, true);
 			particleEffect.setFineProperties(0.6, 0.0, 0.0, 0);
 			//particleEffect.setAccelerationProperties(-0.02);
 			particleEffect.lifetime = 500;
@@ -623,19 +623,29 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			var catView_1:CatView;
 			var catView_2:CatView;
 			
+			if (foodViewsContainer.numChildren <= 0)
+				return false;
+			
 			catView_1 = getCatByRole(enemyTeamIsFirst ? enemyCatsViews : playerCatsViews, CatRole.HARVESTER);
 			if (catView_1) 
 			{
-				if (foodViewsContainer.numChildren > 0)
+				catView_2 = getCatByRole(enemyTeamIsFirst ? playerCatsViews : enemyCatsViews, CatRole.HARVESTER);
+				if (catView_2)
+				{
+					// если есть сборщики по обе стороны сталкиваем их лбами:
+					showCatAction(catView_1, CatRole.HARVESTER, catView_2, CatRole.HARVESTER);
+					catView_1.cat.active = false;
+					catView_2.cat.active = false;
+				}
+				else
 				{
 					showCatHarverst(catView_1, Math.floor(foodViewsContainer.numChildren * Math.random()));
 					catView_1.cat.active = false;
-					
-					if(!enemyTeamIsFirst)
-						harvestFood(1);
-						
-					return true;	
+					harvestFood(1);
 				}
+					
+				return true;	
+				
 			}
 			return false;
 		}
@@ -743,12 +753,12 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			catView_2.fightMarks = 0;
 			
 			TweenHelper.tween(catView_1, 0.4, {delay:0.3, transition:Transitions.EASE_OUT, scale:1.3, x:(layoutHelper.stageWidth / 2 - CatView.WIDTH / 2 - 30), y:(layoutHelper.stageHeight / 2 - 50)}).
-				chain(catView_1, 3.5, {delay:0, transition:Transitions.EASE_OUT, y:(layoutHelper.stageHeight / 2 + 50), onStart:catView_1.showRoleAction, onStartArgs:[(catView_1.cat.active && catView_1.cat.health > 0) ? role_1 : null, catView_1.isFront], onComplete:catView_1.showRoleAction, onCompleteArgs:[null]}).
+				chain(catView_1, 2.5, {delay:0, transition:Transitions.EASE_OUT, y:(layoutHelper.stageHeight / 2 + 50), onStart:catView_1.showRoleAction, onStartArgs:[(catView_1.cat.active && catView_1.cat.health > 0) ? role_1 : null, catView_1.isFront, true], onComplete:catView_1.showRoleAction, onCompleteArgs:[null]}).
 				chain(catView_1, 0.4, {scale:catView_1.storedScale, alpha:0.5, transition:Transitions.EASE_OUT, x:catView_1.storedX_0, y:catView_1.storedY_0, onComplete:childCatAtHomeLayer, onCompleteArgs:[catView_1], onStart:FadeQuad.hide});
 			
 				
 			TweenHelper.tween(catView_2, 0.4, {delay:0.3, transition:Transitions.EASE_OUT, scale:1.3, x:(layoutHelper.stageWidth / 2 + CatView.WIDTH / 2 + 30), y:(layoutHelper.stageHeight / 2 + 50)}).
-				chain(catView_2, 3.5, {delay:0, transition:Transitions.EASE_OUT, y:(layoutHelper.stageHeight / 2 - 50), onStart:catView_2.showRoleAction, onStartArgs:[(catView_2.cat.active && catView_2.cat.health > 0) ? role_2 : null, catView_2.isFront], onComplete:catView_2.showRoleAction, onCompleteArgs:[null]}).
+				chain(catView_2, 2.5, {delay:0, transition:Transitions.EASE_OUT, y:(layoutHelper.stageHeight / 2 - 50), onStart:catView_2.showRoleAction, onStartArgs:[(catView_2.cat.active && catView_2.cat.health > 0) ? role_2 : null, catView_2.isFront, true], onComplete:catView_2.showRoleAction, onCompleteArgs:[null]}).
 				chain(catView_2, 0.4, {scale:catView_2.storedScale, alpha:0.5, transition:Transitions.EASE_OUT, x:catView_2.storedX_0, y:catView_2.storedY_0, onComplete:childCatAtHomeLayer, onCompleteArgs:[catView_2]});	
 			
 				
@@ -757,7 +767,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			//particleEffect.play(150, 20, 15);
 			//particleEffect.play(3000, 70, 0);	
 				
-			Starling.juggler.delayCall(particleEffect.play, 0.5, 3000, 70, 0);
+			Starling.juggler.delayCall(particleEffect.play, 0.7, 2200, 70, 0);
 			
 			//Starling.juggler.tween(catView_1, 0.4, {delay:2.3, transition:Transitions.EASE_OUT_BACK, x:(layoutHelper.stageWidth / 2 - CatView.WIDTH / 2 + 0), y:(layoutHelper.stageHeight / 2)});
 			//Starling.juggler.tween(catView_2, 0.4, {delay:2.3, transition:Transitions.EASE_OUT_BACK, x:(layoutHelper.stageWidth/2 + CatView.WIDTH/2 + 0), y:(layoutHelper.stageHeight/2)});
@@ -849,11 +859,11 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			
 			
 			TweenHelper.tween(catView_1, 0.4, {delay:0.3, transition:Transitions.EASE_OUT, scale:1.3, x:x_1_left, y:y_1_left}).
-				chain(catView_1, 3.5, {delay:0, transition:Transitions.EASE_OUT, y:(layoutHelper.stageHeight / 2 + 50), onStart:catView_1.showRoleAction, onStartArgs:[catView_1.cat.role, true], onComplete:catView_1.showRoleAction, onCompleteArgs:[null]}).
+				chain(catView_1, 2.0, {delay:0, transition:Transitions.EASE_OUT, y:(layoutHelper.stageHeight / 2 + 50), onStart:catView_1.showRoleAction, onStartArgs:[catView_1.cat.role, true], onComplete:catView_1.showRoleAction, onCompleteArgs:[null]}).
 				chain(catView_1, 0.4, {scale:catView_1.storedScale, alpha:0.5, transition:Transitions.EASE_OUT, x:catView_1.storedX_0, y:catView_1.storedY_0, onComplete:childCatAtHomeLayer, onCompleteArgs:[catView_1], onStart:FadeQuad.hide});
 				
 			TweenHelper.tween(foodImage, 0.4, {delay:0.3, transition:Transitions.EASE_OUT, scale:1.3, x:x_1_right, y:y_1_right}).
-				chain(foodImage, 3.5, {delay:0, transition:Transitions.EASE_OUT, y:(layoutHelper.stageHeight / 2 - 50)}).
+				chain(foodImage, 2.0, {delay:0, transition:Transitions.EASE_OUT, y:(layoutHelper.stageHeight / 2 - 50)}).
 				chain(foodImage, 0.4, {alpha:0, transition:Transitions.EASE_OUT, y:(layoutHelper.stageHeight / 2 - 150), onComplete:foodImage.removeFromParent});	
 		}
 		
