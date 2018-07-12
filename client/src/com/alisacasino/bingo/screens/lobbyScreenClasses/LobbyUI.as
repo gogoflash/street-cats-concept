@@ -23,6 +23,7 @@ package com.alisacasino.bingo.screens.lobbyScreenClasses
 	import com.alisacasino.bingo.screens.GameScreen;
 	import com.alisacasino.bingo.screens.gameScreenClasses.CatView;
 	import com.alisacasino.bingo.screens.gameScreenClasses.ConnectionProblemIndicator;
+	import com.alisacasino.bingo.screens.gameScreenClasses.GameUI;
 	import com.alisacasino.bingo.screens.profileScreenClasses.ProfileScreen;
 	import com.alisacasino.bingo.utils.Constants;
 	import com.alisacasino.bingo.utils.GameManager;
@@ -74,6 +75,7 @@ package com.alisacasino.bingo.screens.lobbyScreenClasses
 	
 		public var collectionsButton:LobbyCollectionButton;
 		public var tourneyButton:XButton;
+		public var rightButton:XButton;
 
 		private var hideCallback:Function;
 		
@@ -144,12 +146,17 @@ package com.alisacasino.bingo.screens.lobbyScreenClasses
 			
 			tourneyButton = new XButton(XButtonStyle.BlueButtonStyle);
 			tourneyButton.scale9Grid = new Rectangle(25 * pxScale, 0, 35 * pxScale, collectionsButton.upState.height);
-			tourneyButton.text = 'PVE';
+			tourneyButton.text = 'PVE 12 FOOD';
 			tourneyButton.visible = false;
 			tourneyButton.addEventListener(Event.TRIGGERED, tourneyButton_triggeredHandler);
 			addChild(tourneyButton);
 			
-			
+			rightButton = new XButton(XButtonStyle.BlueButtonStyle);
+			rightButton.scale9Grid = new Rectangle(25 * pxScale, 0, 35 * pxScale, rightButton.upState.height);
+			rightButton.text = 'PVE 4 FOOD';
+			//rightButton.visible = false;
+			rightButton.addEventListener(Event.TRIGGERED, rightButton_triggeredHandler);
+			addChild(rightButton);
 			
 			connectionProblemIndicator = new ConnectionProblemIndicator();
 			addChild(connectionProblemIndicator);
@@ -245,6 +252,7 @@ package com.alisacasino.bingo.screens.lobbyScreenClasses
 			cashBar.visible = value;
 			collectionsButton.visible = value;
 			tourneyButton.visible = value;
+			rightButton.visible = value;
 		}
 		
 		private function tweenFromGameToBuyCards():void
@@ -402,12 +410,12 @@ package com.alisacasino.bingo.screens.lobbyScreenClasses
 			tourneyButton.scale = globalUIScale;
 			tourneyButton.y = collectionsButton.y;
 			tourneyButton.width = UI_BUTTONS_WIDTH * complexScale;
-			
-			
-			
 			tourneyButton.x = layoutHelper.stageWidth - tourneyButton.width - 17 * complexScale - uiCornersShiftX;
 			
-			
+			rightButton.scale = globalUIScale;
+			rightButton.y = collectionsButton.y - 90;
+			rightButton.width = UI_BUTTONS_WIDTH * complexScale;
+			rightButton.x = layoutHelper.stageWidth - rightButton.width - 17 * complexScale - uiCornersShiftX;
 			
 			connectionProblemIndicator.scale = globalUIScale;
 			connectionProblemIndicator.x = layoutHelper.stageWidth / 2;
@@ -496,12 +504,20 @@ package com.alisacasino.bingo.screens.lobbyScreenClasses
 		
 		private function tourneyButton_triggeredHandler(e:Event):void 
 		{
+			GameUI.foodCount = 12;
 			gameManager.gameMode = GameManager.GAME_MODE_GROUP;
 			gameScreen.showGame(false);
 			//DialogsManager.addDialog(new LeaderboardDialog());
 		}
 		
-	
+		private function rightButton_triggeredHandler(e:Event):void 
+		{
+			GameUI.foodCount = 4;
+			gameManager.gameMode = GameManager.GAME_MODE_GROUP;
+			gameScreen.showGame(false);
+			//DialogsManager.addDialog(new LeaderboardDialog());
+		}
+		
 		private function get menuButtonX():int {
 			return (-38 + (layoutHelper.isIPhoneX ? 10 : 0)) * pxScale;
 		}

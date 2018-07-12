@@ -43,6 +43,8 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 		
 		private var fightMarksContainer:Sprite;
 		
+		private var defenderMarksContainer:Sprite;
+		
 		private var hpLabel:XTextField;
 		
 		
@@ -156,6 +158,12 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			refreshHP();
 		}
 		
+		/*********************************************************************************************************************
+		*
+		*
+		* 
+		*********************************************************************************************************************/	
+		
 		private var _fightMarks:int;
 		
 		public function set fightMarks(value:int):void
@@ -203,6 +211,69 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 		{
 			return _fightMarks;
 		}	
+		
+		
+		/*********************************************************************************************************************
+		*
+		*
+		* 
+		*********************************************************************************************************************/	
+		
+		private var _defenderMarks:int;
+		
+		public function set defenderMarks(value:int):void
+		{
+			return;
+			
+			if (value == _defenderMarks)
+				return;
+				
+			_defenderMarks = value;
+			
+			if (_defenderMarks > 0)
+			{
+				if (!defenderMarksContainer) {
+					defenderMarksContainer = new Sprite();
+					defenderMarksContainer.x = 50;
+					defenderMarksContainer.y = -35;
+					defenderMarksContainer.touchable = false;
+					addChild(defenderMarksContainer);
+				}
+				
+				while (defenderMarksContainer.numChildren != _defenderMarks) 
+				{
+					if (defenderMarksContainer.numChildren > _defenderMarks) {
+						defenderMarksContainer.removeChildAt(defenderMarksContainer.numChildren-1);
+					}
+					else {
+						var image:Image = new Image(AtlasAsset.CommonAtlas.getTexture('cats/roles/shield'));
+						image.alignPivot();
+						image.x = defenderMarksContainer.numChildren*30;
+						//roleImage.y = 215;
+						image.scale = 0.4;
+						defenderMarksContainer.addChild(image);
+					}
+				}
+			}
+			else
+			{
+				if (defenderMarksContainer) {
+					defenderMarksContainer.removeFromParent();
+					defenderMarksContainer = null;
+				}
+			}	
+		}
+		
+		public function get defenderMarks():int
+		{
+			return _defenderMarks;
+		}	
+		
+		/*********************************************************************************************************************
+		*
+		*
+		* 
+		*********************************************************************************************************************/	
 		
 		public function refreshHP():void
 		{

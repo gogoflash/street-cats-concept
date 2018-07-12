@@ -19,6 +19,7 @@ package com.alisacasino.bingo.models.cats
 		
 		public var targetCat:int = -1;
 		
+		
 		public var active:Boolean;
 		
 		public function set health(value:int):void {

@@ -68,7 +68,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 		public var playerCatsViews:Array = [];
 		public var enemyCatsViews:Array = [];
 		
-		public var foodCount:int;
+		public static var foodCount:int;
 		
 		private var charV:XTextField;
 		private var charS:XTextField;
@@ -243,7 +243,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			TutorialManager.fillCats(gameManager.enemyCats);
 			TutorialManager.refreshCatTargets(gameManager.enemyCats, gameManager.playerCats);
 			
-			foodCount = 12//2 + Math.round(Math.random()*4);
+			//foodCount = 12//2 + Math.round(Math.random()*4);
 			takeFood();
 			
 			
@@ -267,7 +267,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 				catView.cat = gameManager.playerCats[i];
 				catView.cat.active = true;
 				
-				if (catView.cat.role == CatRole.FIGHTER) {
+				if (catView.cat.role == CatRole.FIGHTER || catView.cat.role == CatRole.DEFENDER) {
 					catView.cat.targetCat = (gameManager.enemyCats[i] as CatModel).id;
 				}
 				else
@@ -311,7 +311,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			}
 			
 			
-			refreshEnemyFighterMarks();
+			refreshEnemyTargetMarks();
 			
 		}
 		
@@ -333,14 +333,28 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			
 			selectedPlayerCat.showSelected = true;
 			
-			
+			var enemyCatView:CatView;
 			if (catView.cat.role == CatRole.FIGHTER) 
 			{
 				enemyCatViewsContainer.touchable = true;
 				
 				if (catView.cat.targetCat == -1) 
 				{
-					var enemyCatView:CatView = getEnemyCatWithoutFightMarks();
+					enemyCatView = getEnemyCatWithoutFightMarks();
+					if(enemyCatView)
+						catView.cat.targetCat = enemyCatView.cat.id;
+					else
+						catView.cat.targetCat = -1;
+				}
+				
+			}
+			else if (catView.cat.role == CatRole.DEFENDER) 
+			{
+				enemyCatViewsContainer.touchable = true;
+				
+				if (catView.cat.targetCat == -1) 
+				{
+					enemyCatView = getEnemyCatWithoutDefenderMarks();
 					if(enemyCatView)
 						catView.cat.targetCat = enemyCatView.cat.id;
 					else
@@ -353,14 +367,17 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 				enemyCatViewsContainer.touchable = false;
 			}
 			
-			refreshEnemyFighterMarks();
+			refreshEnemyTargetMarks();
 		}
 		
 		private function handler_enemyCatTriggered(event:Event):void 
 		{
-			if (!selectedPlayerCat || selectedPlayerCat.cat.role != CatRole.FIGHTER)
+			if (!selectedPlayerCat)
 				return;
 			
+			if ((selectedPlayerCat.cat.role != CatRole.FIGHTER) && (selectedPlayerCat.cat.role != CatRole.DEFENDER))	
+				return;
+				
 			var catView:CatView = event.target as CatView;
 			catView.cat.role = CatRole.getNext(catView.cat.role);
 			//catView.refreshRole();
@@ -369,8 +386,12 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			{
 				selectedPlayerCat.cat.targetCat = catView.cat.id;
 			}
+			else
+			{
+			//	selectedPlayerCat.cat.targetCat = -1;
+			}
 			
-			refreshEnemyFighterMarks();
+			refreshEnemyTargetMarks();
 		}
 		
 		private function getEnemyCatWithoutFightMarks():CatView 
@@ -393,29 +414,53 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			return activeEnemyCats.length > 0 ? activeEnemyCats[0] : null;
 		}
 		
-		private function refreshEnemyFighterMarks():void 
+		private function getEnemyCatWithoutDefenderMarks():CatView 
+		{
+			var i:int;
+			var catView:CatView;
+			var activeEnemyCats:Array = [];
+			for (i = 0; i < enemyCatsViews.length; i++) 
+			{
+				catView = enemyCatsViews[i] as CatView;
+				if (catView.cat.health > 0)
+				{
+					if(catView.defenderMarks == 0)
+						return catView;
+						
+					activeEnemyCats.push(catView);	
+				}		
+			}
+			
+			return activeEnemyCats.length > 0 ? activeEnemyCats[0] : null;
+		}
+		
+		private function refreshEnemyTargetMarks():void 
 		{
 			var i:int;
 			var j:int;
 			var catView:CatView;
 			var playerCatView:CatView;
 			var marksCount:int;
+			var defenderMarksCount:int;
 			for (i = 0; i < enemyCatsViews.length; i++) 
 			{
 				catView = enemyCatsViews[i] as CatView;
 				marksCount = 0;
+				defenderMarksCount = 0;
 				for (j = 0; j < playerCatsViews.length; j++) 
 				{
 					playerCatView = playerCatsViews[j] as CatView;
+					
 					if (playerCatView.cat.role == CatRole.FIGHTER && playerCatView.cat.targetCat == catView.cat.id) 
-					{
 						marksCount++;
-					}
+					
+					if (playerCatView.cat.role == CatRole.DEFENDER && playerCatView.cat.targetCat == catView.cat.id) 
+						defenderMarksCount++;
 				}
 				
 				catView.fightMarks = marksCount;
+				catView.defenderMarks = defenderMarksCount;
 			}
-			
 		}
 		
 		private function dispatchReadyGoComplete():void 
@@ -703,7 +748,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			
 			showEnemyRoles();
 			
-			refreshEnemyFighterMarks();
+			refreshEnemyTargetMarks();
 		}
 		
 		private function showCatAction(catView_1:CatView, role_1:String, catView_2:CatView, role_2:String, sameTargets:Boolean = false):void
