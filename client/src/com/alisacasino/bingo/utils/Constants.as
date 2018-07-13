@@ -25,7 +25,7 @@ package com.alisacasino.bingo.utils
 
 		static public var enableProdLogging:Boolean = false;
 		
-		static public var USE_ALL_LOCAL_ASSETS:Boolean = true;
+		static public var USE_ALL_LOCAL_ASSETS:Boolean = false;
 		
 		static public var USE_LOCAL_ASSETS:Boolean = USE_ALL_LOCAL_ASSETS || false;
 		
@@ -134,7 +134,7 @@ package com.alisacasino.bingo.utils
 			return cachedPlatformId;
 		}
 		
-		public static const CANVAS_VERSION:String = "0.00.03";
+		public static const CANVAS_VERSION:String = "0.00.05";
 		static public const PROTOCOL_VERSION:int = 1;
 		
 		public static function get assetsURL():String 
