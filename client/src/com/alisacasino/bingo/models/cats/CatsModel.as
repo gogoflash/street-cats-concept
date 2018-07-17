@@ -14,7 +14,7 @@ package com.alisacasino.bingo.models.cats
 		
 		public function getRandomCatUID():int 
 		{
-			return Math.floor(Math.random()*9);
+			return 3;//Math.floor(Math.random()*9);
 		}
 		
 		public function getCatTexture(uid:int, front:Boolean):Texture 

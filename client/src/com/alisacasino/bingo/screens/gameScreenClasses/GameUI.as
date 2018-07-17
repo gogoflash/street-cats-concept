@@ -6,6 +6,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 	import com.alisacasino.bingo.assets.MovieClipAsset;
 	import com.alisacasino.bingo.assets.SoundAsset;
 	import com.alisacasino.bingo.commands.player.UpdateLobbyBarsTrueValue;
+	import com.alisacasino.bingo.components.DottedLine;
 	import com.alisacasino.bingo.components.FadeQuad;
 	import com.alisacasino.bingo.components.effects.ParticleExplosion;
 	import com.alisacasino.bingo.controls.BingoAnimation;
@@ -35,11 +36,15 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 	import flash.geom.Rectangle;
 	import starling.animation.Transitions;
 	import starling.core.Starling;
+	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 	import starling.display.Image;
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
+	import starling.events.Touch;
+	import starling.events.TouchEvent;
+	import starling.events.TouchPhase;
 	import starling.filters.ColorMatrixFilter;
 	import starling.utils.TweenHelper;
 	/**
@@ -64,9 +69,12 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 		private var playerCatViewsContainer:Sprite;
 		private var enemyCatViewsContainer:Sprite;
 		private var foodViewsContainer:Sprite;
+		private var arrowsContainer:Sprite;
 		
 		public var playerCatsViews:Array = [];
 		public var enemyCatsViews:Array = [];
+		
+		public var playerActionHelpersViews:Array = [];
 		
 		public static var foodCount:int;
 		
@@ -81,6 +89,11 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 		
 		private var particleEffect:ParticleExplosion;
 		
+		private var attackImage:Image;
+		private var defenceImage:Image;
+		
+		private var foodImageScale:Number = 0.7;
+		
 		public function GameUI(gameScreen:GameScreen) 
 		{
 			this.gameScreen = gameScreen;
@@ -90,10 +103,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			
 			topLayer = new Sprite();
 			topLayer.touchable = false;
-			
-			
 		}
-		
 		
 		override protected function initialize():void 
 		{
@@ -111,6 +121,10 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			
 			foodViewsContainer = new Sprite();
 			addChild(foodViewsContainer)
+			
+			arrowsContainer = new Sprite();
+			arrowsContainer.touchable = false;
+			addChild(arrowsContainer);
 			
 			charV = new XTextField(130*pxScale, 190*pxScale, XTextFieldStyle.houseHolidaySans(170, 0xE11700).setStroke(4), 'V');
 			charV.touchable = false;
@@ -159,6 +173,21 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			particleEffect.setFineProperties(0.6, 0.0, 0.0, 0);
 			//particleEffect.setAccelerationProperties(-0.02);
 			particleEffect.lifetime = 500;
+			
+			
+			Starling.current.stage.addEventListener(TouchEvent.TOUCH, handler_touch);
+			
+			
+			attackImage = new Image(AtlasAsset.CommonAtlas.getTexture('cats/attack_bg'));
+			attackImage.alignPivot();
+			attackImage.alpha = 0;
+			attackImage.touchable = false;
+			//addChild(attackImage);
+			
+			defenceImage = new Image(AtlasAsset.CommonAtlas.getTexture('cats/defence_bg'));
+			defenceImage.alignPivot();
+			//defenceImage.alpha = 0;
+			defenceImage.touchable = false;
 		}
 		
 		override protected function draw():void 
@@ -179,10 +208,10 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			
 			enemyCatViewsContainer.scale = layoutHelper.independentScaleFromEtalonMin * 0.85;
 			enemyCatViewsContainer.x = layoutHelper.stageWidth / 2;
-			enemyCatViewsContainer.y = layoutHelper.stageHeight / 2 - 30;
+			enemyCatViewsContainer.y = layoutHelper.stageHeight / 2 - 180;
 			
 			foodViewsContainer.x = layoutHelper.stageWidth / 2;
-			foodViewsContainer.y = layoutHelper.stageHeight / 2 + 90;
+			foodViewsContainer.y = layoutHelper.stageHeight / 2 + 0;
 			
 			playerCatViewsContainer.scale = layoutHelper.independentScaleFromEtalonMin;
 			playerCatViewsContainer.x = layoutHelper.stageWidth / 2;
@@ -192,7 +221,8 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			
 			charS.y = layoutHelper.stageHeight / 2 + 80;
 			
-			
+			attackImage.scale = layoutHelper.independentScaleFromEtalonMin;
+			defenceImage.scale = layoutHelper.independentScaleFromEtalonMin;
 		}
 		
 		public function show(showReadyGo:Boolean):void 
@@ -223,7 +253,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			
 			
 			
-			charV.x = - 50;
+			/*charV.x = - 50;
 			charV.alpha = 1;
 			
 			charS.alpha = 1;
@@ -232,6 +262,10 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			
 			Starling.juggler.tween(charV, 0.5, {delay:1.0, transition:Transitions.EASE_OUT_BACK, x:layoutHelper.stageWidth / 2 - 30});
 			Starling.juggler.tween(charS, 0.5, {delay:1.0, transition:Transitions.EASE_OUT_BACK, x:layoutHelper.stageWidth / 2 + 30});
+			
+			Starling.juggler.tween(charV, 0.4, {delay:1.8, transition:Transitions.EASE_OUT, x:charV.x - 50, alpha:0});
+			Starling.juggler.tween(charS, 0.4, {delay:1.8, transition:Transitions.EASE_OUT, x:charV.x + 50, alpha:0});*/
+			
 			
 			startButton.scale = 1;
 			startButton.alpha = 1;
@@ -282,6 +316,8 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 				playerCatViewsContainer.addChild(playerCatsViews[i]);
 				
 				catView.addEventListener(CatView.EVENT_TRIGGERED, handler_playerCatTriggered);
+				catView.addEventListener(CatView.EVENT_MOUSE_DOWN, handler_playerCatMouseDown);
+				catView.addEventListener(CatView.EVENT_MOUSE_UP, handler_playerCatMouseUp);
 			}
 			
 			
@@ -310,16 +346,280 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 				Starling.juggler.tween(enemyCatViewsContainer.getChildAt(i), 0.3, {delay:(i*0.1) + 1.3, transition:Transitions.EASE_OUT_BACK, x:(shiftX + i*(CatView.WIDTH*pxScale + 50*pxScale))});
 			}
 			
+			var dottedLine:DottedLine;
+			while (playerActionHelpersViews.length < playerCatsViews.length) 
+			{
+				dottedLine = new DottedLine();
+				playerActionHelpersViews.push(dottedLine);
+				arrowsContainer.addChild(dottedLine);
+			}
 			
-			refreshEnemyTargetMarks();
+			Starling.juggler.delayCall(refreshEnemyTargetMarks, 2);
 			
 		}
 		
 		private var selectedPlayerCat:CatView;
 		
-		private function handler_playerCatTriggered(event:Event):void 
+		private var actionTouchCat:CatView;
+		
+		private function handler_playerCatMouseDown(event:Event):void 
 		{
 			var catView:CatView = event.target as CatView;
+			
+			FadeQuad.show(topLayer, 0.2, 0.8, false, null);
+			
+			if (!actionTouchCat)
+			{
+				actionTouchCat = catView;
+				
+				var helperPoint:Point;
+				helperPoint = actionTouchCat.parent.localToGlobal(new Point(actionTouchCat.x, actionTouchCat.y));
+				actionTouchCat.refreshStoreds();
+				actionTouchCat.x = helperPoint.x;
+				actionTouchCat.y = helperPoint.y;
+				actionTouchCat.scale = actionTouchCat.parent.scale;
+				actionTouchCat.storedX_0 = actionTouchCat.x;
+				actionTouchCat.storedY_0 = actionTouchCat.y;
+				
+				//trace('>ss', actionTouchCat.storedX, actionTouchCat.storedY, actionTouchCat.storedX_0, actionTouchCat.storedY_0);
+				
+				
+				
+				topLayer.addChild(enemyCatViewsContainer);
+				topLayer.addChild(foodViewsContainer);
+				topLayer.addChild(playerCatViewsContainer);
+				topLayer.addChild(arrowsContainer);
+				topLayer.addChild(actionTouchCat);
+			}
+			
+			addEventListener(Event.ENTER_FRAME, hanler_enterFrame);
+		}
+		
+		private function handler_playerCatMouseUp(event:Event):void 
+		{
+			return;
+			var catView:CatView = event.target as CatView;
+			
+			if (actionTouchCat)
+			{
+				catView.refreshStoreds();
+				
+				
+				TweenHelper.tween(catView, 0.2, {delay:0.0, transition:Transitions.EASE_OUT, x:catView.storedX_0, y:catView.storedY_0, onComplete:childCatAtHomeLayer, onCompleteArgs:[catView]});	
+				
+				
+				actionTouchCat = null;
+				
+				if (true) {
+					
+				}
+				else {
+					
+				}
+				
+				
+			}
+			
+			FadeQuad.hide(0.2);
+			
+			removeEventListener(Event.ENTER_FRAME, hanler_enterFrame);
+		}
+		
+		private var helpersActive:Boolean;
+		private var lastHelperView:DisplayObject;
+		
+		protected function hanler_enterFrame(event:Event):void
+		{
+			var helperPoint:Point;
+			
+			if (actionTouchCat) {
+				actionTouchCat.x = Starling.current.nativeStage.mouseX;
+				actionTouchCat.y = Starling.current.nativeStage.mouseY;
+			}
+			
+			var i:int;
+			var catView:CatView;
+		
+			var currentPlayerCatPoint:Point = new Point(actionTouchCat.x, actionTouchCat.y);
+			var hasHelpersTouch:Boolean;
+			for (i = 0; i < enemyCatsViews.length; i++) 
+			{
+				catView = enemyCatsViews[i] as CatView;
+				helperPoint = catView.parent.localToGlobal(new Point(catView.x, catView.y));
+				
+				//trace('UUUU ', i, Point.distance(helperPoint,currentPlayerCatPoint));
+				//break;
+				
+				
+				if (helpersActive)
+				{
+					if (Point.distance(new Point(attackImage.x, attackImage.y), currentPlayerCatPoint) < 90)
+					{
+						
+						actionTouchCat.cat.role = CatRole.FIGHTER;
+						actionTouchCat.showRoleImage(actionTouchCat.cat.role);
+						hasHelpersTouch = true;
+						
+						if (lastHelperView != attackImage) {
+							lastHelperView = attackImage;
+							EffectsManager.jump(attackImage, 2, layoutHelper.independentScaleFromEtalonMin, layoutHelper.independentScaleFromEtalonMin*1.13, 0.07, 0.07, 0.08, 0, 0, 0.8, true);
+						}
+					}
+					else if (Point.distance(new Point(defenceImage.x, defenceImage.y), currentPlayerCatPoint) < 90)
+					{
+						
+						actionTouchCat.cat.role = CatRole.DEFENDER;
+						actionTouchCat.showRoleImage(actionTouchCat.cat.role);
+						hasHelpersTouch = true;
+						
+						if (lastHelperView != defenceImage) {
+							lastHelperView = defenceImage;
+							EffectsManager.jump(defenceImage, 2, layoutHelper.independentScaleFromEtalonMin, layoutHelper.independentScaleFromEtalonMin*1.13, 0.07, 0.07, 0.08, 0, 0, 0.8, true);
+						}
+					}
+					else {
+						hasHelpersTouch = false;
+						lastHelperView = null;
+					}
+					
+					
+				}
+				else
+				{
+					hasHelpersTouch = false;
+					lastHelperView = null;
+				}
+				
+				if (Point.distance(helperPoint, new Point(actionTouchCat.x, actionTouchCat.y)) < 80)
+				{
+					actionTouchCat.cat.targetCat = catView.cat.id;
+					showEnemyActionHelpers(catView, helperPoint);
+					return;
+				}
+				else if(hasHelpersTouch || (helpersActive && Point.distance(helperPoint, new Point(actionTouchCat.x, actionTouchCat.y)) < 90))
+				{
+					return;
+				}
+				
+				
+				//actionTouchCat.refreshStoreds();
+				//actionTouchCat.x = helperPoint.x;
+				//actionTouchCat.y = helperPoint.y;
+				//actionTouchCat.scale = actionTouchCat.parent.scale;
+				
+			}
+			
+			
+			var foodView:CatFoodView;
+			for (i = 0; i < foodViewsContainer.numChildren; i++) 
+			{
+				foodView = foodViewsContainer.getChildAt(i) as CatFoodView;
+				
+				helperPoint = foodView.parent.localToGlobal(new Point(foodView.x, foodView.y));
+				
+				if (Point.distance(helperPoint, new Point(actionTouchCat.x, actionTouchCat.y)) < 70)
+				{
+					if (lastHelperView != foodView) {
+						lastHelperView = foodView;
+						EffectsManager.jump(foodView, 2, foodImageScale, foodImageScale*1.13, 0.07, 0.07, 0.08, 0, 0, 0.8, true);
+					}
+					
+					actionTouchCat.cat.targetCat = -1;
+					actionTouchCat.cat.role = CatRole.HARVESTER;
+					actionTouchCat.showRoleImage(actionTouchCat.cat.role);
+					return;
+				}
+			}
+			
+			
+			hideEnemyActionHelpers();
+			
+			helpersActive = false;		
+		}
+		
+		private function hideEnemyActionHelpers():void 
+		{
+			Starling.juggler.removeTweens(attackImage);
+			TweenHelper.tween(attackImage, 0.1, {alpha:0, transition:Transitions.EASE_OUT});	
+			
+			Starling.juggler.removeTweens(defenceImage);
+			TweenHelper.tween(defenceImage, 0.1, {alpha:0, transition:Transitions.EASE_OUT});	
+		}
+		
+		private function showEnemyActionHelpers(catView:CatView, helperPoint:Point):void 
+		{
+			if (helpersActive)
+				return;
+			
+			helpersActive = true;	
+				
+			Starling.juggler.removeTweens(attackImage);
+			TweenHelper.tween(attackImage, 0.1, {alpha:1, transition:Transitions.EASE_OUT});	
+			
+			attackImage.x = helperPoint.x + 70;
+			attackImage.y = helperPoint.y - 110;
+			topLayer.addChildAt(attackImage, topLayer.getChildIndex(actionTouchCat) -1);
+			
+			Starling.juggler.removeTweens(defenceImage);
+			TweenHelper.tween(defenceImage, 0.1, {alpha:1, transition:Transitions.EASE_OUT});	
+			
+			defenceImage.x = helperPoint.x - 70;
+			defenceImage.y = helperPoint.y - 110;
+			topLayer.addChildAt(defenceImage, topLayer.getChildIndex(actionTouchCat)-1);
+			
+			
+			
+		}
+		
+			
+		
+		private function handler_touch(event:TouchEvent): void 
+		{
+		
+			const touch:Touch = event.getTouch(Starling.current.stage);
+			if (touch && touch.phase==TouchPhase.ENDED) 
+			{
+				
+				if (actionTouchCat)
+				{
+					TweenHelper.tween(actionTouchCat, 0.2, {delay:0.0, transition:Transitions.EASE_OUT, x:actionTouchCat.storedX_0, y:actionTouchCat.storedY_0, onComplete:childCatAtHomeLayer, onCompleteArgs:[actionTouchCat]});	
+					
+					actionTouchCat = null;
+					
+					if (true) 
+					{
+						
+					}
+					else 
+					{
+						
+					}
+					
+					FadeQuad.hide(0.2);
+					removeEventListener(Event.ENTER_FRAME, hanler_enterFrame);
+					
+					hideEnemyActionHelpers();
+					
+			
+					addChild(enemyCatViewsContainer);
+					addChild(foodViewsContainer);
+					addChild(playerCatViewsContainer);
+					addChild(arrowsContainer);
+					addChild(topLayer);
+					
+				}
+			}
+			
+			
+			
+			
+		}
+		
+		private function handler_playerCatTriggered(event:Event):void 
+		{
+			return;
+			
+			/*var catView:CatView = event.target as CatView;
 			catView.cat.role = CatRole.getNext(catView.cat.role);
 			catView.showRoleImage(catView.cat.role);
 			
@@ -367,7 +667,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 				enemyCatViewsContainer.touchable = false;
 			}
 			
-			refreshEnemyTargetMarks();
+			refreshEnemyTargetMarks();*/
 		}
 		
 		private function handler_enemyCatTriggered(event:Event):void 
@@ -442,7 +742,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			var playerCatView:CatView;
 			var marksCount:int;
 			var defenderMarksCount:int;
-			for (i = 0; i < enemyCatsViews.length; i++) 
+			/*for (i = 0; i < enemyCatsViews.length; i++) 
 			{
 				catView = enemyCatsViews[i] as CatView;
 				marksCount = 0;
@@ -456,10 +756,68 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 					
 					if (playerCatView.cat.role == CatRole.DEFENDER && playerCatView.cat.targetCat == catView.cat.id) 
 						defenderMarksCount++;
+						
+						
 				}
 				
 				catView.fightMarks = marksCount;
 				catView.defenderMarks = defenderMarksCount;
+			}
+			*/
+			
+		
+			
+			var dottedLine:DottedLine;
+			var startPoint:Point;
+			var finishPoint:Point;
+			for (i = 0; i < playerCatsViews.length; i++) 
+			{
+				playerCatView = playerCatsViews[i] as CatView;
+				dottedLine = playerActionHelpersViews[i] as DottedLine;
+				if (playerCatView.cat.role == CatRole.FIGHTER || playerCatView.cat.role == CatRole.DEFENDER) 
+				{
+					catView = getCatById(enemyCatsViews, playerCatView.cat.targetCat);
+					
+					if (catView) 
+					{
+						startPoint = playerCatView.parent.localToGlobal(new Point(playerCatView.x, playerCatView.y));
+						finishPoint = catView.parent.localToGlobal(new Point(catView.x, catView.y));
+						finishPoint.y += CatView.HEIGHT / 4;
+						
+						//dottedLine.x = finishPoint.x;
+						//dottedLine.y = finishPoint.y;
+						dottedLine.left = startPoint.x > finishPoint.x;
+						
+						if(Math.abs(startPoint.x - finishPoint.x) > 40)
+							finishPoint.x += (dottedLine.left ? 1 : -1)*CatView.WIDTH / 4;
+						
+						dottedLine.rect = new Rectangle(Math.min(startPoint.x, finishPoint.x), finishPoint.y, Math.abs(startPoint.x - finishPoint.x), startPoint.y- finishPoint.y-CatView.HEIGHT / 4);
+					}
+					else
+					{
+						dottedLine.rect = null;
+					}
+				}
+				else if (playerCatView.cat.role == CatRole.HARVESTER) 
+				{
+					var foodImage:CatFoodView = foodViewsContainer.getChildAt(0) as CatFoodView;
+					
+					startPoint = playerCatView.parent.localToGlobal(new Point(playerCatView.x, playerCatView.y));
+					finishPoint = foodImage.parent.localToGlobal(new Point(foodImage.x, foodImage.y));
+					finishPoint.y += CatView.HEIGHT / 4;
+					
+					dottedLine.left = startPoint.x > finishPoint.x;
+					
+					if(Math.abs(startPoint.x - finishPoint.x) > 40)
+						finishPoint.x += (dottedLine.left ? 1 : -1)*CatView.WIDTH / 4;
+					
+					dottedLine.rect = new Rectangle(Math.min(startPoint.x, finishPoint.x), finishPoint.y, Math.abs(startPoint.x - finishPoint.x), startPoint.y- finishPoint.y-CatView.HEIGHT / 4);
+				}
+				else
+				{
+					dottedLine.rect = null;
+				}
+			
 			}
 		}
 		
@@ -491,10 +849,10 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			}
 			
 			
-			var foodImage:Image;
+			var foodImage:CatFoodView;
 			for (i = 0; i < foodViewsContainer.numChildren; i++) 
 			{
-				foodImage = foodViewsContainer.getChildAt(i) as Image;
+				foodImage = foodViewsContainer.getChildAt(i) as CatFoodView;
 				Starling.juggler.tween(foodImage, 0.2, {delay:(i*0.05), alpha:0, transition:Transitions.EASE_OUT, y:(foodImage.y - 100)});
 			}
 		}
@@ -528,13 +886,13 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 				return;
 			
 			var columns:int = 4;	
-			var foodImageScale:Number = 0.7;
-			var foodImage:Image;
-			var shiftX:int = (-150 * Math.min(foodCount, columns-1) * foodImageScale)/2 /*- (172 * foodImageScale) / 2*/;
-			for (i = 0; i < foodCount; i++) 
+			
+			var foodImage:CatFoodView;
+			var shiftX:int = 0//(-150 * Math.min(foodCount, columns-1) * foodImageScale)/2;
+			for (i = 0; i < /*foodCount*/1; i++) 
 			{
-				foodImage = new Image(AtlasAsset.CommonAtlas.getTexture('cats/fish_chest'));
-				foodImage.alignPivot();
+				foodImage = new CatFoodView();
+				foodImage.foodCount = foodCount;
 				foodImage.scale = foodImageScale;
 				foodImage.x = shiftX + i % columns * 150 * foodImageScale;
 				foodImage.alpha = 0;
@@ -584,7 +942,8 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 				return;
 			}
 			
-			if (foodViewsContainer.numChildren <= 0)
+			var foodView:CatFoodView = foodViewsContainer.numChildren > 0 ? (foodViewsContainer.getChildAt(0) as CatFoodView) : null;
+			if (!foodView || foodView.foodCount <= 0)
 			{
 				gameScreen.backToLobby();
 				return;
@@ -864,7 +1223,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			catView.scale = 1;
 			
 			//FadeQuad.hide();
-			
+			refreshEnemyTargetMarks();
 		}
 		
 		private function showCatHarverst(catView_1:CatView, foodIndex:int):void
@@ -882,12 +1241,13 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			catView_1.storedY_0 = catView_1.y;
 			topLayer.addChild(catView_1);
 			
-			var foodImage:Image = foodViewsContainer.getChildAt(foodIndex) as Image;
-			helperPoint = foodImage.parent.localToGlobal(new Point(foodImage.x, foodImage.y));
-			foodImage.x = helperPoint.x;
-			foodImage.y = helperPoint.y;
-			foodImage.scale = foodImage.parent.scale;
-			topLayer.addChild(foodImage);
+			var foodImage:CatFoodView = foodViewsContainer.getChildAt(foodIndex) as CatFoodView;
+			foodImage.foodCount--;
+			//helperPoint = foodImage.parent.localToGlobal(new Point(foodImage.x, foodImage.y));
+			//foodImage.x = helperPoint.x;
+			//foodImage.y = helperPoint.y;
+			//foodImage.scale = foodImage.parent.scale;
+			//topLayer.addChild(foodImage);
 			
 			catView_1.showRoleImage(null);
 			catView_1.fightMarks = 0;
@@ -907,9 +1267,9 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 				chain(catView_1, 2.0, {delay:0, transition:Transitions.EASE_OUT, y:(layoutHelper.stageHeight / 2 + 50), onStart:catView_1.showRoleAction, onStartArgs:[catView_1.cat.role, true], onComplete:catView_1.showRoleAction, onCompleteArgs:[null]}).
 				chain(catView_1, 0.4, {scale:catView_1.storedScale, alpha:0.5, transition:Transitions.EASE_OUT, x:catView_1.storedX_0, y:catView_1.storedY_0, onComplete:childCatAtHomeLayer, onCompleteArgs:[catView_1], onStart:FadeQuad.hide});
 				
-			TweenHelper.tween(foodImage, 0.4, {delay:0.3, transition:Transitions.EASE_OUT, scale:1.3, x:x_1_right, y:y_1_right}).
+			/*TweenHelper.tween(foodImage, 0.4, {delay:0.3, transition:Transitions.EASE_OUT, scale:1.3, x:x_1_right, y:y_1_right}).
 				chain(foodImage, 2.0, {delay:0, transition:Transitions.EASE_OUT, y:(layoutHelper.stageHeight / 2 - 50)}).
-				chain(foodImage, 0.4, {alpha:0, transition:Transitions.EASE_OUT, y:(layoutHelper.stageHeight / 2 - 150), onComplete:foodImage.removeFromParent});	
+				chain(foodImage, 0.4, {alpha:0, transition:Transitions.EASE_OUT, y:(layoutHelper.stageHeight / 2 - 150), onComplete:foodImage.removeFromParent});*/	
 		}
 		
 		private function harvestFood(count:int):void

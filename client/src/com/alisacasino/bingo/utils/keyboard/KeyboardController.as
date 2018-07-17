@@ -18,6 +18,7 @@ package com.alisacasino.bingo.utils.keyboard
 	import com.alisacasino.bingo.commands.player.CollectCommodityItem;
 	import com.alisacasino.bingo.commands.player.ShowCompleteCollectionPageDialog;
 	import com.alisacasino.bingo.commands.player.UpdateLobbyBarsTrueValue;
+	import com.alisacasino.bingo.components.DottedLine;
 	import com.alisacasino.bingo.components.MultiCharsLabel;
 	import com.alisacasino.bingo.components.NativeStageRedErrorPlate;
 	import com.alisacasino.bingo.components.effects.ParticleExplosion;
@@ -496,6 +497,14 @@ package com.alisacasino.bingo.utils.keyboard
 			
 			if (e.keyCode == Keyboard.N)
 			{
+				var asd:DottedLine = new DottedLine();
+				asd.x = 200;
+				asd.y = 200;
+				Game.current.gameScreen.addChild(asd);
+				
+				asd.rect = new Rectangle(0, 0, 200, 300);
+				
+				
 				//showClipDebug(MovieClipAsset.LogoFire, MovieClipAsset.PackBase, 'logo_fire', 0, 0);
 				return;
 				

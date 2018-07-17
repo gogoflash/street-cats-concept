@@ -508,7 +508,7 @@ package com.alisacasino.bingo.screens
 			var color2:String = colors.splice(Math.floor(Math.random() * colors.length), 1);
 			logoText = new XTextField(400, 80, XTextFieldStyle.getChateaudeGarage(48, 0x00d3ff));
 			logoText.isHtmlText = true;
-			logoText.text = '<font color="#' + color1 + '">STREET</font> <font color="' + color1 +  '">CATS</font>';
+			logoText.text = '<font color="#' + color1 + '">STREET</font> <font color="' + color2 +  '">CATS</font>';
 			addChild(logoText);
 			
 			progressHintText = new XTextField(1, 1, XTextFieldStyle.getChateaudeGarage(24, 0x00d3ff));

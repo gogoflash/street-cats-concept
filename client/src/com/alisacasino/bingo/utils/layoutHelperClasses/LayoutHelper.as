@@ -60,7 +60,7 @@ package com.alisacasino.bingo.utils.layoutHelperClasses
 			LARGE_SCREEN_DIAGONAL = canvasLayoutMode ? 14.7 : 6;
 			
 			cachedScale = -1;
-			if (width > height) {
+			if (width < height) {
 				mRealScreenWidth = width;
 				mRealScreenHeight = height;
 			} else {
@@ -228,9 +228,10 @@ package com.alisacasino.bingo.utils.layoutHelperClasses
 		
 		public function get pxScale():Number
 		{
+			return 1;
 			if (cachedScale == -1)
 			{
-				cachedScale = stageEtalonHeight / 720;
+				cachedScale = stageEtalonHeight / 854//720;
 			}
 			return cachedScale;
 		}
@@ -266,14 +267,14 @@ package com.alisacasino.bingo.utils.layoutHelperClasses
 			в 1.5 раза в режиме больших эссетов по савнению с режимом малых эссетов. 
 		*/
 		public function get stageEtalonWidth():Number {
-			return 854 * assetCoefficient;
+			return 480 * assetCoefficient;
 		}
 		public function get stageEtalonHeight():Number {
-			return 480 * assetCoefficient;
+			return 854 * assetCoefficient;
 		}
 		
 		public function get assetCoefficient():Number {
-			return assetMode == ASSET_MODE_BIG ? 1.5 : 1;
+			return assetMode == ASSET_MODE_BIG ? (/*1.5/*/1.5) : 1;
 		}
 		
 		private static const BAR_MAX_SCALE:Number = 1.0;

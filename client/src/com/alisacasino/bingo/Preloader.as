@@ -25,9 +25,12 @@ package com.alisacasino.bingo
 	 * ...
 	 * @author Dmitriy Barabanschikov
 	 */
+	[SWF(width = '540', height = '960', frameRate = '60', backgroundColor = '#FFFFFF')] //PHONE_MODE
+	//[SWF(width = '720', height = '1280', frameRate = '60', backgroundColor = '#FFFFFF')] //PHONE_MODE
+	//[SWF(width = '1280', height = '800', frameRate = '60', backgroundColor = '#FFFFFF')] //PHONE_MODE
 	//[SWF(width = '1136', height = '640', frameRate = '60', backgroundColor = '#FFFFFF')] //PHONE_MODE
 	//[SWF(width = '1024', height = '768', frameRate = '60', backgroundColor = '#FFFFFF')] //TABLET_MODE
-	[SWF(width = '1280', height = '720', frameRate = '60', backgroundColor = '#FFFFFF')] //PHONE_MODE
+	//[SWF(width = '1280', height = '720', frameRate = '60', backgroundColor = '#FFFFFF')] //PHONE_MODE
 	//[SWF(width='1280', height='960', frameRate='60', backgroundColor='#FFFFFF')] //CANVAS_MODE
 	//[SWF(width='960', height='720', frameRate='60', backgroundColor='#FFFFFF')] // IPAD 2
 	//[SWF(width='960', height='640', frameRate='60', backgroundColor='#FFFFFF')] // iPhone 4S

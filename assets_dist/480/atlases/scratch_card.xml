@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker https://www.codeandweb.com/texturepacker -->
-<!-- $TexturePacker:SmartUpdate:38fad260127b3d467ee9eec933c7a003:132cde043de55df0d0e854e246a98487:293ff51e18584c947f5c94456ed60ce6$ -->
+<!-- $TexturePacker:SmartUpdate:3fe8585a8e1ccafab8fbc4d75c2d1912:306baa091052bdd36ca88a8cf84cfe53:293ff51e18584c947f5c94456ed60ce6$ -->
 <TextureAtlas imagePath="scratch_card.png" width="1024" height="2048">
     <SubTexture name="backgrounds/1" x="1" y="1" width="977" height="601"/>
     <SubTexture name="backgrounds/2" x="1" y="604" width="683" height="378"/>
-    <SubTexture name="backgrounds/3" x="1" y="984" width="600" height="450"/>
-    <SubTexture name="backgrounds/4" x="1" y="1436" rotated="true" width="360" height="600"/>
-    <SubTexture name="backgrounds/5" x="603" y="984" width="400" height="400"/>
+    <SubTexture name="backgrounds/3" x="1" y="984" rotated="true" width="640" height="453"/>
+    <SubTexture name="backgrounds/4" x="1" y="1439" rotated="true" width="360" height="600"/>
+    <SubTexture name="backgrounds/5" x="363" y="1439" width="400" height="400"/>
 </TextureAtlas>

@@ -18,7 +18,7 @@ package com.alisacasino.bingo.models.cats
 		public static function getRoleTexture(role:String):Texture 
 		{
 			switch(role) {
-				case FIGHTER: return AtlasAsset.CommonAtlas.getTexture('cats/roles/claw');
+				case FIGHTER: return AtlasAsset.CommonAtlas.getTexture('cats/roles/sword');
 				case DEFENDER: return AtlasAsset.CommonAtlas.getTexture('cats/roles/shield');
 				case HARVESTER: return AtlasAsset.CommonAtlas.getTexture('cats/roles/fork_knife');
 			}

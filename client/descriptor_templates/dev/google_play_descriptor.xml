@@ -45,7 +45,7 @@
 	<initialWindow>
 		<content>StreetCats.swf</content>
 		<title>StreetCats Dev</title>
-        <aspectRatio>landscape</aspectRatio>
+        <aspectRatio>portrait</aspectRatio>
         <renderMode>direct</renderMode>
 		<autoOrients>true</autoOrients>
         <fullScreen>true</fullScreen>

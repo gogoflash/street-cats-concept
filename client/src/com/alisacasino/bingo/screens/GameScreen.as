@@ -168,13 +168,13 @@ package com.alisacasino.bingo.screens
 				cat.catUID = gameManager.catsModel.getRandomCatUID();
 				
 				
-				cat.role = CatRole.getRandom();
-				cat.targetCat = Math.floor(Math.random()*3);
+				cat.role = CatRole.HARVESTER;//CatRole.getRandom();
+				//cat.targetCat = Math.floor(Math.random()*3);
 				
 				gameManager.playerCats.push(cat);
 			}
 			
-			mBackgroundImage = new Image(AtlasAsset.ScratchCardAtlas.getTexture('backgrounds/' + Math.ceil(Math.random()*5).toString()));
+			mBackgroundImage = new Image(AtlasAsset.ScratchCardAtlas.getTexture('backgrounds/' + '3'/*Math.ceil(Math.random()*5).toString()*/));
 			addChild(mBackgroundImage);
 			mBackgroundImage.alignPivot();
 			

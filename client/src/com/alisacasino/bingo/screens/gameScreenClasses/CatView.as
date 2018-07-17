@@ -22,6 +22,8 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 		public static var HEIGHT:int = 270;
 		
 		public static var EVENT_TRIGGERED:String = 'EVENT_TRIGGERED';
+		public static var EVENT_MOUSE_DOWN:String = 'EVENT_MOUSE_DOWN';
+		public static var EVENT_MOUSE_UP:String = 'EVENT_MOUSE_UP';
 		
 		public function CatView() 
 		{
@@ -82,7 +84,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 					
 					if (controlsEnabled) {
 						jumpHelper = new JumpWithHintHelper(catImage, true, true);
-						jumpHelper.setStateCallbacks(null, null, callback_imageTriggered);
+						jumpHelper.setStateCallbacks(callback_imageMouseDown, callback_imageMouseUp, callback_imageTriggered);
 					}
 					
 				}
@@ -126,6 +128,14 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			dispatchEventWith(EVENT_TRIGGERED, true);
 		}
 		
+		private function callback_imageMouseDown():void {
+			dispatchEventWith(EVENT_MOUSE_DOWN, true);
+		}
+		
+		private function callback_imageMouseUp():void {
+			dispatchEventWith(EVENT_MOUSE_UP, true);
+		}
+		
 		public function showRoleImage(role:String):void
 		{
 			if (role)
@@ -134,8 +144,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 				{
 					roleImage = new Image(CatRole.getRoleTexture(role));
 					roleImage.alignPivot();
-					roleImage.x = 75;
-					roleImage.y = 85;
+					
 					roleImage.touchable = false;
 					
 					addChild(roleImage);
@@ -146,6 +155,20 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 					roleImage.readjustSize();
 					roleImage.alignPivot();
 				}
+				
+				if (role == CatRole.FIGHTER) {
+					roleImage.x = 75;
+					roleImage.y = -85;
+				}
+				else if (role == CatRole.DEFENDER) {
+					roleImage.x = -75;
+					roleImage.y = -85;
+				}
+				else if (role == CatRole.HARVESTER) {
+					roleImage.x = 0;
+					roleImage.y = -85;
+				}
+				
 			}
 			else
 			{

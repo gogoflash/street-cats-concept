@@ -1855,7 +1855,7 @@ package com.alisacasino.bingo.models
 				}
 				
 				//cat.role = CatRole.FIGHTER;
-				cat.role = CatRole.HARVESTER;
+				//cat.role = CatRole.HARVESTER;
 				//cat.targetCat = (opponents[0] as CatModel).id;
 			}
 		}
