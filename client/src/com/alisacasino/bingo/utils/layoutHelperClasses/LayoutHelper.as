@@ -106,7 +106,7 @@ package com.alisacasino.bingo.utils.layoutHelperClasses
 			} else 
 			{
 
-				var needToForce480:Boolean = IPhoneModelDecoder.needToForce480(PlatformServices.interceptor.getDeviceModelRaw());
+				/*var needToForce480:Boolean = IPhoneModelDecoder.needToForce480(PlatformServices.interceptor.getDeviceModelRaw());
 				needToForce480 ||= phoneTest;
 				mScaleFromEtalonMin = Math.min(mRealScreenWidth / stageEtalonWidth, mRealScreenHeight / stageEtalonHeight);
 				
@@ -120,9 +120,21 @@ package com.alisacasino.bingo.utils.layoutHelperClasses
 					mStageHeight = 480;
 					
 					mAssetMode = ASSET_MODE_SMALL;
-				}
+				}*/
 				
-				mScaleFromEtalonMin = 1;
+				//mStageWidth = mRealScreenWidth * 720 / mRealScreenHeight;
+				//mStageHeight = 720;
+				
+				mStageWidth = mRealScreenWidth;
+				mStageHeight = mRealScreenHeight;
+				
+				//mStageHeight = mRealScreenHeight * 560 / mRealScreenWidth;
+				//mStageWidth = 560;
+				
+				mAssetMode = ASSET_MODE_BIG;
+				
+				//mScaleFromEtalonMin = 1;
+				mScaleFromEtalonMin = Math.min(mRealScreenWidth / stageEtalonWidth, mRealScreenHeight / stageEtalonHeight);
 				_scaleFromEtalon = Math.min(mRealScreenWidth / stageEtalonWidth, mRealScreenHeight / stageEtalonHeight);
 				_independentScaleFromEtalonMin = Math.min(mStageWidth / stageEtalonWidth, mStageHeight / stageEtalonHeight);
 			}
@@ -254,6 +266,10 @@ package com.alisacasino.bingo.utils.layoutHelperClasses
 		
 		public function get contentScaleFactorCoefficient():Number {
 			return _contentScaleFactorCoefficient;
+		}
+		
+		public function get specialScale():Number {
+			return canvasLayoutMode ? 1 : _independentScaleFromEtalonMin;
 		}
 		
 		/* следующие 2 метода - определяют эталонные размеры: ширину и высоту.

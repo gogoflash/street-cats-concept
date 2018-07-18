@@ -1,6 +1,7 @@
 package com.alisacasino.bingo.models.cats 
 {
 	import com.alisacasino.bingo.assets.AtlasAsset;
+	import com.alisacasino.bingo.screens.gameScreenClasses.CatView;
 	import starling.textures.Texture;
 	public class CatRole 
 	{
@@ -45,6 +46,17 @@ package com.alisacasino.bingo.models.cats
 			//var types:Vector.<String> = new <String> [X2, CASH, XP, INSTABINGO, /*MINIGAME,*/ SCORE];
 			return types[Math.floor(Math.random()*types.length)];
 		}
+		
+		public static function getStateByRole(role:String):String 
+		{
+			switch(role) {
+				case FIGHTER: return CatView.STATE_FIGHT;
+				case DEFENDER: return CatView.STATE_DEFENCE;
+				case HARVESTER: return CatView.STATE_HARVEST;
+			}
+			return CatView.STATE_IDLE;
+		}
+		
 	}
 
 }

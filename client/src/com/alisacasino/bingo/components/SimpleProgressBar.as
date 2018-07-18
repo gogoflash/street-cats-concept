@@ -64,11 +64,13 @@ package com.alisacasino.bingo.components
 			progressFillImage = new Image(atlas.getTexture(fillTexture));
 			progressFillImage.mask = new Quad(progressFillImage.width, progressFillImage.height);
 			progressFillImage.mask.width = 0;
-			addChild(progressFillImage);
+			
 			
 			progressFrame = new Image(atlas.getTexture(backgroundTexture));
 			addChild(progressFrame);
 				
+			
+			addChild(progressFillImage);
 			//debugTest();
 		}
 		

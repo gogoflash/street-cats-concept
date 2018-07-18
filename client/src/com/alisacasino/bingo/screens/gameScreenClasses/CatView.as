@@ -1,6 +1,7 @@
 package com.alisacasino.bingo.screens.gameScreenClasses 
 {
 	import com.alisacasino.bingo.assets.AtlasAsset;
+	import com.alisacasino.bingo.components.SimpleProgressBar;
 	import com.alisacasino.bingo.controls.XTextField;
 	import com.alisacasino.bingo.controls.XTextFieldStyle;
 	import com.alisacasino.bingo.models.cats.CatModel;
@@ -24,6 +25,14 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 		public static var EVENT_TRIGGERED:String = 'EVENT_TRIGGERED';
 		public static var EVENT_MOUSE_DOWN:String = 'EVENT_MOUSE_DOWN';
 		public static var EVENT_MOUSE_UP:String = 'EVENT_MOUSE_UP';
+		
+		private var _state:String = 'STATE_IDLE';
+		public static var STATE_IDLE:String = 'STATE_IDLE';
+		public static var STATE_WALK:String = 'STATE_WALK';
+		public static var STATE_WALK_HARVEST:String = 'STATE_WALK_HARVEST';
+		public static var STATE_FIGHT:String = 'STATE_FIGHT';
+		public static var STATE_DEFENCE:String = 'STATE_DEFENCE';
+		public static var STATE_HARVEST:String = 'STATE_HARVEST';
 		
 		public function CatView() 
 		{
@@ -49,7 +58,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 		
 		private var hpLabel:XTextField;
 		
-		
+		private var healthProgress:SimpleProgressBar;
 		
 		public var storedParent:DisplayObjectContainer;
 		public var storedX:Number = 0;
@@ -76,24 +85,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 				
 			if (value)
 			{
-				if (!catImage) 
-				{
-					catImage = new Image(gameManager.catsModel.getCatTexture(_cat.catUID, isFront));
-					catImage.alignPivot();
-					addChild(catImage);
-					
-					if (controlsEnabled) {
-						jumpHelper = new JumpWithHintHelper(catImage, true, true);
-						jumpHelper.setStateCallbacks(callback_imageMouseDown, callback_imageMouseUp, callback_imageTriggered);
-					}
-					
-				}
-				else 
-				{
-					catImage.texture = gameManager.catsModel.getCatTexture(_cat.catUID, isFront);
-					catImage.readjustSize();
-					catImage.alignPivot();
-				}
+				setState(_state, false, true);
 				
 				if (roleImage)
 					addChild(roleImage);
@@ -101,8 +93,8 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 				if (fightMarksContainer)
 					addChild(fightMarksContainer);
 					
-				if (hpLabel)
-					addChild(hpLabel);
+				if (healthProgress)
+					addChild(healthProgress);
 			}
 			else
 			{
@@ -122,6 +114,38 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 		
 		public function get cat():CatModel {
 			return _cat;
+		}
+		
+		public function setState(value:String, invertHorisontal:Boolean = false, explicit:Boolean = false):void 
+		{
+			if (_state == value && !explicit)
+				return;
+				
+			_state = value;
+			
+			if (!catImage) 
+			{
+				catImage = new Image(gameManager.catsModel.getCatTexture(_cat.catUID, isFront, _state));
+				catImage.alignPivot();
+				addChild(catImage);
+				
+				if (controlsEnabled) {
+					jumpHelper = new JumpWithHintHelper(catImage, true, true);
+					jumpHelper.setStateCallbacks(callback_imageMouseDown, callback_imageMouseUp, callback_imageTriggered);
+				}
+				
+			}
+			else 
+			{
+				catImage.texture = gameManager.catsModel.getCatTexture(_cat.catUID, isFront, _state);
+				catImage.readjustSize();
+				catImage.alignPivot();
+			}
+			
+			catImage.scaleX = invertHorisontal ? -1 : 1;
+			
+			//refreshHP();
+			
 		}
 		
 		private function callback_imageTriggered():void {
@@ -317,12 +341,34 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 				hpLabel.format.color = _cat.health > 0 ? 0x00E100 : 0xE10000;
 				hpLabel.text = 'health:' + _cat.health.toString();
 				
-				addChild(hpLabel);
+				//addChild(hpLabel);
+				
+				
+				if (!healthProgress) 
+				{
+					healthProgress = new SimpleProgressBar(AtlasAsset.CommonAtlas, 'bars/progress_bg', 'bars/progress_fill', 0);
+					healthProgress.alignPivot();
+					//hpLabel.x = 75;
+					healthProgress.y = -125;
+					healthProgress.touchable = false;
+					
+					
+				}
+				
+				healthProgress.y = isFront ? -130 : 123;
+				healthProgress.animateValues(_cat.health / 3, 1, 0);
+				//healthProgress.format.color = _cat.health > 0 ? 0x00E100 : 0xE10000;
+				//healthProgress.text = 'health:' + _cat.health.toString();
+				
+				addChild(healthProgress);
+				
+				
 			}
 			else
 			{
 				if (roleImage) {
-					hpLabel.text = '';
+					//hpLabel.text = '';
+					healthProgress.animateValues(0, 1, 0);
 				}	
 			}	
 		}

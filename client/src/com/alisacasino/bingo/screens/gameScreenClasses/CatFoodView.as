@@ -3,8 +3,10 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 	import com.alisacasino.bingo.assets.AtlasAsset;
 	import com.alisacasino.bingo.controls.XTextField;
 	import com.alisacasino.bingo.controls.XTextFieldStyle;
+	import starling.animation.Transitions;
 	import starling.display.Image;
 	import starling.display.Sprite;
+	import starling.utils.TweenHelper;
 
 	public class CatFoodView extends Sprite 
 	{
@@ -26,10 +28,19 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 		
 		private var foodImage:Image;
 		
+		public function setFoodCount(value:int):void
+		{
+			foodCount = value;
+		}
+		
 		public function set foodCount(value:int):void
 		{
 			if (value == _foodCount)
 				return;
+			
+			if (value < _foodCount) {
+				showFoodDrop(_foodCount-value);
+			}
 				
 			_foodCount = value;
 			
@@ -58,7 +69,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			{
 				if (!hpLabel) 
 				{
-					hpLabel = new XTextField(160 * pxScale, 30 * pxScale, XTextFieldStyle.getWalrus(18).setStroke(0.5), '' );
+					hpLabel = new XTextField(160 * pxScale, 30 * pxScale, XTextFieldStyle.getWalrus(22).setStroke(0.5), '' );
 					hpLabel.alignPivot();
 					//hpLabel.x = 75;
 					hpLabel.y = 90;
@@ -75,6 +86,20 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			{
 				hpLabel.text = '';	
 			}	
+		}
+		
+		private function showFoodDrop(value:int):void 
+		{
+			var image:Image = new Image(AtlasAsset.CommonAtlas.getTexture('cats/fish'));
+			image.alignPivot();
+			image.scale = 1;
+			//foodImage.x = shiftX + i % columns * 150 * foodImageScale;
+			//foodImage.alpha = 0;
+			//foodImage.y = -layoutHelper.stageHeight/2 - foodImage.height/2 + 104;
+			touchable = false;
+			addChild(image);
+			
+			TweenHelper.tween(image, 1.2, {transition:Transitions.EASE_OUT, y: -200 * layoutHelper.independentScaleFromEtalonMin, onComplete:image.removeFromParent});
 		}
 	}
 

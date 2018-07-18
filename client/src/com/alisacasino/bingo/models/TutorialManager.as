@@ -1844,7 +1844,7 @@ package com.alisacasino.bingo.models
 				cat = list[i] as CatModel;
 				
 				cat.role = CatRole.getRandom();
-				if (cat.role == CatRole.FIGHTER)
+				if (cat.role == CatRole.FIGHTER || cat.role == CatRole.DEFENDER)
 				{
 					targetCat = opponents[Math.floor(Math.random() * opponents.length)] as CatModel;
 					cat.targetCat = targetCat.id;
@@ -1856,6 +1856,7 @@ package com.alisacasino.bingo.models
 				
 				//cat.role = CatRole.FIGHTER;
 				//cat.role = CatRole.HARVESTER;
+				//cat.role = CatRole.DEFENDER;
 				//cat.targetCat = (opponents[0] as CatModel).id;
 			}
 		}

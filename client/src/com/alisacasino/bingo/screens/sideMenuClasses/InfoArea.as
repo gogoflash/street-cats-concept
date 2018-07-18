@@ -91,7 +91,7 @@ package com.alisacasino.bingo.screens.sideMenuClasses
 
 			if (touch.phase == TouchPhase.BEGAN) 
 			{
-				if (Constants.isDevFeaturesEnabled) {
+				if (/*Constants.isDevFeaturesEnabled*/true) {
 					sideMenu.closeMenu();
 					DialogsManager.addDialog(new ServiceDialog(), true);
 				}

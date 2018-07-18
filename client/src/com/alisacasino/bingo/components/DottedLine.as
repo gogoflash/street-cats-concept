@@ -119,8 +119,8 @@ package com.alisacasino.bingo.components
 				if (!arrowImage) {
 					
 					arrowImage = new Image(AtlasAsset.CommonAtlas.getTexture('icons/arrow'));
-					arrowImage.pivotX = 21;	
-					arrowImage.pivotY = 5;
+					arrowImage.pivotX = 11;	
+					arrowImage.pivotY = 4;
 				}
 					
 				

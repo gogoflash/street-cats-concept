@@ -96,8 +96,9 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			
 			cardScrollButton = new XButton(XButtonStyle.BlueButtonStyle);
 			cardScrollButton.scale9Grid = new Rectangle(25 * pxScale, 0, 35 * pxScale, cardScrollButton.upState.height);
+			cardScrollButton.width = 90;
 			cardScrollButton.useHandCursor = true;
-			cardScrollButton.text = 'SPY ENEMY';
+			cardScrollButton.text = 'SPY';
 			cardScrollButton.alignPivot();
 			cardScrollButton.addEventListener(Event.TRIGGERED, cardScrollButton_triggeredHandler);
 			//cardScrollButton.defaultSkin = new Image(AtlasAsset.CommonAtlas.getTexture("game/card_scroll_button"));
@@ -291,7 +292,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 		
 		private function getCardScrollButtonX():Number
 		{
-			return width - cardScrollButton.width + cardScrollButton.pivotX - 14 * gameUILayoutScale;
+			return width - 60 * layoutHelper.independentScaleFromEtalonMin//cardScrollButton.width + cardScrollButton.pivotX - 10 * layoutHelper.independentScaleFromEtalonMin;
 		}
 		
 		override public function dispose():void
