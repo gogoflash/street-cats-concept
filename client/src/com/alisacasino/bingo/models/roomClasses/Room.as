@@ -72,6 +72,8 @@ package com.alisacasino.bingo.models.roomClasses
 		
 		public function updateFromRoomMessage(m:RoomMessage, isRoundOverMessage:Boolean = false):void
 		{
+			if (!m)
+				return;
 			mIsRoundRunning = m.isRoundRunning;
 			mPlayersCount = m.playersCount;
 			_roundCardsCount = m.cardsCount;

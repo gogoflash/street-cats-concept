@@ -41,7 +41,7 @@ package com.alisacasino.bingo.models
 		public var sequenceRoundLossCount:int;
 		public var sequenceRoundWinsCount:int;
 		
-		private var mPlayerId:UInt64;
+		public var mPlayerId:UInt64;
 		private var mFacebookId:String;
 		private var _avatarSource:String;
 		private var mFirstName:String;

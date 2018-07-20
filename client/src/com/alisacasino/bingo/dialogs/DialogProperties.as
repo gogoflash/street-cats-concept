@@ -59,7 +59,7 @@ package com.alisacasino.bingo.dialogs
 		
 		public static var STUB:DialogProperties = new DialogProperties(812, 0, 'STUB', true, "STUB");
 		
-		public static var RECONNECT_BLANK:DialogProperties = new DialogProperties(812, 0, null, false, null, true, false, false, 0.85, 0.06, true);
+		public static var RECONNECT_BLANK:DialogProperties = new DialogProperties(500, 0, null, false, null, true, false, false, 0.85, 0.06, true);
 		
 		public static var RECONNECT_DIALOG:DialogProperties = new DialogProperties(812, 0, 'CONNECTION LOST', false, "RETRY", true, false, false, 0.85, 0.06, true);
 		public static var RATE_US_DIALOG:DialogProperties = new DialogProperties(812, 0, 'RATE US!', true, "RETRY", true, true, true, 0.8, 0.06, true);

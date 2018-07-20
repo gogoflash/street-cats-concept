@@ -46,6 +46,7 @@ package com.alisacasino.bingo.utils.connection
 		
 		public function initialize(game:Game):void
 		{
+			return;
 			game.addEventListener(EnterFrameEvent.ENTER_FRAME, game_enterFrameHandler);
 			reset();
 		}

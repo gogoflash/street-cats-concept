@@ -10,6 +10,7 @@ package com.alisacasino.bingo.utils
 	import com.alisacasino.bingo.models.Card;
 	import com.alisacasino.bingo.models.Player;
 	import com.alisacasino.bingo.models.roomClasses.Room;
+	import com.alisacasino.bingo.platform.IFacebookManager;
 	import com.alisacasino.bingo.platform.PlatformServices;
 	import com.alisacasino.bingo.platform.mobile.FacebookDialogResponse;
 	import com.alisacasino.bingo.protocol.BaseMessage;
@@ -163,6 +164,45 @@ package com.alisacasino.bingo.utils
 				if (baseMessage.hasSignInOkMessage)
 					mSignInTime = mCurrentServerTime;
 			}
+		}
+		
+		public var sessionId:String;
+		
+		public var playerId:String;
+		
+		public function parseMessageNew(raw:Object):void 
+		{
+			if (raw.name == "signInResponse")
+			{
+				Player.current = new Player(null);
+				Player.current.mPlayerId = UInt64.fromNumber(raw.payload.playerId);
+			
+				Player.current.xpCount = 1;
+				
+				Room.current = new Room(null);
+				
+				sessionId = raw.payload.sessionId;
+				
+				Game.dispatchEventWith(ConnectionManager.SIGN_IN_COMPLETE_EVENT);
+				
+				var mGameManager:GameManager = GameManager.instance;
+				var mFacebookManager:IFacebookManager = PlatformServices.facebookManager;
+				if (PlatformServices.isMobile) {
+				// first time login as a guest -> we save playerId/pwdHash
+				if (mGameManager.playerId == null && mGameManager.pwdHash != null && !mFacebookManager.isConnected) {
+					mGameManager.playerId = Player.current.mPlayerId;
+				}
+					// was a guest, became a Facebook user w/ the same playerId -> remove guest data
+				else if (mGameManager.playerId != null && 
+					mGameManager.playerId.toNumber() == raw.player.playerId.toNumber() && 
+					mGameManager.pwdHash != null && mFacebookManager.isConnected) {
+					mGameManager.playerId = null;
+					mGameManager.pwdHash = null;
+				}
+				}
+			}
+			
+			
 		}
 		
 		private function handleMessage(message:Message):void

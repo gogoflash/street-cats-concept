@@ -595,7 +595,7 @@ package com.alisacasino.bingo.screens
 			logoGlow.y = alisaLogoImage.y - 80 * pxScale * viewScale;
 			
 			logoText.x = alisaLogoImage.x + (alisaLogoImage.width - logoText.width)/2;
-			logoText.y = alisaLogoImage.y + 205;
+			logoText.y = alisaLogoImage.y + 205 * layoutHelper.specialScale;
 		}
 		
 		override public function get requiredAssets():Array

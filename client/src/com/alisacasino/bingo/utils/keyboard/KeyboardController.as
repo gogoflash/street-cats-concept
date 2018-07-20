@@ -491,8 +491,18 @@ package com.alisacasino.bingo.utils.keyboard
 			
 			if (e.keyCode == Keyboard.B)
 			{
+				var json:Object = {
+				   id: 0,
+				   session: null,
+				   name: "joinGame",
+				   playerId:12
+				   //payload: {platformId:1} 
+				}
+			
+				ServerConnection.current.sendMessageNew(json);
+				
 				//DialogsManager.closeAll([TournamentResultDialog, ReconnectDialog, ScratchCardWindow]);
-				doCtrlShiftB();
+				//doCtrlShiftB();
 			}
 			
 			if (e.keyCode == Keyboard.N)

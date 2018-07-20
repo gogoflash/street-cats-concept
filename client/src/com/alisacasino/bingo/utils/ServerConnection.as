@@ -4,6 +4,8 @@ package com.alisacasino.bingo.utils
 	import avmplus.getQualifiedClassName;
 	import com.alisacasino.bingo.Game;
 	import com.alisacasino.bingo.commands.messages.HandleRequestHelloMessage;
+	import com.alisacasino.bingo.dialogs.DialogsManager;
+	import com.alisacasino.bingo.dialogs.ReconnectDialog;
 	import com.alisacasino.bingo.protocol.BaseMessage;
 	import com.alisacasino.bingo.protocol.BingoMessage;
 	import com.alisacasino.bingo.protocol.BuyCardsMessage;
@@ -30,6 +32,7 @@ package com.alisacasino.bingo.utils
 	import com.netease.protobuf.used_by_generated_code;
 	import com.netease.protobuf.fieldDescriptors.FieldDescriptor$TYPE_MESSAGE;
 	import flash.utils.Dictionary;
+	import starling.core.Starling;
 	
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
@@ -113,6 +116,8 @@ package com.alisacasino.bingo.utils
 		
 		public function connect():void
 		{
+			mHost = '54.146.172.237';
+			mPort = 8888;
 			mSocket.connect(mHost, mPort);
 			
 			Game.connectionManager.helloReceived = false;
@@ -128,11 +133,24 @@ package com.alisacasino.bingo.utils
 		
 		public function onConnect(e:Event):void
 		{
+			1 + 1
 			Game.dispatchEventWith(ConnectionManager.CONNECTION_ESTABLISHED_EVENT);
+			
+			if (!rer)
+				sendMessage(null);
 		}
 		
 		private function onDisconnect(e:Event):void
 		{
+			
+			var reconnectDialog1:ReconnectDialog = new ReconnectDialog(ReconnectDialog.TYPE_INFO, 'Socket event', 'Socket closet!');
+			
+			Starling.juggler.delayCall(DialogsManager.addDialog, 2.3, reconnectDialog1, true, true)
+			//DialogsManager.addDialog(reconnectDialog1, true, true);
+			
+			return;
+			
+			
 			current = null;
 			Game.dispatchEventWith(ConnectionManager.CONNECTION_CLOSED_EVENT, false, 'Socket close');
 		}
@@ -179,8 +197,11 @@ package com.alisacasino.bingo.utils
 			
 			mBuffer.endian = flash.utils.Endian.LITTLE_ENDIAN;
 
-			while (mBuffer.position < mBuffer.length) {
-				if (mMessageLength == 0) {
+			//var dd1:String = mBuffer.readUTF();
+			
+			while (mBuffer.position < mBuffer.length) 
+			{
+				/*if (mMessageLength == 0) {
 					var oldPosition:int = mBuffer.position;
 					try {
 						mMessageLength = readVarint32(mBuffer);
@@ -188,13 +209,51 @@ package com.alisacasino.bingo.utils
 						mBuffer.position = oldPosition;
 						break;
 					}
-				}
-				if (mMessageLength <= mBuffer.bytesAvailable) {
+				}*/
+				if (true/*mMessageLength <= mBuffer.bytesAvailable*/) {
 					var  msg:BaseMessage = new BaseMessage();
-					msg.used_by_generated_code::readFromSlice(mBuffer, mBuffer.bytesAvailable - mMessageLength);
-					mMessageLength = 0;
+					
+					var ba:ByteArray = new ByteArray();
+					
+					mBuffer.position = 0//oldPosition;
+					var dd:String = mBuffer.readUTFBytes(mBuffer.bytesAvailable)//mBuffer.readUTFBytes(/*mBuffer.bytesAvailable - */mMessageLength);
+					trace('<>>>>> ', dd);
+					
+					//dd = dd.replace('} {', '');
+					var iii:int = dd.search('}{');
+					var iiss:int = dd.indexOf('}{');
+					
+					if (iii != -1)
+						dd = dd.slice(0, iii + 1);
+					
+					
+					var sse:Object = JSON.parse(dd);
+					
+					/*var rawString:String = '';
+					var ss:int;
+					
+					while (ss < dd.length) {
+						var s:String;
+						s = dd.charAt(ss);
+						if (s == "\"" ) {
+							rawString += '"';
+						}
+						else {
+							rawString += s;
+						}
+						ss++;
+						
+					}
+					
+					var re:Object = JSON.parse(rawString);*/
+					1  +1
+					Game.connectionManager.parseMessageNew(sse);
+					
+					//msg.used_by_generated_code::readFromSlice(mBuffer, mBuffer.bytesAvailable - mMessageLength);
+					//mMessageLength = 0;
+					
 					//Game.dispatchEventWith(Game.MESSAGE_RECEIVED_EVENT, false, msg);
-					Game.connectionManager.parseMessage(msg);
+					//Game.connectionManager.parseMessage(msg);
 				} else
 					break;
 			}
@@ -207,27 +266,8 @@ package com.alisacasino.bingo.utils
 		
 		public function sendMessage(m:com.netease.protobuf.Message, doNotLog:Boolean = false):void
 		{
-			//trace('send message ', getQualifiedClassName(m) );
-			if (ConnectionManager.LOGGING_ENABLED)
-			{
-				if (!doNotLog) {
-					try {
-						sosTrace( "ServerConnection.sendMessage > m : " + getQualifiedClassName(m) + ": " + m.toString(), SOSLog.INFO);
-					}
-					catch(error:Error) {
-						sosTrace( "Cannot parse " + getQualifiedClassName(m) + ".toString() message ServerConnection.sendMessage ", error.name, error.message, SOSLog.INFO);
-					}
-				}
-				else
-				{
-					try {
-						sosTrace( "ServerConnection.sendMessage > m : " + getQualifiedClassName(m), SOSLog.INFO);
-					}
-					catch(error:Error) {
-						sosTrace( "Cannot log " + getQualifiedClassName(m) + " message ServerConnection.sendMessage ", error.name, error.message, SOSLog.INFO);
-					}
-				}
-			}
+			
+			
 			
 			if (!mSocket.connected)
 			{
@@ -236,43 +276,70 @@ package com.alisacasino.bingo.utils
 			}
 			
 			
+			if (rer)
+				return;
+				
+			rer = true;	
 			
-			var baseMessage:BaseMessage = new BaseMessage();
+			
+			/*var baseMessage:BaseMessage = new BaseMessage();
 			baseMessage.protocolVersion = Constants.PROTOCOL_VERSION;
 			var messageClass:Class = Object(m).constructor;
 			var type:FieldDescriptor = baseMessageFieldByClass[messageClass] as FieldDescriptor;
 			if (type != null)
 			{
 				baseMessage[type.name] = m;
-				
-				//var obj:Object = {};
-				//obj[type.name] = m;
-				//Game.messageLog.push(obj);
 			}
 			else
 			{
 				sosTrace("Message not registered " + getQualifiedClassName(m), SOSLog.FATAL);
-			}
-			
-			if (ConnectionManager.LOGGING_ENABLED)
-			{
-				if (!doNotLog) {
-					try {
-						sosTrace( "baseMessage : " + baseMessage.toString(), SOSLog.INFO);
-					}
-					catch(error:Error) {
-					}
-				}
-			}
-			
+			}*/
 			
 			
 			var ba:ByteArray = new ByteArray();
-			baseMessage.writeDelimitedTo(ba);
+			//baseMessage.writeDelimitedTo(ba);
+			
+			if (GameManager.instance.pwdHash == null) {
+				GameManager.instance.createNewPwdHash();
+			}
+			
+			var jso:Object = {
+			   id: 2, //GameManager.instance.pwdHash
+			   session: null,
+			   name: "signIn",
+			   payload: {platformId:1} 
+			}
+			
+			var json:String = JSON.stringify(jso);
+			ba.writeUTFBytes(json);	
+			
 			mSocket.writeBytes(ba);
 			mSocket.flush();
 			ba.clear();
 		}
+		
+		private var rer:Boolean;
+		
+		
+		public function sendMessageNew(data:Object):void
+		{
+			if (!mSocket.connected || !rer)
+			{
+				sosTrace("Socket is not connected", SOSLog.ERROR);
+				return;
+			}
+			
+			var ba:ByteArray = new ByteArray();
+			
+			
+			var json:String = JSON.stringify(data);
+			ba.writeUTFBytes(json);	
+			
+			mSocket.writeBytes(ba);
+			mSocket.flush();
+			ba.clear();
+		}
+		
 		
 		public function get host():String {
 			return mHost;

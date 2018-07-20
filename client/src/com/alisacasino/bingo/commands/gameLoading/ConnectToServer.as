@@ -3,6 +3,7 @@ package com.alisacasino.bingo.commands.gameLoading
 	import com.alisacasino.bingo.Game;
 	import com.alisacasino.bingo.commands.dialogCommands.ShowNoConnectionDialog;
 	import com.alisacasino.bingo.commands.serviceClasses.CommandBase;
+	import com.alisacasino.bingo.protocol.RequestServerStatusMessage;
 	import com.alisacasino.bingo.utils.ConnectionManager;
 	import com.alisacasino.bingo.utils.Server;
 	import com.alisacasino.bingo.utils.ServerConnection;
@@ -42,6 +43,10 @@ package com.alisacasino.bingo.commands.gameLoading
 			
 			ServerConnection.current = new ServerConnection(serverSettings.host, serverSettings.port, serverSettings.useSSL);
 			ServerConnection.current.connect();
+			
+			
+			ServerConnection.current.sendMessage(new RequestServerStatusMessage());
+			//finish();
 		}
 		
 		private function showNoConnectionDialog(ddnaSource:String, ddnaDescription:String):void
