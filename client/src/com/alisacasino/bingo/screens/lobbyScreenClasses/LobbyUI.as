@@ -76,6 +76,7 @@ package com.alisacasino.bingo.screens.lobbyScreenClasses
 		public var collectionsButton:LobbyCollectionButton;
 		public var tourneyButton:XButton;
 		public var rightButton:XButton;
+		public var pvpButton:XButton;
 
 		private var hideCallback:Function;
 		
@@ -158,6 +159,12 @@ package com.alisacasino.bingo.screens.lobbyScreenClasses
 			rightButton.addEventListener(Event.TRIGGERED, rightButton_triggeredHandler);
 			addChild(rightButton);
 			
+			pvpButton = new XButton(XButtonStyle.BlueButtonStyle);
+			pvpButton.scale9Grid = new Rectangle(25 * pxScale, 0, 35 * pxScale, pvpButton.upState.height);
+			pvpButton.text = 'PVP WAIT FOR PLAYER';
+			pvpButton.addEventListener(Event.TRIGGERED, pvpButton_triggeredHandler);
+			addChild(pvpButton);
+			
 			connectionProblemIndicator = new ConnectionProblemIndicator();
 			addChild(connectionProblemIndicator);
 			
@@ -171,7 +178,7 @@ package com.alisacasino.bingo.screens.lobbyScreenClasses
 			var i:int;
 			for (i = 0; i < gameManager.playerCats.length; i++) {
 				var catView:CatView = new CatView();
-				catView.isFront = true;
+				catView.isLeft = true;
 				catView.cat = gameManager.playerCats[i];
 				catView.refreshHP();
 				
@@ -179,6 +186,8 @@ package com.alisacasino.bingo.screens.lobbyScreenClasses
 				playerCatsViews[i].x = -layoutHelper.stageWidth / 2 - 100;
 				catViewsContainer.addChild(playerCatsViews[i]);
 			}
+			
+			showReadyForPvP();
 		}
 		
 		
@@ -253,6 +262,7 @@ package com.alisacasino.bingo.screens.lobbyScreenClasses
 			collectionsButton.visible = value;
 			tourneyButton.visible = value;
 			rightButton.visible = value;
+			pvpButton.visible = value;
 		}
 		
 		private function tweenFromGameToBuyCards():void
@@ -413,9 +423,14 @@ package com.alisacasino.bingo.screens.lobbyScreenClasses
 			tourneyButton.x = layoutHelper.stageWidth - tourneyButton.width - 17 * complexScale - uiCornersShiftX;
 			
 			rightButton.scale = globalUIScale;
-			rightButton.y = collectionsButton.y - 90;
+			rightButton.y = collectionsButton.y - 90*layoutHelper.specialScale;
 			rightButton.width = UI_BUTTONS_WIDTH * complexScale;
 			rightButton.x = layoutHelper.stageWidth - rightButton.width - 17 * complexScale - uiCornersShiftX;
+			
+			pvpButton.scale = globalUIScale;
+			pvpButton.y = rightButton.y - 90*layoutHelper.specialScale;
+			pvpButton.width = UI_BUTTONS_WIDTH * complexScale;
+			pvpButton.x = layoutHelper.stageWidth - pvpButton.width - 17 * complexScale - uiCornersShiftX;
 			
 			connectionProblemIndicator.scale = globalUIScale;
 			connectionProblemIndicator.x = layoutHelper.stageWidth / 2;
@@ -424,7 +439,7 @@ package com.alisacasino.bingo.screens.lobbyScreenClasses
 			
 			catViewsContainer.scale = globalUIScale;
 			catViewsContainer.x = layoutHelper.stageWidth / 2;
-			catViewsContainer.y = layoutHelper.stageHeight / 2 + 170;
+			catViewsContainer.y = layoutHelper.stageHeight / 2;
 			
 			
 			
@@ -518,6 +533,17 @@ package com.alisacasino.bingo.screens.lobbyScreenClasses
 			//DialogsManager.addDialog(new LeaderboardDialog());
 		}
 		
+		private function pvpButton_triggeredHandler(e:Event):void 
+		{
+			if(!gameManager.pvpUserReady)
+				return;
+				
+			GameUI.foodCount = 4;
+			gameManager.gameMode = GameManager.GAME_MODE_PVP;
+			gameScreen.showGame(false);
+			//DialogsManager.addDialog(new LeaderboardDialog());
+		}
+		
 		private function get menuButtonX():int {
 			return (-38 + (layoutHelper.isIPhoneX ? 10 : 0)) * pxScale;
 		}
@@ -543,7 +569,13 @@ package com.alisacasino.bingo.screens.lobbyScreenClasses
 		}
 		
 		
-		
+		public function showReadyForPvP():void
+		{
+			if(gameManager.pvpUserReady)
+				pvpButton.text = 'PVP READY! ID:' + gameManager.connectionManager.gameId.toString();
+			else
+				pvpButton.text = 'PVP WAIT FOR PLAYER';
+		}
 	
 	}
 }

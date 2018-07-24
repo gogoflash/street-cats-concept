@@ -383,7 +383,7 @@ package com.alisacasino.bingo.models
 		
 		public function get bonusUsedTimestamp():Number
 		{
-			return mBonusUsedTimestamp.toNumber();
+			return 100000//mBonusUsedTimestamp.toNumber();
 		}
 		
 		public function set bonusUsedTimestamp(value:Number):void

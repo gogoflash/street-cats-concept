@@ -396,9 +396,13 @@ import com.netease.protobuf.UInt64;
 
 		public var gameMode:String;
 		
+		public var pvpEnemySetted:Boolean;
+		public var playerCatsSetted:Boolean;
+		public var pvpUserReady:Boolean;
+		
 		public static const GAME_MODE_SIMPLE:String = 'GAME_MODE_SIMPLE';
 		public static const GAME_MODE_GROUP:String = 'GAME_MODE_GROUP';
-		
+		public static const GAME_MODE_PVP:String = 'GAME_MODE_PVP';
 		
 		
 		

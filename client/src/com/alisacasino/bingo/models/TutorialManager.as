@@ -1812,16 +1812,16 @@ package com.alisacasino.bingo.models
 		
 		
 		
-		public static function fillCats(list:Array):void
+		public static function fillCats(list:Array, pvpIds:Boolean = false, catUID:int = 0):void
 		{
 			list.splice(0, list.length);
 			
 			while (list.length < gameManager.CAT_SLOTS_MAX) 
 			{
 				var cat:CatModel = new CatModel();
-				cat.id = gameManager.catsModel.getNextCatID();
+				cat.id = pvpIds ? list.length : (gameManager.catsModel.getNextCatID());
 				cat.health = 3;//Math.ceil(Math.random()*3);
-				cat.catUID = gameManager.catsModel.getRandomCatUID();
+				cat.catUID = catUID;//gameManager.catsModel.getRandomCatUID();
 				
 				cat.role = CatRole.getRandom();
 				cat.targetCat = Math.floor(Math.random()*3);
@@ -1854,10 +1854,16 @@ package com.alisacasino.bingo.models
 					cat.targetCat = -1;
 				}
 				
+				
+				
 				//cat.role = CatRole.FIGHTER;
 				//cat.role = CatRole.HARVESTER;
-				//cat.role = CatRole.DEFENDER;
-				//cat.targetCat = (opponents[0] as CatModel).id;
+				cat.role = CatRole.DEFENDER;
+				
+				if (i == 2)
+					cat.role = CatRole.HARVESTER;
+				
+				//cat.targetCat = 3//(opponents[0] as CatModel).id;
 			}
 		}
 		

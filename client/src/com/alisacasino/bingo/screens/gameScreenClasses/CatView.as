@@ -1,6 +1,7 @@
 package com.alisacasino.bingo.screens.gameScreenClasses 
 {
 	import com.alisacasino.bingo.assets.AtlasAsset;
+	import com.alisacasino.bingo.components.FrameAnimator;
 	import com.alisacasino.bingo.components.SimpleProgressBar;
 	import com.alisacasino.bingo.controls.XTextField;
 	import com.alisacasino.bingo.controls.XTextFieldStyle;
@@ -19,8 +20,8 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 	
 	public class CatView extends Sprite
 	{
-		public static var WIDTH:int = 190;
-		public static var HEIGHT:int = 270;
+		public static var WIDTH:int = 130;
+		public static var HEIGHT:int = 170;
 		
 		public static var EVENT_TRIGGERED:String = 'EVENT_TRIGGERED';
 		public static var EVENT_MOUSE_DOWN:String = 'EVENT_MOUSE_DOWN';
@@ -31,23 +32,28 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 		public static var STATE_WALK:String = 'STATE_WALK';
 		public static var STATE_WALK_HARVEST:String = 'STATE_WALK_HARVEST';
 		public static var STATE_FIGHT:String = 'STATE_FIGHT';
+		public static var STATE_FIGHT_STANDOFF:String = 'STATE_FIGHT_STANDOFF';
 		public static var STATE_DEFENCE:String = 'STATE_DEFENCE';
 		public static var STATE_HARVEST:String = 'STATE_HARVEST';
+		public static var STATE_HARVEST_STANDOFF:String = 'STATE_HARVEST_STANDOFF';
+		public static var STATE_DAMAGE:String = 'STATE_DAMAGE';
+		
 		
 		public function CatView() 
 		{
-			
 		}
 		
 		public var roleVisible:Boolean;
 		
 		public var controlsEnabled:Boolean;
 		
-		public var isFront:Boolean;
+		public var isLeft:Boolean;
 		
 		private var _cat:CatModel;
 		
-		private var catImage:Image;
+		private var catShadow:Image;
+		private var catAnimator:FrameAnimator;
+		
 		private var roleImage:Image;
 		private var roleActionImage:Image;
 		private var jumpHelper:JumpWithHintHelper;
@@ -98,9 +104,10 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			}
 			else
 			{
-				if (catImage) {
-					catImage.removeFromParent();
-					catImage = null;
+				if (catAnimator) {
+					catAnimator.removeFromParent();
+					catAnimator.clean();
+					catAnimator = null;
 					
 					if (jumpHelper) {
 						jumpHelper.dispose();
@@ -116,6 +123,8 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			return _cat;
 		}
 		
+		public var catBaseScale:Number = 0.77; 
+		
 		public function setState(value:String, invertHorisontal:Boolean = false, explicit:Boolean = false):void 
 		{
 			if (_state == value && !explicit)
@@ -123,26 +132,81 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 				
 			_state = value;
 			
-			if (!catImage) 
+			if (!catAnimator) 
 			{
-				catImage = new Image(gameManager.catsModel.getCatTexture(_cat.catUID, isFront, _state));
-				catImage.alignPivot();
-				addChild(catImage);
+				catShadow = new Image(AtlasAsset.CommonAtlas.getTexture('cats/sdw'));
+				catShadow.alignPivot();
+				//catShadow.x = 50 * layoutHelper.specialScale;
+				catShadow.y = 75 * layoutHelper.specialScale;
+				catShadow.touchable = false;
+				//image.scale = 0.4;
+				addChild(catShadow);
+				
+				catAnimator = FrameAnimator.getCatAnimator(_cat.catUID);//new Image(gameManager.catsModel.getCatTexture(_cat.catUID, isLeft, _state));
+				addChild(catAnimator);
 				
 				if (controlsEnabled) {
-					jumpHelper = new JumpWithHintHelper(catImage, true, true);
+					jumpHelper = new JumpWithHintHelper(catAnimator, true, true);
+					jumpHelper.minScale = catBaseScale * 0.95;
+					jumpHelper.minScale = catBaseScale * 1.05;
+					jumpHelper.scale = catBaseScale;
 					jumpHelper.setStateCallbacks(callback_imageMouseDown, callback_imageMouseUp, callback_imageTriggered);
 				}
 				
 			}
 			else 
 			{
-				catImage.texture = gameManager.catsModel.getCatTexture(_cat.catUID, isFront, _state);
-				catImage.readjustSize();
-				catImage.alignPivot();
+				//catAnimator.texture = gameManager.catsModel.getCatTexture(_cat.catUID, isLeft, _state);
+				
 			}
 			
-			catImage.scaleX = invertHorisontal ? -1 : 1;
+			var showLeftAnimation:Boolean = invertHorisontal ? (isLeft) : (!isLeft);
+			
+			
+			var fps:int = 7;
+			
+			if (_state == STATE_IDLE)
+			{
+				catAnimator.gotoAndPlay(_state, 0, showLeftAnimation, 0, fps);	
+			}
+			else if (_state == STATE_WALK)
+			{
+				catAnimator.gotoAndPlay(_state, 0, showLeftAnimation, -1, fps);	
+			}
+			else if (_state == STATE_DEFENCE)
+			{
+				catAnimator.gotoAndPlay(_state, 0, showLeftAnimation, 0, fps);
+			}
+			else if (_state == STATE_FIGHT)
+			{
+				catAnimator.gotoAndPlay(_state, 0, showLeftAnimation, 0, fps);
+			}
+			else if (_state == STATE_FIGHT_STANDOFF)
+			{
+				catAnimator.gotoAndPlay(_state, 0, showLeftAnimation, 0, 2);
+			}
+			else if (_state == STATE_HARVEST)
+			{
+				catAnimator.gotoAndPlay(_state, 0, showLeftAnimation, 1, 3, 5);
+			}
+			else if (_state == STATE_HARVEST_STANDOFF)
+			{
+				catAnimator.gotoAndPlay(_state, 0, showLeftAnimation, 1, 2, 1);
+			}
+			else if (_state == STATE_WALK_HARVEST)
+			{
+				catAnimator.gotoAndPlay(_state, 0, showLeftAnimation, -1, fps);
+				
+				Starling.juggler.delayCall(function():void {fishVisible = true}, 0.0);
+				//fishVisible = true;
+				//showFish
+			}
+			
+			catAnimator.scaleX = catBaseScale;//isLeft ? catBaseScale : -catBaseScale;
+			catAnimator.scaleY = catBaseScale;
+			//catImage.scaleX = invertHorisontal ? -1 : 1;
+			
+			//addChild(catAnimator);
 			
 			//refreshHP();
 			
@@ -322,6 +386,49 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 		* 
 		*********************************************************************************************************************/	
 		
+		private var _fishVisible:Boolean;
+		
+		private var fishImage:Image;
+		
+		public function set fishVisible(value:Boolean):void
+		{
+			if (value == _fishVisible)
+				return;
+				
+			_fishVisible = value;
+			
+			if (_fishVisible)
+			{
+				if (!fishImage) {
+					fishImage = new Image(AtlasAsset.CommonAtlas.getTexture('cats/fish'));
+					fishImage.alignPivot();
+					//fishImage.x = 50 * layoutHelper.specialScale;
+					fishImage.y = -85 * layoutHelper.specialScale;
+					fishImage.touchable = false;
+					//image.scale = 0.4;
+					addChild(fishImage);
+				}
+			}
+			else
+			{
+				if (fishImage) {
+					fishImage.removeFromParent();
+					fishImage = null;
+				}
+			}	
+		}
+		
+		public function get fishVisible():Boolean
+		{
+			return _fishVisible;
+		}	
+		
+		/*********************************************************************************************************************
+		*
+		*
+		* 
+		*********************************************************************************************************************/	
+		
 		public function refreshHP():void
 		{
 			if (_cat)
@@ -337,7 +444,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 					
 				}
 				
-				hpLabel.y = isFront ? -130 : 123;
+				hpLabel.y = -130 * layoutHelper.specialScale;//isLeft ? -130 : 123;
 				hpLabel.format.color = _cat.health > 0 ? 0x00E100 : 0xE10000;
 				hpLabel.text = 'health:' + _cat.health.toString();
 				
@@ -355,7 +462,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 					
 				}
 				
-				healthProgress.y = isFront ? -130 : 123;
+				healthProgress.y = -130 * layoutHelper.specialScale//isLeft ? -130 : 123;
 				healthProgress.animateValues(_cat.health / 3, 1, 0);
 				//healthProgress.format.color = _cat.health > 0 ? 0x00E100 : 0xE10000;
 				//healthProgress.text = 'health:' + _cat.health.toString();
@@ -375,19 +482,19 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 		
 		public function set showSelected(value:Boolean):void 
 		{
-			if (!catImage)
+			if (!catAnimator)
 				return;
 				
 			if (value)
 			{
-				EffectsManager.jump(catImage, 10000, 1, 1.0, 0.05, 0.05, 0.9, 3, 0, 1.3, true);
+				EffectsManager.jump(catAnimator, 10000, 1, 1.0, 0.05, 0.05, 0.9, 3, 0, 1.3, true);
 				
 				//catImage.filter = new DropShadowFilter(4, 0, 0xFFFFFF, 1, 3, 2);
 				//(catImage.filter as ColorMatrixFilter).adjustBrightness(0.3);
 			}
 			else
 			{
-				EffectsManager.removeJump(catImage, true);
+				EffectsManager.removeJump(catAnimator, true);
 				//catImage.filter = null;
 			}
 			
@@ -417,7 +524,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 				//roleActionImage.y = 85;
 				
 				if(animateCats)
-					Starling.juggler.tween(catImage, 0.25, {delay:0.0, alpha:0, scale:0.7, transition:Transitions.EASE_OUT, x:(right ? 100 : -100)});
+					Starling.juggler.tween(catAnimator, 0.25, {delay:0.0, alpha:0, scale:catBaseScale*0.7, transition:Transitions.EASE_OUT, x:(right ? 100 : -100)});
 				
 			}
 			else
@@ -428,7 +535,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 					roleActionImage = null;
 				}
 				
-				Starling.juggler.tween(catImage, 0.2, {delay:0.0, alpha:4, scale:1, transition:Transitions.EASE_OUT, x:0});
+				Starling.juggler.tween(catAnimator, 0.2, {delay:0.0, alpha:4, scale:catBaseScale, transition:Transitions.EASE_OUT, x:0});
 			}	
 			
 			refreshHP();

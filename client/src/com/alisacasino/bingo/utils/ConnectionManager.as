@@ -168,7 +168,11 @@ package com.alisacasino.bingo.utils
 		
 		public var sessionId:String;
 		
-		public var playerId:String;
+		//public var playerId:String;
+		
+		public var gameId:int;
+		
+		
 		
 		public function parseMessageNew(raw:Object):void 
 		{
@@ -176,7 +180,7 @@ package com.alisacasino.bingo.utils
 			{
 				Player.current = new Player(null);
 				Player.current.mPlayerId = UInt64.fromNumber(raw.payload.playerId);
-			
+				
 				Player.current.xpCount = 1;
 				
 				Room.current = new Room(null);
@@ -190,19 +194,68 @@ package com.alisacasino.bingo.utils
 				if (PlatformServices.isMobile) {
 				// first time login as a guest -> we save playerId/pwdHash
 				if (mGameManager.playerId == null && mGameManager.pwdHash != null && !mFacebookManager.isConnected) {
-					mGameManager.playerId = Player.current.mPlayerId;
+						mGameManager.playerId = Player.current.mPlayerId;
+					}
+						// was a guest, became a Facebook user w/ the same playerId -> remove guest data
+					else if (mGameManager.playerId != null && 
+						mGameManager.playerId.toNumber() == raw.player.playerId.toNumber() && 
+						mGameManager.pwdHash != null && mFacebookManager.isConnected) {
+						mGameManager.playerId = null;
+						mGameManager.pwdHash = null;
+					}
 				}
-					// was a guest, became a Facebook user w/ the same playerId -> remove guest data
-				else if (mGameManager.playerId != null && 
-					mGameManager.playerId.toNumber() == raw.player.playerId.toNumber() && 
-					mGameManager.pwdHash != null && mFacebookManager.isConnected) {
-					mGameManager.playerId = null;
-					mGameManager.pwdHash = null;
-				}
-				}
+				
+				
+				sendJoin();
 			}
 			
 			
+			if (raw.name == "joinGameResponse")
+			{
+				gameId = raw.payload.gameId;
+				
+				gameManager.pvpUserReady = true;
+				if (Game.current && Game.current.gameScreen && Game.current.gameScreen.lobbyUI) {
+					Game.current.gameScreen.lobbyUI.showReadyForPvP();
+				}
+				
+				//{"id":0,"name":"joinGameResponse","payload":{"gameId":2},"timeMillis":1532099385399,"clientLocalAddr":null}
+			}
+			
+			if (raw.name == "roundResponse")
+			{
+				// сеттим котов врага
+				var rawCats:Object;
+				
+				gameManager.catsModel.deserializeCats(raw.payload.firstPlayerInfo, null);
+				gameManager.catsModel.deserializeCats(raw.payload.secondPlayerInfo, null);
+				
+				
+				/*for each(rawCats in raw.payload) {
+					gameManager.catsModel.deserializeCats(rawCats, null);
+				}*/
+				
+				gameManager.pvpEnemySetted = true;
+				Game.current.gameScreen.gameUI.tryStartPvPRound();
+			}
+			
+			
+			
+			//<>>>>>  {"id":0,"name":"roundResponse","payload":{"gameId":3,"status":"CLOSED","firstPlayerInfo":{"playerId":5,"gameId":3,"pets":[{"id":0,"catProtoId":3,"health":3,"role":"HARVESTER","targetCatId":-1},{"id":1,"catProtoId":3,"health":3,"role":"DEFENDER","targetCatId":3},{"id":2,"catProtoId":3,"health":3,"role":"FIGHTER","targetCatId":5}]},"secondPlayerInfo":{"playerId":6,"gameId":3,"pets":[{"id":0,"catProtoId":3,"health":3,"role":"HARVESTER","targetCatId":-1},{"id":1,"catProtoId":3,"health":3,"role":"HARVESTER","targetCatId":-1},{"id":2,"catProtoId":3,"health":3,"role":"DEFENDER","targetCatId":5}]}},"timeMillis":1532103837977,"clientLocalAddr":null}
+
+			
+		}
+		
+		private function sendJoin():void
+		{
+			var json:Object = {
+			   id: 0,
+			   session: gameManager.connectionManager.sessionId,
+			   name: "joinGame",
+			   payload: {playerId:Player.current.playerId} 
+			}
+		
+			ServerConnection.current.sendMessageNew(json);
 		}
 		
 		private function handleMessage(message:Message):void

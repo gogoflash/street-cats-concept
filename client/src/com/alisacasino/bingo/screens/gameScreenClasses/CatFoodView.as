@@ -10,13 +10,15 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 
 	public class CatFoodView extends Sprite 
 	{
+		public static var FOOD_SCALE:Number = 0.80;
+		
 		public function CatFoodView() 
 		{
 			super();
 			
-			foodImage = new Image(AtlasAsset.CommonAtlas.getTexture('cats/fish_chest'));
+			foodImage = new Image(AtlasAsset.CommonAtlas.getTexture('cats/trash_01'));
 			foodImage.alignPivot();
-//			foodImage.scale = foodImageScale;
+			foodImage.scale = FOOD_SCALE;//;
 			//foodImage.x = shiftX + i % columns * 150 * foodImageScale;
 			//foodImage.alpha = 0;
 			//foodImage.y = -layoutHelper.stageHeight/2 - foodImage.height/2 + 104;
@@ -94,12 +96,12 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			image.alignPivot();
 			image.scale = 1;
 			//foodImage.x = shiftX + i % columns * 150 * foodImageScale;
-			//foodImage.alpha = 0;
-			//foodImage.y = -layoutHelper.stageHeight/2 - foodImage.height/2 + 104;
+			image.alpha = 0;
+			image.y = -170 * layoutHelper.specialScale;
 			touchable = false;
 			addChild(image);
 			
-			TweenHelper.tween(image, 1.2, {transition:Transitions.EASE_OUT, y: -200 * layoutHelper.independentScaleFromEtalonMin, onComplete:image.removeFromParent});
+			TweenHelper.tween(image, 1.2, {transition:Transitions.EASE_OUT, alpha:7, delay:0.99, y: -250 * layoutHelper.specialScale, onComplete:image.removeFromParent});
 		}
 	}
 

@@ -29,7 +29,9 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 	import com.alisacasino.bingo.screens.GameScreen;
 	import com.alisacasino.bingo.utils.DelayCallUtils;
 	import com.alisacasino.bingo.utils.EffectsManager;
+	import com.alisacasino.bingo.utils.GameManager;
 	import com.alisacasino.bingo.utils.JumpWithHintHelper;
+	import com.alisacasino.bingo.utils.ServerConnection;
 	import com.alisacasino.bingo.utils.caurina.transitions.properties.DisplayShortcuts;
 	import com.alisacasino.bingo.utils.sounds.SoundManager;
 	import feathers.core.FeathersControl;
@@ -98,7 +100,8 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 		private var defenceImage:Image;
 		private var targetImage:Image;
 		
-		private var foodImageScale:Number = 0.99 * layoutHelper.independentScaleFromEtalonMin;
+		
+		private var foodCoverImage:Image;
 	
 		
 		public function GameUI(gameScreen:GameScreen) 
@@ -155,11 +158,11 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			playerCatViewsContainer = new Sprite();
 			addChild(playerCatViewsContainer);
 			
-			startButton = new XButton(XButtonStyle.BlueButtonStyle);
-			startButton.scale9Grid = new Rectangle(25 * pxScale, 0, 35 * pxScale, startButton.upState.height);
-			startButton.text = 'START!';
+			startButton = new XButton(XButtonStyle.getStyle(AtlasAsset.CommonAtlas, 'buttons/fight_btn', 'buttons/fight_btn'));
+			//startButton.scale9Grid = new Rectangle(25 * pxScale, 0, 35 * pxScale, startButton.upState.height);
+			//startButton.text = 'START!';
 			startButton.alignPivot();
-			//startButton.visible = false;
+			//startButton.scale = ;
 			startButton.addEventListener(Event.TRIGGERED, startButton_triggeredHandler);
 			addChild(startButton);
 			
@@ -179,7 +182,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			
 			//roundResultsLabel.y = //layoutHelper.stageHeight / 2;
 			roundResultsLabel.alignPivot(Align.CENTER, Align.TOP);
-			addChild(roundResultsLabel);
+			
 			
 			
 			var colors:Vector.<uint> = new <uint>[0xFFFFFF];
@@ -213,8 +216,18 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			targetImage.touchable = false;
 			
 			
+			foodCoverImage = new Image(AtlasAsset.CommonAtlas.getTexture('cats/trash_02'));
+			foodCoverImage.alignPivot();
+			foodCoverImage.scale = layoutHelper.specialScale * CatFoodView.FOOD_SCALE;
+			foodCoverImage.touchable = false;
+			foodCoverImage.visible = false;
+			addChild(foodCoverImage);
+			
 			Starling.juggler.tween(targetImage, 2.8, {rotation:Math.PI*2, repeatCount:0, transition:Transitions.LINEAR});	
 			
+			
+			
+			addChild(roundResultsLabel);
 			//var ggg:Number = pxScale;
 			//1+1
 		}
@@ -235,26 +248,32 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			gameUIPanel.setSize(width, height);
 			gameUIPanel.invalidate(INVALIDATION_FLAG_SIZE);
 			
-			enemyCatViewsContainer.scale = layoutHelper.independentScaleFromEtalonMin * 0.85;
+			enemyCatViewsContainer.scale = layoutHelper.independentScaleFromEtalonMin;// * 0.85;
 			enemyCatViewsContainer.x = layoutHelper.stageWidth / 2;
-			enemyCatViewsContainer.y = layoutHelper.stageHeight / 2 - 180*layoutHelper.specialScale;
+			enemyCatViewsContainer.y = layoutHelper.stageHeight / 2// - 180*layoutHelper.specialScale;
 			
 			foodViewsContainer.x = layoutHelper.stageWidth / 2;
 			foodViewsContainer.y = layoutHelper.stageHeight / 2 + 0;
 			
 			playerCatViewsContainer.scale = layoutHelper.independentScaleFromEtalonMin;
 			playerCatViewsContainer.x = layoutHelper.stageWidth / 2;
-			playerCatViewsContainer.y = layoutHelper.stageHeight / 2 + 225*layoutHelper.specialScale;
+			playerCatViewsContainer.y = layoutHelper.stageHeight / 2// + 225*layoutHelper.specialScale;
 			
 			charV.y = layoutHelper.stageHeight / 2 + 80;
 			
 			charS.y = layoutHelper.stageHeight / 2 + 80;
 			
 			
+			foodCoverImage.x = layoutHelper.stageWidth / 2 + 28*layoutHelper.specialScale;
+			foodCoverImage.y = layoutHelper.stageHeight / 2 - 52*layoutHelper.specialScale;
+			
 			//var asd:Number = layoutHelper.independentScaleFromEtalonMin;
 			
 			attackImage.scale = layoutHelper.specialScale;
 			defenceImage.scale = layoutHelper.specialScale;
+			
+			if(gameUIPanel.cardScrollButton)
+				gameUIPanel.cardScrollButton.visible = gameManager.gameMode != GameManager.GAME_MODE_PVP;
 		}
 		
 		public function show(showReadyGo:Boolean):void 
@@ -299,15 +318,17 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			Starling.juggler.tween(charS, 0.4, {delay:1.8, transition:Transitions.EASE_OUT, x:charV.x + 50, alpha:0});*/
 			
 			
-			startButton.scale = layoutHelper.independentScaleFromEtalonMin;
+			startButton.scale = layoutHelper.specialScale;
 			startButton.alpha = 1;
-			startButton.y = layoutHelper.stageHeight - startButton.height/2 - 30*layoutHelper.independentScaleFromEtalonMin; 
-			startButton.x = layoutHelper.stageWidth + startButton.width + 50*layoutHelper.independentScaleFromEtalonMin; 
-			Starling.juggler.tween(startButton, 0.3, {delay:0.6, transition:Transitions.EASE_OUT, x:(layoutHelper.stageWidth - startButton.width/2 - 30*layoutHelper.independentScaleFromEtalonMin)});
+			startButton.y = layoutHelper.stageHeight + startButton.height/2 + 30*layoutHelper.independentScaleFromEtalonMin; 
+			startButton.x = layoutHelper.stageWidth/2// + startButton.width + 50*layoutHelper.independentScaleFromEtalonMin; 
+			Starling.juggler.tween(startButton, 0.3, {delay:0.6, transition:Transitions.EASE_OUT, y:(layoutHelper.stageHeight - startButton.height/2 - 30*layoutHelper.specialScale)});
 			
 			
-			TutorialManager.fillCats(gameManager.enemyCats);
-			TutorialManager.refreshCatTargets(gameManager.enemyCats, gameManager.playerCats);
+			TutorialManager.fillCats(gameManager.enemyCats, true, 1);
+			
+			if (gameManager.gameMode != GameManager.GAME_MODE_PVP)
+				TutorialManager.refreshCatTargets(gameManager.enemyCats, gameManager.playerCats);
 			
 			//foodCount = 12//2 + Math.round(Math.random()*4);
 			takeFood();
@@ -325,11 +346,13 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			}
 			
 			var i:int;
+			var length:int;
 			var catView:CatView;
 			for (i = 0; i < gameManager.playerCats.length; i++) 
 			{
 				catView = new CatView();
 				catView.controlsEnabled = true;
+				catView.isLeft = true;
 				catView.cat = gameManager.playerCats[i];
 				catView.cat.active = true;
 				
@@ -356,7 +379,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			for (i = 0; i < gameManager.enemyCats.length; i++) 
 			{
 				catView = new CatView();
-				catView.isFront = true;
+				
 				catView.controlsEnabled = true;
 				catView.cat = gameManager.enemyCats[i];
 				catView.cat.active = true;
@@ -367,15 +390,19 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 				catView.addEventListener(CatView.EVENT_TRIGGERED, handler_enemyCatTriggered);
 			}
 			
-			var shiftX:int = -((CatView.WIDTH*pxScale + 50*pxScale) * gameManager.playerCats.length - 50*layoutHelper.independentScaleFromEtalonMin)/2 + CatView.WIDTH/2;
-			for (i = 0; i < playerCatViewsContainer.numChildren; i++) 
+			var catGap:int = 50;
+			var shiftX:int = -((CatView.WIDTH * pxScale + catGap*pxScale) * gameManager.playerCats.length - catGap * layoutHelper.independentScaleFromEtalonMin) / 2 + CatView.WIDTH / 2;
+			var shiftY:int = -((CatView.HEIGHT * pxScale + catGap * pxScale) * gameManager.playerCats.length - catGap * layoutHelper.independentScaleFromEtalonMin) / 2 + CatView.HEIGHT / 2;
+			length = playerCatViewsContainer.numChildren;
+			for (i = 0; i < length; i++) 
 			{
-				Starling.juggler.tween(playerCatViewsContainer.getChildAt(i), 0.3, {delay:(i*0.1) + 0.5, transition:Transitions.EASE_OUT, x:(shiftX + i*(CatView.WIDTH*pxScale + 50*pxScale))});
+				Starling.juggler.tween(playerCatViewsContainer.getChildAt(i), 0.3, {delay:(i*0.1) + 0.5, transition:Transitions.EASE_OUT, y:(shiftY + i*(CatView.HEIGHT*pxScale + catGap*pxScale)), x:-getCatX(i), scale:getCatScale(i)});
 			}
 			
-			for (i = 0; i < enemyCatViewsContainer.numChildren; i++) 
+			length = enemyCatViewsContainer.numChildren;
+			for (i = 0; i < length; i++) 
 			{
-				Starling.juggler.tween(enemyCatViewsContainer.getChildAt(i), 0.3, {delay:(i*0.1) + 1.3, transition:Transitions.EASE_OUT_BACK, x:(shiftX + i*(CatView.WIDTH*pxScale + 50*pxScale))});
+				Starling.juggler.tween(enemyCatViewsContainer.getChildAt(i), 0.3, {delay:(i*0.1) + 1.3, transition:Transitions.EASE_OUT_BACK, y:(shiftY + i*(CatView.HEIGHT*pxScale + catGap*pxScale)), x:getCatX(i), scale:getCatScale(i)});
 			}
 			
 			var dottedLine:DottedLine;
@@ -388,6 +415,40 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			
 			Starling.juggler.delayCall(refreshEnemyTargetMarks, 2);
 			
+			Starling.juggler.delayCall(function():void {foodCoverImage.visible = true}, 0.7);
+			
+		}
+		
+		private function getCatX(index:int):int 
+		{
+			if (gameManager.CAT_SLOTS_MAX == 3)
+			{
+				switch(index) {
+					case 0: return 130 * layoutHelper.specialScale;
+					case 1: return 250 * layoutHelper.specialScale;
+					case 2: return 170 * layoutHelper.specialScale;
+				}
+			}
+			
+			if (gameManager.CAT_SLOTS_MAX == 2)
+			{
+				switch(index) {
+					case 0: return 170 * layoutHelper.specialScale;
+					case 2: return 210 * layoutHelper.specialScale;
+				}
+			}
+			
+			if (gameManager.CAT_SLOTS_MAX == 1)
+			{
+				return 250 * layoutHelper.specialScale;
+			}
+			
+			return 0;
+		}
+		
+		private function getCatScale(index:int):Number
+		{
+			return 1 - (gameManager.CAT_SLOTS_MAX - index - 1) * 0.1;
 		}
 		
 		private var selectedPlayerCat:CatView;
@@ -419,12 +480,16 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 				
 				topLayer.addChild(enemyCatViewsContainer);
 				topLayer.addChild(foodViewsContainer);
+				topLayer.addChild(foodCoverImage);
 				topLayer.addChild(playerCatViewsContainer);
 				topLayer.addChild(arrowsContainer);
 				//topLayer.addChild(actionTouchCat);
+				addChild(roundResultsLabel);
+				
 				
 				targetImage.scale = layoutHelper.independentScaleFromEtalonMin;
 				topLayer.addChild(targetImage);
+				
 			}
 			
 			addEventListener(Event.ENTER_FRAME, hanler_enterFrame);
@@ -559,7 +624,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 				{
 					if (lastHelperView != foodView) {
 						lastHelperView = foodView;
-						EffectsManager.jump(foodView, 2, foodImageScale, foodImageScale*1.13, 0.07, 0.07, 0.08, 0, 0, 0.8, true);
+						EffectsManager.jump(foodView, 2, layoutHelper.specialScale, layoutHelper.specialScale*1.13, 0.07, 0.07, 0.08, 0, 0, 0.8, true);
 					}
 					
 					actionTouchCat.cat.targetCat = -1;
@@ -650,7 +715,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 					addChild(playerCatViewsContainer);
 					addChild(arrowsContainer);
 					addChild(topLayer);
-					
+					addChild(foodCoverImage);
 				}
 			}
 			
@@ -910,28 +975,40 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			FadeQuad.hide();
 			
 			roundResultsLabel.visible = false;
+			
+			foodCoverImage.visible = false;
 		}
 		
 		
 		private function startButton_triggeredHandler(e:Event):void 
 		{
-			// start fight
-		
-			enemyCatViewsContainer.touchable = false;
-			playerCatViewsContainer.touchable = false;
+			gameManager.playerCatsSetted = true;
 			
-			hideVSandStartButton();
-			
-			var i:int;
-			
-			for (i = 0; i < playerCatsViews.length; i++) 
+			if (gameManager.gameMode == GameManager.GAME_MODE_PVP)
 			{
-				(playerCatsViews[i] as CatView).showSelected = false;
-			}
-			
+				// отправляем своих котов и блокируем юи
 				
+				var json:Object = {
+				   id: 0,
+				   session: gameManager.connectionManager.sessionId,
+				   name: "round",
+				   payload: 
+				   {
+					   playerId:Player.current.playerId,
+					   gameId:gameManager.connectionManager.gameId,
+					   pets:gameManager.catsModel.serializePlayerCats()
+				   } 
+				}
 			
-			Starling.juggler.delayCall(nextFightAction, 1.8);
+				ServerConnection.current.sendMessageNew(json);
+				
+				tryStartPvPRound();
+			}
+			else
+			{
+				gameManager.pvpEnemySetted = true;
+				tryStartPvPRound();
+			}
 		}
 		
 		private function takeFood():void
@@ -943,20 +1020,20 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			var columns:int = 4;	
 			
 			var foodImage:CatFoodView;
-			var shiftX:int = 0//(-150 * Math.min(foodCount, columns-1) * foodImageScale)/2;
+			var shiftX:int = 0//(-150 * Math.min(foodCount, columns-1) * layoutHelper.specialScale)/2;
 			for (i = 0; i < /*foodCount*/1; i++) 
 			{
 				foodImage = new CatFoodView();
 				foodImage.foodCount = foodCount;
-				foodImage.scale = foodImageScale;
-				foodImage.x = shiftX + i % columns * 150 * foodImageScale;
+				foodImage.scale = layoutHelper.specialScale;
+				foodImage.x = shiftX + i % columns * 150 * layoutHelper.specialScale;
 				foodImage.alpha = 0;
 				foodImage.y = -layoutHelper.stageHeight/2 - foodImage.height/2 + 104*layoutHelper.independentScaleFromEtalonMin;
 				foodImage.touchable = false;
 					
 				foodViewsContainer.addChild(foodImage);
 				
-				Starling.juggler.tween(foodImage, 0.5, {delay:(i*0.02) + 0.3, alpha:20, transition:Transitions.EASE_OUT_BACK, y:(Math.floor(i/columns)*95* foodImageScale)});
+				Starling.juggler.tween(foodImage, 0.5, {delay:(i*0.02) + 0.3, alpha:20, transition:Transitions.EASE_OUT_BACK, y:(Math.floor(i/columns)*95* layoutHelper.specialScale)});
 			}
 			
 			foodTaken = true;
@@ -965,10 +1042,11 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 		
 		private function hideVSandStartButton():void 
 		{
-			Starling.juggler.tween(charV, 0.4, {transition:Transitions.EASE_OUT, x:charV.x - 50, alpha:0});
-			Starling.juggler.tween(charS, 0.4, {transition:Transitions.EASE_OUT, x:charV.x + 50, alpha:0});
+			//Starling.juggler.tween(charV, 0.4, {transition:Transitions.EASE_OUT, x:charV.x - 50, alpha:0});
+			//Starling.juggler.tween(charS, 0.4, {transition:Transitions.EASE_OUT, x:charV.x + 50, alpha:0});
 			
-			EffectsManager.scaleJumpDisappear(startButton);
+			if(startButton.scale != 0)
+				EffectsManager.scaleJumpDisappear(startButton);
 		}
 		
 		public function nextFightAction():void 
@@ -1092,7 +1170,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 					{
 						// идем свободно мочить кота:
 						catView_2 = getCatById(secondTeamCatViews, catView_1.cat.targetCat);
-						if (catView_2 && catView_2.cat.health > 0 && catView_2.cat.active) 
+						if (catView_2 && catView_2.cat.health > 0 /*&& catView_2.cat.active*/) 
 						{
 							showCatAction(catView_1, CatRole.FIGHTER, catView_2, catView_2.cat.role);
 							catView_1.cat.active = false;
@@ -1154,13 +1232,20 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 		
 		private function showNewStage():void 
 		{
+			gameManager.playerCatsSetted = false;
+			gameManager.pvpEnemySetted = false;
+			
 			enemyCatViewsContainer.touchable = true;
 			playerCatViewsContainer.touchable = true;
 			
 			EffectsManager.scaleJumpAppearBase(startButton, 1);
 			
-			TutorialManager.refreshCatTargets(gameManager.enemyCats, gameManager.playerCats);
 			
+			if (gameManager.gameMode != GameManager.GAME_MODE_PVP)
+				TutorialManager.refreshCatTargets(gameManager.enemyCats, gameManager.playerCats);
+			
+				
+				
 			var i:int;
 			var catView:CatView;
 			for (i = 0; i < playerCatsViews.length; i++) 
@@ -1168,6 +1253,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 				catView = playerCatsViews[i] as CatView;
 				catView.cat.active = true;
 				catView.alpha = 1;
+				catView.fishVisible = false;
 				
 				if (catView.cat.role == CatRole.FIGHTER) {
 					catView.cat.targetCat = (gameManager.enemyCats[i] as CatModel).id;
@@ -1206,12 +1292,14 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			showEnemyRoles();
 			
 			refreshEnemyTargetMarks();
+			
+			refreshResultsLabel();
 		}
 		
 		private function showCatAction(catView_1:CatView, role_1:String, catView_2:CatView, role_2:String, sameTargets:Boolean = false):void
 		{
 			// Чтобы тот кто мордой на нас всегда был слева:
-			if (!catView_1.isFront) 
+			if (!catView_1.isLeft) 
 			{
 				var storedCat:CatView = catView_1;
 				var storedRole:String = role_1;
@@ -1226,6 +1314,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			//FadeQuad.show(topLayer, 0.2, 0.7, false, null);
 			
 			var helperPoint:Point;
+			var meetPoint:Point;
 			
 			helperPoint = catView_1.parent.localToGlobal(new Point(catView_1.x, catView_1.y));
 			catView_1.refreshStoreds();
@@ -1255,26 +1344,49 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			catView_2.fightMarks = 0;
 			
 			
-			var meetPoint:Point;
-			if (catView_1.x < layoutHelper.stageWidth / 2) {
-				meetPoint = new Point(layoutHelper.stageWidth / 2 - (CatView.WIDTH*layoutHelper.specialScale)/1.7, layoutHelper.stageHeight / 2);
-			}
-			else {
-				meetPoint = new Point(layoutHelper.stageWidth / 2 + (CatView.WIDTH*layoutHelper.specialScale)/1.7, layoutHelper.stageHeight / 2);
-			}
-			
 			catView_1.setState(CatView.STATE_WALK);
 			catView_2.setState(CatView.STATE_WALK);
 			
-			TweenHelper.tween(catView_1, 1.4, {delay:0.3, transition:Transitions.LINEAR, x:(meetPoint.x - (CatView.WIDTH*layoutHelper.specialScale)/1.6), y:meetPoint.y, onComplete:catView_1.setState, onCompleteArgs:[CatRole.getStateByRole(role_1), true]}).
-				chain(catView_1, 1.5, {delay:0, transition:Transitions.EASE_OUT, onComplete:catView_1.setState, onCompleteArgs:[CatView.STATE_WALK]}).
-				chain(catView_1, 1.4, {transition:Transitions.LINEAR, x:catView_1.storedX_0, y:catView_1.storedY_0, onComplete:childCatAtHomeLayer, onCompleteArgs:[catView_1], onStart:FadeQuad.hide});
-			
+			if (catView_1.y < layoutHelper.stageHeight / 2)
+					meetPoint = new Point(layoutHelper.stageWidth / 2, layoutHelper.stageHeight / 2 - 100*layoutHelper.specialScale);
+			else
+				meetPoint = new Point(layoutHelper.stageWidth / 2, layoutHelper.stageHeight / 2 + 100 * layoutHelper.specialScale);
+					
+					
 				
-			TweenHelper.tween(catView_2, 1.4, {delay:0.3, transition:Transitions.LINEAR, x:(meetPoint.x + (CatView.WIDTH*layoutHelper.specialScale)/1.6), y:meetPoint.y, onComplete:catView_2.setState, onCompleteArgs:[CatRole.getStateByRole(role_2)]}).
-				chain(catView_2, 1.5, {delay:0, transition:Transitions.EASE_OUT}).
-				chain(catView_2, 0.4, {transition:Transitions.LINEAR, x:catView_2.storedX_0, y:catView_2.storedY_0, onComplete:childCatAtHomeLayer, onCompleteArgs:[catView_2]});	
-			
+			if (role_1 == role_2 && role_1 == CatRole.FIGHTER) 
+			{
+				TweenHelper.tween(catView_1, 1.4, {delay:0.3, transition:Transitions.LINEAR, x:(meetPoint.x - (CatView.WIDTH*layoutHelper.specialScale)/1.6), y:meetPoint.y, onComplete:catView_1.setState, onCompleteArgs:[CatView.STATE_FIGHT_STANDOFF]}).
+					chain(catView_1, 1.4, {delay:0.0, transition:Transitions.LINEAR, x:catView_1.storedX_0, y:catView_1.storedY_0, onComplete:childCatAtHomeLayer, onCompleteArgs:[catView_1], onStart:catView_1.setState, onStartArgs:[CatView.STATE_WALK, true]});
+					
+				TweenHelper.tween(catView_2, 1.4, {delay:0.3, transition:Transitions.LINEAR, x:(meetPoint.x + (CatView.WIDTH*layoutHelper.specialScale)/1.6), y:meetPoint.y, onComplete:catView_2.setState, onCompleteArgs:[CatView.STATE_FIGHT_STANDOFF]}).
+					chain(catView_2, 1.4, {delay:0.0, transition:Transitions.LINEAR, x:catView_2.storedX_0, y:catView_2.storedY_0, onComplete:childCatAtHomeLayer, onCompleteArgs:[catView_2], onStart:catView_2.setState, onStartArgs:[CatView.STATE_WALK, true]});	
+			}
+			else if (role_1 == role_2 && role_1 == CatRole.HARVESTER) 
+			{
+				var foodImage:CatFoodView = foodViewsContainer.getChildAt(0) as CatFoodView;
+				var foodPoint:Point = foodImage.parent.localToGlobal(new Point(foodImage.x, foodImage.y));
+				foodPoint = new Point(foodPoint.x-36*layoutHelper.specialScale, foodPoint.y - 115*layoutHelper.specialScale);
+				
+				TweenHelper.tween(catView_1, 1.4, {delay:0.3, transition:Transitions.LINEAR, x:(foodPoint.x - 14*layoutHelper.specialScale), y:foodPoint.y, onComplete:catView_1.setState, onCompleteArgs:[CatView.STATE_HARVEST_STANDOFF]}).
+					chain(catView_1, 1.4, {delay:1.5, transition:Transitions.LINEAR, x:catView_1.storedX_0, y:catView_1.storedY_0, onComplete:childCatAtHomeLayer, onCompleteArgs:[catView_1], onStart:catView_1.setState, onStartArgs:[CatView.STATE_WALK, true]});
+					
+				TweenHelper.tween(catView_2, 1.4, {delay:0.3, transition:Transitions.LINEAR, x:(foodPoint.x + 117*layoutHelper.specialScale), y:foodPoint.y, onComplete:catView_2.setState, onCompleteArgs:[CatView.STATE_HARVEST_STANDOFF]}).
+					chain(catView_2, 1.4, {delay:1.5, transition:Transitions.LINEAR, x:catView_2.storedX_0, y:catView_2.storedY_0, onComplete:childCatAtHomeLayer, onCompleteArgs:[catView_2], onStart:catView_2.setState, onStartArgs:[CatView.STATE_WALK, true]});	
+			}
+			else
+			{
+				TweenHelper.tween(catView_1, 1.4, {delay:0.3, transition:Transitions.LINEAR, x:(meetPoint.x - 45*layoutHelper.specialScale), y:meetPoint.y, onComplete:catView_1.setState, onCompleteArgs:[CatRole.getStateByRole(role_1), true]}).
+					chain(catView_1, 1.5, {delay:0, transition:Transitions.EASE_OUT, onComplete:catView_1.setState, onCompleteArgs:[CatView.STATE_WALK]}).
+					chain(catView_1, 1.4, {transition:Transitions.LINEAR, x:catView_1.storedX_0, y:catView_1.storedY_0, onComplete:childCatAtHomeLayer, onCompleteArgs:[catView_1], onStart:FadeQuad.hide});
+				
+				TweenHelper.tween(catView_2, 1.4, {delay:0.3, transition:Transitions.LINEAR, x:(meetPoint.x + 50*layoutHelper.specialScale), y:meetPoint.y, onComplete:catView_2.setState, onCompleteArgs:[CatRole.getStateByRole(role_2)]}).
+					chain(catView_2, 1.5, {delay:0, transition:Transitions.EASE_OUT}).
+					chain(catView_2, 0.4, {transition:Transitions.LINEAR, x:catView_2.storedX_0, y:catView_2.storedY_0, onComplete:childCatAtHomeLayer, onCompleteArgs:[catView_2]});	
+			}
+				
+				
+				
 			particleEffect.x = meetPoint.x;
 			particleEffect.y = meetPoint.y;
 			//topLayer.addChild(particleEffect);
@@ -1351,31 +1463,21 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			topLayer.addChild(catView_1);
 			
 			var foodImage:CatFoodView = foodViewsContainer.getChildAt(foodIndex) as CatFoodView;
-			//foodImage.foodCount--;
-			//helperPoint = foodImage.parent.localToGlobal(new Point(foodImage.x, foodImage.y));
-			//foodImage.x = helperPoint.x;
-			//foodImage.y = helperPoint.y;
-			//foodImage.scale = foodImage.parent.scale;
-			//topLayer.addChild(foodImage);
 			
 			catView_1.showRoleImage(null);
 			catView_1.fightMarks = 0;
 			
-			var foodPoint:Point = foodImage.parent.localToGlobal(new Point(foodImage.x, foodImage.y));;
-			
-			/*var x_1_left:int = (layoutHelper.stageWidth / 2 - CatView.WIDTH / 2 - 40);
-			var y_1_left:int = (layoutHelper.stageHeight / 2 - 50);
-			
-			var x_1_right:int = (layoutHelper.stageWidth / 2 + CatView.WIDTH / 2 + 40);
-			var y_1_right:int = (layoutHelper.stageHeight / 2 + 50);
-			*/
+			var foodPoint:Point = foodImage.parent.localToGlobal(new Point(foodImage.x, foodImage.y));
+			foodPoint = new Point(foodPoint.x-36*layoutHelper.specialScale, foodPoint.y - 115*layoutHelper.specialScale);
 			
 			catView_1.setState(CatView.STATE_WALK);
 			
 			
-			TweenHelper.tween(catView_1, 1.4, {delay:0.3, transition:Transitions.LINEAR, /*scale:1.3,*/ x:foodPoint.x, y:foodPoint.y, onComplete:foodImage.setFoodCount, onCompleteArgs:[foodImage.foodCount - 1]}).
-				chain(catView_1, 1.4, {delay:0.0, transition:Transitions.LINEAR, x:catView_1.storedX_0, y:catView_1.storedY_0, onComplete:childCatAtHomeLayer, onCompleteArgs:[catView_1], onStart:catView_1.setState, onStartArgs:[CatView.STATE_WALK_HARVEST]});
-			/*TweenHelper.tween(foodImage, 0.4, {delay:0.3, transition:Transitions.EASE_OUT, scale:1.3, x:x_1_right, y:y_1_right}).
+			TweenHelper.tween(catView_1, 1.4, {delay:0.3, transition:Transitions.LINEAR, /*scale:catView_1.scale,*/ x:(foodPoint.x - 14*layoutHelper.specialScale), y:foodPoint.y, onComplete:foodImage.setFoodCount, onCompleteArgs:[foodImage.foodCount - 1]}).
+				chain(catView_1, 1.4, {delay:0.0, transition:Transitions.LINEAR, onStart:catView_1.setState, onStartArgs:[CatView.STATE_HARVEST]}).
+				chain(catView_1, 1.4, {delay:0.0, /*scale:getCatScale(catView_1.parent.getChildIndex(catView_1)),*/ transition:Transitions.LINEAR, x:catView_1.storedX_0, y:catView_1.storedY_0, onComplete:childCatAtHomeLayer, onCompleteArgs:[catView_1], onStart:catView_1.setState, onStartArgs:[CatView.STATE_WALK_HARVEST, true]});
+			
+				/*TweenHelper.tween(foodImage, 0.4, {delay:0.3, transition:Transitions.EASE_OUT, scale:1.3, x:x_1_right, y:y_1_right}).
 				chain(foodImage, 2.0, {delay:0, transition:Transitions.EASE_OUT, y:(layoutHelper.stageHeight / 2 - 50)}).
 				chain(foodImage, 0.4, {alpha:0, transition:Transitions.EASE_OUT, y:(layoutHelper.stageHeight / 2 - 150), onComplete:foodImage.removeFromParent});*/	
 		}
@@ -1464,10 +1566,69 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 		private var playerFish:int;
 		private var enemyFish:int;
 		
+		public function tryStartPvPRound():void
+		{
+			var i:int;
+			
+			if (gameManager.playerCatsSetted)
+			{
+				hideVSandStartButton();
+				enemyCatViewsContainer.touchable = false;
+				playerCatViewsContainer.touchable = false;
+
+				for (i = 0; i < playerCatsViews.length; i++) 
+				{
+					(playerCatsViews[i] as CatView).showSelected = false;
+				}
+			}
+			else
+			{
+				refreshResultsLabel();
+				return;
+			}
+			
+			
+			if (gameManager.pvpEnemySetted)
+			{
+				Starling.juggler.delayCall(nextFightAction, 1.8);
+			}
+			else
+			{
+				refreshResultsLabel();
+				return;
+			}
+			
+			
+			refreshResultsLabel();
+		}
 		
 		private function refreshResultsLabel():void 
 		{
-			roundResultsLabel.text = "<font color='#ffffff'> Player fish: " + playerFish.toString() + ',</font> Enemy fish:' + enemyFish.toString();
+			if (gameManager.gameMode == GameManager.GAME_MODE_PVP)
+			{
+				if (gameManager.pvpEnemySetted && gameManager.playerCatsSetted)
+				{
+					roundResultsLabel.text = "<font color='#ffffff'> Player fish: " + playerFish.toString() + ',</font> Enemy fish:' + enemyFish.toString();
+				}
+				else if (gameManager.playerCatsSetted)
+				{
+					roundResultsLabel.text = "Wait for enemy start ...";
+				}
+				else if (gameManager.pvpEnemySetted)
+				{
+					roundResultsLabel.text = "Enemy ready and wait for you";
+				}
+				else
+				{
+					roundResultsLabel.text = "Nobody is ready yet";
+				}
+			}
+			else
+			{
+				roundResultsLabel.text = "<font color='#ffffff'> Player fish: " + playerFish.toString() + ',</font> Enemy fish:' + enemyFish.toString();
+			}
+			
+			
 		}
 		
 		
@@ -1580,6 +1741,9 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			refreshResultsLabel();
 			
 			DelayCallUtils.cleanBundle(DELAY_CALL_GAME_UI_BUNDLE);
+			
+			gameManager.playerCatsSetted = false;
+			gameManager.pvpEnemySetted = false;
 			
 			while (foodViewsContainer.numChildren > 0) 
 			{

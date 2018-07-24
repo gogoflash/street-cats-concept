@@ -491,15 +491,14 @@ package com.alisacasino.bingo.utils.keyboard
 			
 			if (e.keyCode == Keyboard.B)
 			{
-				var json:Object = {
-				   id: 0,
-				   session: null,
-				   name: "joinGame",
-				   playerId:12
-				   //payload: {platformId:1} 
-				}
-			
-				ServerConnection.current.sendMessageNew(json);
+				//var json:Object = {
+				   //id: 0,
+				   //session: gameManager.connectionManager.sessionId,
+				   //name: "joinGame",
+				   //payload: {playerId:Player.current.playerId} 
+				//}
+			//
+				//ServerConnection.current.sendMessageNew(json);
 				
 				//DialogsManager.closeAll([TournamentResultDialog, ReconnectDialog, ScratchCardWindow]);
 				//doCtrlShiftB();

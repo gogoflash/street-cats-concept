@@ -249,6 +249,8 @@ package com.alisacasino.bingo.utils
 					1  +1
 					Game.connectionManager.parseMessageNew(sse);
 					
+					//<>>>>>  {"id":0,"name":"joinGameResponse","payload":{"gameId":2},"timeMillis":1532099385399,"clientLocalAddr":null}
+					
 					//msg.used_by_generated_code::readFromSlice(mBuffer, mBuffer.bytesAvailable - mMessageLength);
 					//mMessageLength = 0;
 					

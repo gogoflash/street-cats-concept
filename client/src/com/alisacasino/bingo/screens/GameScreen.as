@@ -163,10 +163,9 @@ package com.alisacasino.bingo.screens
 			while (gameManager.playerCats.length < gameManager.CAT_SLOTS_MAX) 
 			{
 				var cat:CatModel = new CatModel();
-				cat.id = gameManager.catsModel.getNextCatID();
+				cat.id = 3 + gameManager.playerCats.length;//gameManager.catsModel.getNextCatID();
 				cat.health = 3;
-				cat.catUID = gameManager.catsModel.getRandomCatUID();
-				
+				cat.catUID = 0;//gameManager.catsModel.getRandomCatUID();
 				
 				cat.role = CatRole.HARVESTER;//CatRole.getRandom();
 				//cat.targetCat = Math.floor(Math.random()*3);
@@ -174,7 +173,7 @@ package com.alisacasino.bingo.screens
 				gameManager.playerCats.push(cat);
 			}
 			
-			mBackgroundImage = new Image(AtlasAsset.ScratchCardAtlas.getTexture('backgrounds/' + '3'/*Math.ceil(Math.random()*5).toString()*/));
+			mBackgroundImage = new Image(AtlasAsset.ScratchCardAtlas.getTexture('backgrounds/' + '1'/*Math.ceil(Math.random()*5).toString()*/));
 			addChild(mBackgroundImage);
 			mBackgroundImage.alignPivot();
 			

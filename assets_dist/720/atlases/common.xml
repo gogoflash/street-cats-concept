@@ -1,131 +1,160 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker https://www.codeandweb.com/texturepacker -->
-<!-- $TexturePacker:SmartUpdate:9cc946277935aca896e6ba2d7cf127c6:c16488d051c501d73eb18d530fb9b57e:071684f9feb4b75c21246cadd43ff572$ -->
-<TextureAtlas imagePath="common.png" width="1024" height="2048">
-    <SubTexture name="avatars/avatar_cat" x="579" y="1607" width="117" height="126" frameX="-5" frameY="0" frameWidth="122" frameHeight="126"/>
-    <SubTexture name="avatars/default_square" x="848" y="1418" width="94" height="94"/>
-    <SubTexture name="bars/base" x="852" y="1149" rotated="true" width="46" height="170"/>
-    <SubTexture name="bars/base_frameless" x="834" y="360" rotated="true" width="64" height="187"/>
-    <SubTexture name="bars/base_glow" x="792" y="1149" rotated="true" width="58" height="159" frameX="-25" frameY="0" frameWidth="184" frameHeight="58"/>
-    <SubTexture name="bars/cash" x="759" y="1797" width="66" height="70"/>
-    <SubTexture name="bars/medium/cash" x="944" y="1396" width="76" height="80"/>
-    <SubTexture name="bars/plus" x="900" y="1160" width="42" height="40"/>
-    <SubTexture name="bars/progress_bg" x="998" y="231" rotated="true" width="25" height="138"/>
-    <SubTexture name="bars/progress_fill" x="698" y="1607" rotated="true" width="19" height="130" frameX="-4" frameY="-3" frameWidth="138" frameHeight="25"/>
-    <SubTexture name="bars/progress_flare" x="329" y="582" width="37" height="46"/>
-    <SubTexture name="bars/score_progress" x="811" y="1034" rotated="true" width="91" height="113"/>
-    <SubTexture name="bars/score_progress_edge" x="851" y="1610" rotated="true" width="66" height="8"/>
-    <SubTexture name="bars/score_progress_fill" x="836" y="1787" rotated="true" width="44" height="36" frameX="-76" frameY="-23" frameWidth="113" frameHeight="91"/>
-    <SubTexture name="bars/white_glow_bar" x="569" y="1851" width="36" height="60"/>
-    <SubTexture name="buttons/blue_base" x="176" y="949" rotated="true" width="70" height="270"/>
-    <SubTexture name="buttons/button_blue" x="944" y="1120" rotated="true" width="79" height="84"/>
-    <SubTexture name="buttons/button_gray_flat" x="387" y="821" width="23" height="63"/>
-    <SubTexture name="buttons/button_gray_flat_2" x="217" y="596" width="29" height="29"/>
-    <SubTexture name="buttons/circle_gray_close" x="607" y="1847" width="59" height="59"/>
-    <SubTexture name="buttons/circle_red_query" x="569" y="1913" width="59" height="59"/>
-    <SubTexture name="buttons/gray_base" x="819" y="549" rotated="true" width="65" height="204"/>
-    <SubTexture name="buttons/gray_base_mini" x="988" y="1633" width="35" height="65"/>
-    <SubTexture name="buttons/gray_big" x="248" y="349" rotated="true" width="79" height="279"/>
-    <SubTexture name="buttons/green_base" x="900" y="356" rotated="true" width="65" height="204"/>
-    <SubTexture name="buttons/green_base_contoured" x="886" y="562" rotated="true" width="65" height="204"/>
-    <SubTexture name="buttons/green_base_mini" x="988" y="1700" width="35" height="65"/>
-    <SubTexture name="buttons/green_big" x="592" y="776" width="279" height="79"/>
-    <SubTexture name="buttons/menu_button" x="918" y="1302" width="77" height="92"/>
-    <SubTexture name="buttons/orange_base" x="953" y="562" rotated="true" width="70" height="175"/>
-    <SubTexture name="buttons/purple_base" x="953" y="739" rotated="true" width="70" height="175"/>
-    <SubTexture name="buttons/red_base" x="823" y="857" rotated="true" width="70" height="175"/>
-    <SubTexture name="cats/attack_bg" x="370" y="1457" width="195" height="195"/>
-    <SubTexture name="cats/back/0" x="322" y="185" rotated="true" width="279" height="153" frameX="-8" frameY="-11" frameWidth="167" frameHeight="290"/>
-    <SubTexture name="cats/back/1" x="1" y="1222" width="186" height="272" frameX="0" frameY="0" frameWidth="186" frameHeight="273"/>
-    <SubTexture name="cats/back/2" x="629" y="1" rotated="true" width="261" height="187"/>
-    <SubTexture name="cats/back/3" x="581" y="1147" rotated="true" width="209" height="162" frameX="-47" frameY="-6" frameWidth="243" frameHeight="217"/>
-    <SubTexture name="cats/back/4" x="217" y="1476" width="151" height="252" frameX="-13" frameY="-6" frameWidth="194" frameHeight="258"/>
-    <SubTexture name="cats/back/5" x="892" y="1" width="113" height="228" frameX="-36" frameY="-36" frameWidth="184" frameHeight="273"/>
-    <SubTexture name="cats/back/6" x="1" y="1496" width="214" height="271" frameX="-35" frameY="-2" frameWidth="249" frameHeight="273"/>
-    <SubTexture name="cats/back/7" x="217" y="1730" width="163" height="244" frameX="-40" frameY="-21" frameWidth="206" frameHeight="268"/>
-    <SubTexture name="cats/back/8" x="217" y="630" width="168" height="258" frameX="-45" frameY="-6" frameWidth="214" frameHeight="278"/>
-    <SubTexture name="cats/defence/3" x="1" y="911" rotated="true" width="173" height="309" frameX="-12" frameY="-35" frameWidth="321" frameHeight="208"/>
-    <SubTexture name="cats/defence_bg" x="382" y="1654" width="195" height="195"/>
-    <SubTexture name="cats/fight/3" x="1" y="174" width="319" height="173" frameX="-2" frameY="-35" frameWidth="321" frameHeight="208"/>
-    <SubTexture name="cats/fish" x="967" y="371" rotated="true" width="56" height="90"/>
-    <SubTexture name="cats/fish_chest" x="413" y="1075" rotated="true" width="166" height="168" frameX="-2" frameY="-2" frameWidth="172" frameHeight="168"/>
-    <SubTexture name="cats/fork" x="851" y="1514" width="91" height="94" frameX="-2" frameY="-3" frameWidth="97" frameHeight="99"/>
-    <SubTexture name="cats/front/0" x="248" y="890" width="163" height="253" frameX="-43" frameY="-12" frameWidth="206" frameHeight="268"/>
-    <SubTexture name="cats/front/1" x="355" y="1" rotated="true" width="272" height="182" frameX="0" frameY="0" frameWidth="182" frameHeight="273"/>
-    <SubTexture name="cats/front/2" x="571" y="360" rotated="true" width="261" height="187"/>
-    <SubTexture name="cats/front/3" x="354" y="1245" width="196" height="210" frameX="-47" frameY="-6" frameWidth="243" frameHeight="217"/>
-    <SubTexture name="cats/front/4" x="413" y="821" width="166" height="252" frameX="0" frameY="-6" frameWidth="194" frameHeight="258"/>
-    <SubTexture name="cats/front/5" x="581" y="1032" rotated="true" width="228" height="113" frameX="-36" frameY="-36" frameWidth="184" frameHeight="273"/>
-    <SubTexture name="cats/front/6" x="1" y="1769" width="214" height="271" frameX="-35" frameY="-2" frameWidth="249" frameHeight="273"/>
-    <SubTexture name="cats/front/7" x="189" y="1221" width="163" height="253" frameX="-43" frameY="-12" frameWidth="206" frameHeight="268"/>
-    <SubTexture name="cats/front/8" x="603" y="190" rotated="true" width="268" height="168" frameX="-45" frameY="-6" frameWidth="214" frameHeight="278"/>
-    <SubTexture name="cats/harvest/3" x="1" y="596" rotated="true" width="173" height="313" frameX="-8" frameY="-35" frameWidth="321" frameHeight="208"/>
-    <SubTexture name="cats/knife" x="734" y="1311" width="87" height="109" frameX="-1" frameY="-2" frameWidth="90" frameHeight="112"/>
-    <SubTexture name="cats/roles/claw" x="579" y="1735" width="101" height="110"/>
-    <SubTexture name="cats/roles/fork_knife" x="895" y="916" width="128" height="100"/>
-    <SubTexture name="cats/roles/shield" x="217" y="1976" rotated="true" width="87" height="71"/>
-    <SubTexture name="cats/roles/sword" x="900" y="1206" width="91" height="94" frameX="-6" frameY="-9" frameWidth="107" frameHeight="109"/>
-    <SubTexture name="cats/target_bg" x="567" y="1425" width="180" height="180"/>
-    <SubTexture name="cats/walk/3" x="387" y="582" width="203" height="237" frameX="-69" frameY="-64" frameWidth="287" frameHeight="304"/>
-    <SubTexture name="cats/walk/front_3" x="552" y="1311" rotated="true" width="180" height="112" frameX="-11" frameY="-17" frameWidth="139" frameHeight="201"/>
-    <SubTexture name="cats/walk_harvest/3" x="581" y="857" width="240" height="173" frameX="-81" frameY="-35" frameWidth="321" frameHeight="208"/>
-    <SubTexture name="controls/check_box" x="882" y="1787" width="44" height="44"/>
-    <SubTexture name="controls/checkmark" x="679" y="1893" width="51" height="47"/>
-    <SubTexture name="controls/clock_arrow" x="571" y="340" width="19" height="18"/>
-    <SubTexture name="controls/clock_bg" x="967" y="463" width="56" height="56"/>
-    <SubTexture name="controls/no_slot_sign" x="749" y="1530" width="100" height="88"/>
-    <SubTexture name="controls/padlock" x="967" y="521" rotated="true" width="47" height="37"/>
-    <SubTexture name="controls/red_bordered_circle" x="870" y="1833" rotated="true" width="41" height="40"/>
-    <SubTexture name="dialogs/mask_hole_round" x="944" y="1478" width="76" height="76"/>
-    <SubTexture name="dialogs/rate_star" x="719" y="1620" width="97" height="98"/>
-    <SubTexture name="dialogs/rate_star_slot" x="823" y="1321" rotated="true" width="93" height="95"/>
-    <SubTexture name="dialogs/red_circle_white_outline" x="735" y="1935" width="49" height="48"/>
-    <SubTexture name="effects/ball_blue" x="552" y="1245" width="26" height="24"/>
-    <SubTexture name="effects/blur_strike" x="176" y="596" rotated="true" width="39" height="351"/>
-    <SubTexture name="effects/green_puff" x="782" y="1985" width="33" height="33"/>
-    <SubTexture name="effects/puff_ball" x="817" y="1982" width="33" height="33"/>
-    <SubTexture name="effects/rays" x="592" y="549" width="225" height="225"/>
-    <SubTexture name="effects/rays_0" x="1" y="349" width="245" height="245"/>
-    <SubTexture name="effects/rays_bg" x="329" y="340" width="240" height="240"/>
-    <SubTexture name="effects/shadow_ball" x="873" y="768" rotated="true" width="78" height="80"/>
-    <SubTexture name="effects/shine" x="873" y="231" width="123" height="123" frameX="-4" frameY="-4" frameWidth="132" frameHeight="131"/>
-    <SubTexture name="effects/shine_rays" x="382" y="1851" rotated="true" width="185" height="184" frameX="-9" frameY="-6" frameWidth="200" frameHeight="200"/>
-    <SubTexture name="effects/smoke_0" x="306" y="1976" rotated="true" width="74" height="71"/>
-    <SubTexture name="effects/smoke_1" x="330" y="1145" rotated="true" width="75" height="73"/>
-    <SubTexture name="effects/snowflake" x="624" y="2016" width="31" height="31" frameX="0" frameY="0" frameWidth="32" frameHeight="32"/>
-    <SubTexture name="effects/snowflake_1" x="988" y="1767" rotated="true" width="35" height="31"/>
-    <SubTexture name="effects/snowflake_2" x="992" y="1838" width="31" height="31" frameX="0" frameY="0" frameWidth="32" frameHeight="32"/>
-    <SubTexture name="effects/square_white" x="217" y="890" rotated="true" width="16" height="36"/>
-    <SubTexture name="effects/star" x="786" y="1935" width="44" height="45"/>
-    <SubTexture name="effects/strip_blue" x="1007" y="1" rotated="true" width="12" height="216"/>
-    <SubTexture name="icons/arrow" x="571" y="549" rotated="true" width="14" height="22"/>
-    <SubTexture name="icons/fish_bones" x="818" y="1620" rotated="true" width="91" height="92" frameX="0" frameY="-4" frameWidth="99" frameHeight="99"/>
-    <SubTexture name="icons/lozenge" x="827" y="1825" width="41" height="41"/>
-    <SubTexture name="icons/red_circle" x="928" y="1787" width="43" height="44"/>
-    <SubTexture name="icons/round_dot" x="895" y="906" width="8" height="8"/>
-    <SubTexture name="icons/square" x="956" y="1838" width="34" height="34"/>
-    <SubTexture name="icons/star" x="895" y="850" width="56" height="54"/>
-    <SubTexture name="icons/white_star" x="919" y="1610" width="23" height="21"/>
-    <SubTexture name="logo_static" x="1" y="1" width="352" height="171"/>
-    <SubTexture name="side_menu/avatar_placeholder" x="836" y="1714" width="72" height="71"/>
-    <SubTexture name="side_menu/collection" x="630" y="1964" rotated="true" width="47" height="50"/>
-    <SubTexture name="side_menu/customer_support" x="679" y="1985" width="50" height="48"/>
-    <SubTexture name="side_menu/facebook" x="913" y="1833" width="41" height="41"/>
-    <SubTexture name="side_menu/friends" x="731" y="1985" width="49" height="45"/>
-    <SubTexture name="side_menu/full_screen_icon" x="944" y="1556" width="75" height="75"/>
-    <SubTexture name="side_menu/full_screen_icon_exit" x="911" y="1633" width="75" height="75"/>
-    <SubTexture name="side_menu/home" x="630" y="1908" rotated="true" width="47" height="54"/>
-    <SubTexture name="side_menu/inbox" x="993" y="1206" rotated="true" width="30" height="41"/>
-    <SubTexture name="side_menu/inventory" x="569" y="1974" width="53" height="50"/>
-    <SubTexture name="side_menu/music_icon" x="911" y="1710" width="75" height="75"/>
-    <SubTexture name="side_menu/snowflake_icon" x="682" y="1739" width="75" height="75"/>
-    <SubTexture name="side_menu/sound_icon" x="759" y="1720" width="75" height="75"/>
-    <SubTexture name="side_menu/star" x="973" y="1800" width="38" height="36"/>
-    <SubTexture name="side_menu/store_icon" x="904" y="1120" width="38" height="38"/>
-    <SubTexture name="side_menu/tourney_icon" x="679" y="1942" width="54" height="41"/>
-    <SubTexture name="side_menu/voice_over_icon" x="682" y="1816" width="75" height="75"/>
-    <SubTexture name="side_menu/xp_background" x="759" y="1869" width="64" height="64"/>
-    <SubTexture name="winners_pane/alisa_logo" x="248" y="1145" rotated="true" width="80" height="74"/>
-    <SubTexture name="winners_pane/avatar_frame" x="904" y="1018" width="108" height="100"/>
-    <SubTexture name="winners_pane/avatar_mask" x="749" y="1422" rotated="true" width="97" height="106"/>
+<!-- $TexturePacker:SmartUpdate:37823b36c20737d8f00d9715638f6866:5336876a09805098d575d603ba4b454f:071684f9feb4b75c21246cadd43ff572$ -->
+<TextureAtlas imagePath="common.png" width="2048" height="2048">
+    <SubTexture name="avatars/avatar_cat" x="207" y="1668" rotated="true" width="126" height="117" frameX="-5" frameY="0" frameWidth="122" frameHeight="126"/>
+    <SubTexture name="avatars/default_square" x="240" y="1479" width="94" height="94"/>
+    <SubTexture name="bars/base" x="830" y="1611" rotated="true" width="46" height="170"/>
+    <SubTexture name="bars/base_frameless" x="1051" y="1794" rotated="true" width="64" height="187"/>
+    <SubTexture name="bars/base_glow" x="801" y="1450" rotated="true" width="58" height="159" frameX="-25" frameY="0" frameWidth="184" frameHeight="58"/>
+    <SubTexture name="bars/cash" x="899" y="849" width="66" height="70"/>
+    <SubTexture name="bars/medium/cash" x="1147" y="1511" width="76" height="80"/>
+    <SubTexture name="bars/plus" x="312" y="42" rotated="true" width="40" height="42"/>
+    <SubTexture name="bars/progress_bg" x="629" y="606" rotated="true" width="25" height="138"/>
+    <SubTexture name="bars/progress_fill" x="957" y="321" rotated="true" width="19" height="130" frameX="-4" frameY="-3" frameWidth="138" frameHeight="25"/>
+    <SubTexture name="bars/progress_flare" x="932" y="626" width="37" height="46"/>
+    <SubTexture name="bars/score_progress" x="294" y="1904" rotated="true" width="91" height="113"/>
+    <SubTexture name="bars/score_progress_edge" x="1867" y="164" width="8" height="66"/>
+    <SubTexture name="bars/score_progress_fill" x="932" y="736" width="36" height="44" frameX="-76" frameY="-23" frameWidth="113" frameHeight="91"/>
+    <SubTexture name="bars/white_glow_bar" x="932" y="674" width="36" height="60"/>
+    <SubTexture name="buttons/blue_base" x="1" y="807" width="270" height="70"/>
+    <SubTexture name="buttons/button_blue" x="371" y="1816" rotated="true" width="79" height="84"/>
+    <SubTexture name="buttons/button_gray_flat" x="957" y="233" width="23" height="63"/>
+    <SubTexture name="buttons/button_gray_flat_2" x="629" y="575" width="29" height="29"/>
+    <SubTexture name="buttons/circle_gray_close" x="801" y="1328" width="59" height="59"/>
+    <SubTexture name="buttons/circle_red_query" x="801" y="1389" width="59" height="59"/>
+    <SubTexture name="buttons/fight_btn" x="649" y="1795" rotated="true" width="81" height="192"/>
+    <SubTexture name="buttons/gray_base" x="899" y="921" rotated="true" width="65" height="204"/>
+    <SubTexture name="buttons/gray_base_mini" x="932" y="782" width="35" height="65"/>
+    <SubTexture name="buttons/gray_big" x="978" y="403" width="279" height="79"/>
+    <SubTexture name="buttons/green_base" x="1" y="1644" width="204" height="65"/>
+    <SubTexture name="buttons/green_base_contoured" x="555" y="1526" width="204" height="65"/>
+    <SubTexture name="buttons/green_base_mini" x="1522" y="591" width="35" height="65"/>
+    <SubTexture name="buttons/green_big" x="978" y="484" width="279" height="79"/>
+    <SubTexture name="buttons/menu_button" x="270" y="1174" width="77" height="92"/>
+    <SubTexture name="buttons/orange_base" x="1446" y="1058" rotated="true" width="70" height="175"/>
+    <SubTexture name="buttons/purple_base" x="371" y="1744" width="175" height="70"/>
+    <SubTexture name="buttons/red_base" x="758" y="1611" rotated="true" width="70" height="175"/>
+    <SubTexture name="cats/attack_bg" x="1" y="1711" width="195" height="195"/>
+    <SubTexture name="cats/back/3" x="344" y="1458" rotated="true" width="209" height="162" frameX="-47" frameY="-6" frameWidth="243" frameHeight="217"/>
+    <SubTexture name="cats/damage/blue_01" x="976" y="565" rotated="true" width="275" height="259" frameX="-21" frameY="-36" frameWidth="291" frameHeight="324"/>
+    <SubTexture name="cats/damage/blue_02" x="629" y="817" rotated="true" width="268" height="267" frameX="-3" frameY="-25" frameWidth="291" frameHeight="324"/>
+    <SubTexture name="cats/damage/blue_03" x="1791" y="733" rotated="true" width="256" height="240" frameX="-30" frameY="-37" frameWidth="291" frameHeight="324"/>
+    <SubTexture name="cats/damage/red_01" x="352" y="575" rotated="true" width="275" height="259" frameX="-21" frameY="-36" frameWidth="291" frameHeight="324"/>
+    <SubTexture name="cats/damage/red_02" x="350" y="836" rotated="true" width="268" height="267" frameX="-3" frameY="-25" frameWidth="291" frameHeight="324"/>
+    <SubTexture name="cats/damage/red_03" x="1789" y="975" rotated="true" width="256" height="240" frameX="-30" frameY="-37" frameWidth="291" frameHeight="324"/>
+    <SubTexture name="cats/defence/3" x="1" y="42" width="309" height="173" frameX="-12" frameY="-35" frameWidth="321" frameHeight="208"/>
+    <SubTexture name="cats/defence_bg" x="452" y="1816" width="195" height="195"/>
+    <SubTexture name="cats/fight/3" x="354" y="1" width="319" height="173" frameX="-2" frameY="-35" frameWidth="321" frameHeight="208"/>
+    <SubTexture name="cats/fish" x="287" y="1787" rotated="true" width="82" height="115"/>
+    <SubTexture name="cats/fish_chest" x="1064" y="1605" rotated="true" width="166" height="168" frameX="-2" frameY="-2" frameWidth="172" frameHeight="168"/>
+    <SubTexture name="cats/fork" x="240" y="1575" rotated="true" width="94" height="91" frameX="-2" frameY="-3" frameWidth="97" frameHeight="99"/>
+    <SubTexture name="cats/front/3" x="589" y="1328" rotated="true" width="210" height="196" frameX="-47" frameY="-6" frameWidth="243" frameHeight="217"/>
+    <SubTexture name="cats/harvest/arm" x="698" y="1989" rotated="true" width="43" height="52"/>
+    <SubTexture name="cats/harvest/blue_01" x="555" y="1593" rotated="true" width="201" height="200"/>
+    <SubTexture name="cats/harvest/blue_02" x="892" y="1794" width="157" height="188"/>
+    <SubTexture name="cats/harvest/blue_03" x="1196" y="1193" width="225" height="225"/>
+    <SubTexture name="cats/harvest/blue_04" x="1" y="602" width="274" height="203"/>
+    <SubTexture name="cats/harvest/blue_05" x="1253" y="782" rotated="true" width="266" height="198"/>
+    <SubTexture name="cats/harvest/fish" x="1117" y="1775" width="152" height="158"/>
+    <SubTexture name="cats/harvest/red_01" x="1845" y="531" rotated="true" width="202" height="200"/>
+    <SubTexture name="cats/harvest/red_02" x="732" y="1795" width="158" height="189"/>
+    <SubTexture name="cats/harvest/red_03" x="964" y="1284" width="225" height="225"/>
+    <SubTexture name="cats/harvest/red_04" x="656" y="611" width="274" height="204"/>
+    <SubTexture name="cats/harvest/red_05" x="1521" y="889" rotated="true" width="266" height="198"/>
+    <SubTexture name="cats/hide/blue_01" x="1578" y="164" rotated="true" width="287" height="158"/>
+    <SubTexture name="cats/hide/blue_02" x="1216" y="982" rotated="true" width="228" height="209"/>
+    <SubTexture name="cats/hide/blue_03" x="1" y="1261" width="238" height="176"/>
+    <SubTexture name="cats/hide/red_01" x="1578" y="324" rotated="true" width="287" height="158"/>
+    <SubTexture name="cats/hide/red_02" x="966" y="1073" rotated="true" width="228" height="209"/>
+    <SubTexture name="cats/hide/red_03" x="349" y="1280" width="238" height="176"/>
+    <SubTexture name="cats/idle/blue_01" x="983" y="191" rotated="true" width="294" height="210"/>
+    <SubTexture name="cats/idle/red_01" x="1282" y="164" rotated="true" width="294" height="211"/>
+    <SubTexture name="cats/knife" x="198" y="1795" width="87" height="109" frameX="-1" frameY="-2" frameWidth="90" frameHeight="112"/>
+    <SubTexture name="cats/roles/claw" x="241" y="1367" width="101" height="110"/>
+    <SubTexture name="cats/roles/fork_knife" x="862" y="1127" rotated="true" width="100" height="128"/>
+    <SubTexture name="cats/roles/shield" x="277" y="784" width="71" height="87"/>
+    <SubTexture name="cats/roles/sword" x="961" y="1511" width="91" height="94" frameX="-6" frameY="-9" frameWidth="107" frameHeight="109"/>
+    <SubTexture name="cats/run/blue_01" x="1" y="879" rotated="true" width="267" height="189" frameX="-14" frameY="-6" frameWidth="215" frameHeight="316"/>
+    <SubTexture name="cats/run/blue_02" x="1282" y="1" rotated="true" width="297" height="161" frameX="-14" frameY="-8" frameWidth="215" frameHeight="316"/>
+    <SubTexture name="cats/run/blue_03" x="1279" y="377" rotated="true" width="281" height="212" frameX="-3" frameY="-5" frameWidth="215" frameHeight="316"/>
+    <SubTexture name="cats/run/blue_04" x="1" y="217" rotated="true" width="306" height="193" frameX="-3" frameY="-8" frameWidth="215" frameHeight="316"/>
+    <SubTexture name="cats/run/red_01" x="1" y="1070" rotated="true" width="267" height="189" frameX="-14" frameY="-6" frameWidth="215" frameHeight="316"/>
+    <SubTexture name="cats/run/red_02" x="1581" y="1" rotated="true" width="297" height="161" frameX="-14" frameY="-8" frameWidth="215" frameHeight="316"/>
+    <SubTexture name="cats/run/red_03" x="1562" y="484" rotated="true" width="281" height="212" frameX="-3" frameY="-3" frameWidth="215" frameHeight="316"/>
+    <SubTexture name="cats/run/red_04" x="352" y="380" rotated="true" width="306" height="193" frameX="-3" frameY="-8" frameWidth="215" frameHeight="316"/>
+    <SubTexture name="cats/run_harvest/blue_01" x="1253" y="591" rotated="true" width="267" height="189" frameX="-14" frameY="-6" frameWidth="215" frameHeight="316"/>
+    <SubTexture name="cats/run_harvest/blue_02" x="1" y="412" rotated="true" width="297" height="188" frameX="-14" frameY="-8" frameWidth="215" frameHeight="316"/>
+    <SubTexture name="cats/run_harvest/blue_03" x="674" y="205" rotated="true" width="281" height="201" frameX="-3" frameY="-5" frameWidth="215" frameHeight="316"/>
+    <SubTexture name="cats/run_harvest/blue_04" x="675" y="1" rotated="true" width="306" height="202" frameX="-3" frameY="-8" frameWidth="215" frameHeight="316"/>
+    <SubTexture name="cats/run_harvest/red_01" x="1522" y="698" rotated="true" width="267" height="189" frameX="-14" frameY="-6" frameWidth="215" frameHeight="316"/>
+    <SubTexture name="cats/run_harvest/red_02" x="983" y="1" rotated="true" width="297" height="188" frameX="-14" frameY="-8" frameWidth="215" frameHeight="316"/>
+    <SubTexture name="cats/run_harvest/red_03" x="660" y="408" rotated="true" width="281" height="201" frameX="-3" frameY="-5" frameWidth="215" frameHeight="316"/>
+    <SubTexture name="cats/run_harvest/red_04" x="352" y="176" rotated="true" width="306" height="202" frameX="-3" frameY="-8" frameWidth="215" frameHeight="316"/>
+    <SubTexture name="cats/sdw" x="270" y="1032" rotated="true" width="77" height="140"/>
+    <SubTexture name="cats/side/1" x="336" y="1622" rotated="true" width="198" height="120" frameX="-5" frameY="-2" frameWidth="133" frameHeight="200"/>
+    <SubTexture name="cats/target_bg" x="1867" y="235" width="180" height="180"/>
+    <SubTexture name="cats/trash_01" x="1880" y="1" width="166" height="232"/>
+    <SubTexture name="cats/trash_02" x="1" y="1908" width="166" height="131"/>
+    <SubTexture name="cats/walk/3" x="1" y="1439" rotated="true" width="237" height="203" frameX="-69" frameY="-64" frameWidth="287" frameHeight="304"/>
+    <SubTexture name="cats/walk/front_3" x="1867" y="417" rotated="true" width="180" height="112" frameX="-11" frameY="-17" frameWidth="139" frameHeight="201"/>
+    <SubTexture name="cats/walk_harvest/3" x="349" y="1105" width="240" height="173" frameX="-81" frameY="-35" frameWidth="321" frameHeight="208"/>
+    <SubTexture name="controls/check_box" x="792" y="1986" width="44" height="44"/>
+    <SubTexture name="controls/checkmark" x="743" y="1986" rotated="true" width="47" height="51"/>
+    <SubTexture name="controls/clock_arrow" x="1845" y="484" width="19" height="18"/>
+    <SubTexture name="controls/clock_bg" x="387" y="1902" width="56" height="56"/>
+    <SubTexture name="controls/no_slot_sign" x="862" y="1367" width="100" height="88"/>
+    <SubTexture name="controls/padlock" x="312" y="207" width="37" height="47"/>
+    <SubTexture name="controls/red_bordered_circle" x="312" y="86" width="40" height="41"/>
+    <SubTexture name="dialogs/mask_hole_round" x="1225" y="1502" width="76" height="76"/>
+    <SubTexture name="dialogs/rate_star" x="861" y="1457" rotated="true" width="98" height="97"/>
+    <SubTexture name="dialogs/rate_star_slot" x="1423" y="1235" rotated="true" width="93" height="95"/>
+    <SubTexture name="dialogs/red_circle_white_outline" x="300" y="584" width="49" height="48"/>
+    <SubTexture name="effects/ball_blue" x="957" y="205" rotated="true" width="24" height="26"/>
+    <SubTexture name="effects/blur_strike" x="1" y="1" width="351" height="39"/>
+    <SubTexture name="effects/green_puff" x="943" y="453" width="33" height="33"/>
+    <SubTexture name="effects/puff_ball" x="943" y="488" width="33" height="33"/>
+    <SubTexture name="effects/rays" x="1518" y="1089" width="225" height="225"/>
+    <SubTexture name="effects/rays_0" x="969" y="826" width="245" height="245"/>
+    <SubTexture name="effects/rays_bg" x="620" y="1086" width="240" height="240"/>
+    <SubTexture name="effects/shadow_ball" x="270" y="950" rotated="true" width="78" height="80"/>
+    <SubTexture name="effects/shine" x="169" y="1908" width="123" height="123" frameX="-4" frameY="-4" frameWidth="132" frameHeight="131"/>
+    <SubTexture name="effects/shine_rays" x="878" y="1607" width="184" height="185" frameX="-9" frameY="-6" frameWidth="200" frameHeight="200"/>
+    <SubTexture name="effects/smoke_0" x="1446" y="982" width="71" height="74"/>
+    <SubTexture name="effects/smoke_1" x="277" y="634" width="73" height="75"/>
+    <SubTexture name="effects/snowflake" x="943" y="560" width="31" height="31" frameX="0" frameY="0" frameWidth="32" frameHeight="32"/>
+    <SubTexture name="effects/snowflake_1" x="943" y="523" width="31" height="35"/>
+    <SubTexture name="effects/snowflake_2" x="943" y="593" width="31" height="31" frameX="0" frameY="0" frameWidth="32" frameHeight="32"/>
+    <SubTexture name="effects/square_white" x="1259" y="403" rotated="true" width="16" height="36"/>
+    <SubTexture name="effects/star" x="908" y="1556" width="44" height="45"/>
+    <SubTexture name="effects/strip_blue" x="660" y="176" rotated="true" width="12" height="216"/>
+    <SubTexture name="icons/arrow" x="1562" y="377" rotated="true" width="14" height="22"/>
+    <SubTexture name="icons/fish_bones" x="1054" y="1511" rotated="true" width="91" height="92" frameX="0" frameY="-4" frameWidth="99" frameHeight="99"/>
+    <SubTexture name="icons/lozenge" x="309" y="312" width="41" height="41"/>
+    <SubTexture name="icons/red_circle" x="838" y="1986" width="43" height="44"/>
+    <SubTexture name="icons/round_dot" x="1562" y="401" width="8" height="8"/>
+    <SubTexture name="icons/square" x="1522" y="658" width="34" height="34"/>
+    <SubTexture name="icons/star" x="387" y="1960" width="56" height="54"/>
+    <SubTexture name="icons/white_star" x="957" y="298" width="23" height="21"/>
+    <SubTexture name="side_menu/avatar_placeholder" x="277" y="711" width="72" height="71"/>
+    <SubTexture name="side_menu/collection" x="300" y="535" width="50" height="47"/>
+    <SubTexture name="side_menu/customer_support" x="300" y="485" width="50" height="48"/>
+    <SubTexture name="side_menu/facebook" x="309" y="355" width="41" height="41"/>
+    <SubTexture name="side_menu/friends" x="861" y="1556" rotated="true" width="45" height="49"/>
+    <SubTexture name="side_menu/full_screen_icon" x="273" y="873" width="75" height="75"/>
+    <SubTexture name="side_menu/full_screen_icon_exit" x="1267" y="1420" width="75" height="75"/>
+    <SubTexture name="side_menu/home" x="649" y="1989" rotated="true" width="47" height="54"/>
+    <SubTexture name="side_menu/inbox" x="309" y="398" width="41" height="30"/>
+    <SubTexture name="side_menu/inventory" x="300" y="430" rotated="true" width="50" height="53"/>
+    <SubTexture name="side_menu/music_icon" x="1117" y="1935" width="75" height="75"/>
+    <SubTexture name="side_menu/snowflake_icon" x="1194" y="1935" width="75" height="75"/>
+    <SubTexture name="side_menu/sound_icon" x="1232" y="1580" width="75" height="75"/>
+    <SubTexture name="side_menu/star" x="312" y="169" width="38" height="36"/>
+    <SubTexture name="side_menu/store_icon" x="312" y="129" width="38" height="38"/>
+    <SubTexture name="side_menu/tourney_icon" x="309" y="256" rotated="true" width="41" height="54"/>
+    <SubTexture name="side_menu/voice_over_icon" x="1303" y="1497" width="75" height="75"/>
+    <SubTexture name="side_menu/xp_background" x="1051" y="1983" width="64" height="64"/>
+    <SubTexture name="winners_pane/alisa_logo" x="1191" y="1420" width="74" height="80"/>
+    <SubTexture name="winners_pane/avatar_frame" x="862" y="1257" rotated="true" width="100" height="108"/>
+    <SubTexture name="winners_pane/avatar_mask" x="241" y="1268" width="106" height="97"/>
 </TextureAtlas>
