@@ -24,6 +24,10 @@ package com.alisacasino.bingo.components
 		private var frameTime:int;
 		private var currentFrame:int;
 		private var finishFrame:int;
+		private var cycleStartFrame:int;
+		private var cycleStarted:Boolean;
+		
+		public var cycleFps:Number = 0;
 		
 		private var nextFrameTime:int;
 		
@@ -37,8 +41,12 @@ package com.alisacasino.bingo.components
 			addChild(image);
 		}
 		
-		public function add(name:String, frames:Vector.<Texture>, fps:int, shiftX:int = 0, shiftY:int = 0, framesShift:Vector.<Point> = null):void
+		public function add(name:String, frames:Vector.<Texture>, fps:Number, shiftX:int = 0, shiftY:int = 0, framesShift:Vector.<Point> = null):void
 		{
+			if (name in animationsByName) {
+				return;
+			}
+			
 			var prop:AnimationProperties = new AnimationProperties();
 			prop.name = name;
 			prop.fps = fps;
@@ -51,7 +59,7 @@ package com.alisacasino.bingo.components
 			animationsByName[name] = prop;
 		}
 		
-		public function gotoAndPlay(name:String, startFrame:int = 0, invertHorisontal:Boolean = false, cycles:int = -1, fps:Number = 3, endFrame:int = 0):void
+		public function gotoAndPlay(name:String, startFrame:int = 0, invertHorisontal:Boolean = false, cycles:int = -1, fps:Number = 3, endFrame:int = 0, cycleStartFrame:int = 0):void
 		{
 			if (!(name in animationsByName)) {
 				Starling.current.stage.removeEventListener(Event.ENTER_FRAME, handler_enterFrame);
@@ -63,6 +71,8 @@ package com.alisacasino.bingo.components
 			current = animationsByName[name] as AnimationProperties;	
 			this.cycles = cycles;
 			this.finishFrame = endFrame;
+			this.cycleStartFrame = cycleStartFrame;
+			cycleStarted = false;
 			
 			var scaleXCoeff:int = invertHorisontal ? -1:1;
 			
@@ -89,6 +99,8 @@ package com.alisacasino.bingo.components
 			if (!(name in animationsByName)) {
 				return;
 			}
+			
+			cycleStarted = false;
 			Starling.current.stage.removeEventListener(Event.ENTER_FRAME, handler_enterFrame);
 			alignFrame();
 		}
@@ -110,9 +122,21 @@ package com.alisacasino.bingo.components
 			{
 				currentFrame++;
 				var _finishFrame:int = finishFrame == 0 ? current.frames.length : Math.min(finishFrame + 1, current.frames.length);
-				if (currentFrame >= _finishFrame) {
-					currentFrame = finishFrame;
-					cycles = Math.max(-1, cycles - 1);
+				if (currentFrame >= _finishFrame) 
+				{
+					if (cycleStartFrame > 0/* && cycleStarted*/) {
+						
+						if (cycleFps != 0) 
+							frameTime = Math.max(16, 1000 / cycleFps);
+							
+						currentFrame = cycleStartFrame;
+					}
+					else
+						currentFrame =  finishFrame;
+						
+					cycles = Math.max( -1, cycles - 1);
+					
+					//cycleStarted = true;
 				}
 				
 				alignFrame();
@@ -144,26 +168,61 @@ package com.alisacasino.bingo.components
 			
 			
 			var animator:FrameAnimator = new FrameAnimator();
-			animator.add(CatView.STATE_IDLE, new <Texture> [getCatTexture('idle', prefix, 1)], 3);
-			animator.add(CatView.STATE_WALK, new < Texture > [getCatTexture('run', prefix, 1), getCatTexture('run', prefix, 2), getCatTexture('run', prefix, 3), getCatTexture('run', prefix, 4)], 3);
+			animator.add(CatView.STATE_IDLE, getCatTextureSequence(AtlasAsset.LoadingAtlas, 'idle', prefix, 1, 17), 3);
+			animator.add(CatView.STATE_HUNGRY, getCatTextureSequence(AtlasAsset.LoadingAtlas, 'hungry', prefix, 1, 9), 3);
+			animator.add(CatView.STATE_ANGRY, getCatTextureSequence(AtlasAsset.ScratchCardAtlas, 'angry', prefix, 1, 5), 3);
+			animator.add(CatView.STATE_DEFENCE, getCatTextureSequence(AtlasAsset.ScratchCardAtlas, 'hiding', prefix, 1, 3), 3);
 			
-			animator.add(CatView.STATE_WALK_HARVEST, new < Texture > [getCatTexture('run_harvest', prefix, 1), getCatTexture('run_harvest', prefix, 2), getCatTexture('run_harvest', prefix, 3), getCatTexture('run_harvest', prefix, 4)], 3);
 			
-			animator.add(CatView.STATE_HARVEST, new < Texture > [getCatTexture('harvest', prefix, 1), getCatTexture('harvest', prefix, 2), getCatTexture('harvest', prefix, 3), getCatTexture('harvest', prefix, 4)], 3, 0, 0, new < Point > [getP(0,0), getP(28,15), getP(0,16), getP(0,5)]);
-			animator.add(CatView.STATE_HARVEST_STANDOFF, new < Texture > [getCatTexture('harvest', prefix, 1), getCatTexture('harvest', prefix, 5)], 3, 0,0,  new < Point > [new Point(0,0), new Point(-40*layoutHelper.specialScale, -40*layoutHelper.specialScale)]);
-			animator.add(CatView.STATE_DAMAGE, new < Texture > [getCatTexture('damage', prefix, 1), getCatTexture('damage', prefix, 2), getCatTexture('damage', prefix, 3), getCatTexture('damage', prefix, 4)], 3);
-			animator.add(CatView.STATE_FIGHT, new < Texture > [getCatTexture('idle', prefix, 1), getCatTexture('fight', prefix, 1), getCatTexture('fight', prefix, 2), getCatTexture('fight', prefix, 3)], 3);
-			animator.add(CatView.STATE_FIGHT_STANDOFF, new <Texture> [getCatTexture('fight', prefix, 4)], 3);
+			animator.add(CatView.STATE_WALK, getCatTextureSequence(AtlasAsset.CommonAtlas, 'run', prefix, 1, 4), 3);
+			
+			animator.add(CatView.STATE_WALK_HARVEST, getCatTextureSequence(AtlasAsset.CommonAtlas, 'run_harvest', prefix, 1, 4), 3);
+			
+			animator.add(CatView.STATE_HARVEST, getCatTextureSequence(AtlasAsset.CommonAtlas, 'harvest', prefix, 1, 4), 3, 0, 0, new < Point > [getP(0,0), getP(28,15), getP(0,16), getP(0,5)]);
+			animator.add(CatView.STATE_HARVEST_STANDOFF, new < Texture > [getCatTexture(AtlasAsset.CommonAtlas, 'harvest', prefix, 1), getCatTexture(AtlasAsset.CommonAtlas, 'harvest', prefix, 5)], 3, 0,0,  new < Point > [new Point(0,0), new Point(-40/**layoutHelper.specialScale*/, -40/**layoutHelper.specialScale*/)]);
+			animator.add(CatView.STATE_DAMAGE, getCatTextureSequence(AtlasAsset.CommonAtlas, 'damage', prefix, 1, 3), 3);
+			animator.add(CatView.STATE_FIGHT, getCatTextureSequence(AtlasAsset.CommonAtlas, 'fight', prefix, 1, 3), 3);
+			animator.add(CatView.STATE_FIGHT_STANDOFF, new < Texture > [getCatTexture(AtlasAsset.CommonAtlas,'idle', prefix, 1), getCatTexture(AtlasAsset.CommonAtlas,'fight', prefix, 4)], 3);
+				
+			
+			animator.add(CatView.STATE_CONFUSE, getCatTextureSequence(AtlasAsset.CommonAtlas, 'confuse', prefix, 1, 2), 3);
+			animator.add(CatView.STATE_DEAD, getCatTextureSequence(AtlasAsset.ScratchCardAtlas, 'dead', prefix, 1, 6), 3, 15, 23);
+			
 			
 			return animator;
 		}
 		
-		private static function getCatTexture(folder:String, prefix:String, frame:int = 0):Texture {
-			return AtlasAsset.CommonAtlas.getTexture('cats/' + folder + '/' + prefix + '0' + frame.toString());
+		public static function getStarsAnimator():FrameAnimator
+		{
+			var animator:FrameAnimator = new FrameAnimator();
+			animator.add(CatView.STARS_ANIM, getCatTextureSequence(AtlasAsset.ScratchCardAtlas, 'stars', '', 1, 5), 3);
+			return animator;
+		}	
+			
+		public static function getCursorAnimator():FrameAnimator
+		{
+			var animator:FrameAnimator = new FrameAnimator();
+			animator.add(CatView.CURSOR_ANIM, getCatTextureSequence(AtlasAsset.CommonAtlas, 'cursor', '', 1, 6), 3);
+			return animator;
+		}	
+		
+		private static function getCatTexture(atlas:AtlasAsset, folder:String, prefix:String, frame:int = 0):Texture {
+			var f:String = frame < 10 ? ('0' + frame.toString()) : frame.toString();
+			return atlas.getTexture('cats/' + folder + '/' + prefix + f);
 		}
 		
 		private static function getP(x:int, y:int):Point {
 			return new Point(x*layoutHelper.specialScale, y*layoutHelper.specialScale);
+		}
+		
+		private static function getCatTextureSequence(atlas:AtlasAsset, folder:String, prefix:String, frameStart:int = 0, frameFinish:int = 0):Vector.<Texture> {
+			var frames:Vector.<Texture> = new < Texture > [];
+			
+			for (var i:int = frameStart; i <= frameFinish; i++) {
+				frames.push(getCatTexture(atlas, folder, prefix, i));
+			}
+			
+			return frames;
 		}
 	}
 }
@@ -175,7 +234,7 @@ class AnimationProperties
 	public var frames:Vector.<Texture>;
 	public var framesShift:Vector.<Point>;
 	public var name:String;
-	public var fps:int;
+	public var fps:Number = 0 ;
 	public var shiftX:int;
 	public var shiftY:int;
 	

@@ -27,12 +27,14 @@ package com.alisacasino.bingo.controls
 		public var deferAnimation:Boolean;
 		private var onTriggeredCallback:Function;
 		
+		public var custom:Boolean;
+		
 		public function CashBar(hidePlusButton:Boolean = false, onTriggeredCallback:Function = null)
 		{
 			super(Settings.instance.saleType, hidePlusButton);
 			
 			this.onTriggeredCallback = onTriggeredCallback;
-			icon = new Image(mAtlas.getTexture("icons/fish_bones"));
+			icon = new Image(mAtlas.getTexture("cats/fish_blue"));
 			mCriticalValue = Constants.CRITICAL_VALUE_CASH;
 			
 			if (Player.current)
@@ -46,8 +48,8 @@ package com.alisacasino.bingo.controls
 			mBtn.alpha = 0;
 			
 			
-			
-			addEventListener(Event.ENTER_FRAME, enterFrameHandler);
+			if(!custom)
+				addEventListener(Event.ENTER_FRAME, enterFrameHandler);
 		}
 		
 		private function enterFrameHandler(e:Event):void 

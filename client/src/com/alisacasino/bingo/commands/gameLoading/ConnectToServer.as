@@ -3,12 +3,15 @@ package com.alisacasino.bingo.commands.gameLoading
 	import com.alisacasino.bingo.Game;
 	import com.alisacasino.bingo.commands.dialogCommands.ShowNoConnectionDialog;
 	import com.alisacasino.bingo.commands.serviceClasses.CommandBase;
+	import com.alisacasino.bingo.models.Player;
+	import com.alisacasino.bingo.models.roomClasses.Room;
 	import com.alisacasino.bingo.protocol.RequestServerStatusMessage;
 	import com.alisacasino.bingo.utils.ConnectionManager;
 	import com.alisacasino.bingo.utils.Server;
 	import com.alisacasino.bingo.utils.ServerConnection;
 	import com.alisacasino.bingo.utils.Settings;
 	import com.alisacasino.bingo.utils.analytics.deltaDNAEvents.DDNAReconnectShownEvent;
+	import com.netease.protobuf.UInt64;
 	import starling.events.Event;
 	/**
 	 * ...
@@ -17,6 +20,8 @@ package com.alisacasino.bingo.commands.gameLoading
 	public class ConnectToServer extends CommandBase
 	{
 		private var id:String;
+		
+		public static var DEBUG:Boolean = false
 		
 		public function ConnectToServer() 
 		{
@@ -44,9 +49,22 @@ package com.alisacasino.bingo.commands.gameLoading
 			ServerConnection.current = new ServerConnection(serverSettings.host, serverSettings.port, serverSettings.useSSL);
 			ServerConnection.current.connect();
 			
+			if (DEBUG)
+			{
+				Player.current = new Player(null);
+				Player.current.mPlayerId = UInt64.fromNumber(5678);
+				
+				Player.current.xpCount = 1;
+				
+				Room.current = new Room(null);
+				finish();
+			}
+			else
+			{
+				ServerConnection.current.sendMessage(new RequestServerStatusMessage());
+			}
 			
-			ServerConnection.current.sendMessage(new RequestServerStatusMessage());
-			//finish();
+			
 		}
 		
 		private function showNoConnectionDialog(ddnaSource:String, ddnaDescription:String):void

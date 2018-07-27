@@ -1839,14 +1839,23 @@ package com.alisacasino.bingo.models
 			var i:int;
 			var cat:CatModel;
 			var targetCat:CatModel;
+			
+			var healthOpponents:Array = [];
+			for (i = 0; i < opponents.length; i++) 
+			{
+				if((opponents[i] as CatModel).health > 0)
+					healthOpponents.push(opponents[i]);
+			}
+			
 			for (i = 0; i < list.length; i++) 
 			{
 				cat = list[i] as CatModel;
 				
-				cat.role = CatRole.getRandom();
+				
+				cat.role = healthOpponents.length > 0 ? CatRole.getRandom() : CatRole.HARVESTER;
 				if (cat.role == CatRole.FIGHTER || cat.role == CatRole.DEFENDER)
 				{
-					targetCat = opponents[Math.floor(Math.random() * opponents.length)] as CatModel;
+					targetCat = healthOpponents[Math.floor(Math.random() * healthOpponents.length)] as CatModel;
 					cat.targetCat = targetCat.id;
 				}
 				else
@@ -1857,13 +1866,23 @@ package com.alisacasino.bingo.models
 				
 				
 				//cat.role = CatRole.FIGHTER;
+				
 				//cat.role = CatRole.HARVESTER;
-				cat.role = CatRole.DEFENDER;
 				
-				if (i == 2)
-					cat.role = CatRole.HARVESTER;
+				//cat.role = CatRole.HARVESTER;
 				
-				//cat.targetCat = 3//(opponents[0] as CatModel).id;
+				//if (i == 2)
+					//cat.role = CatRole.FIGHTER
+				
+			//	if (i == 0)
+					//cat.role = CatRole.DEFENDER;
+				
+					
+				//cat.targetCat = 5//(opponents[0] as CatModel).id;
+				// enemy 0,1,2, player 3,4,5
+				//cat.role = CatRole.HARVESTER;
+				//cat.role = CatRole.FIGHTER;
+				//cat.targetCat = i + 3;
 			}
 		}
 		

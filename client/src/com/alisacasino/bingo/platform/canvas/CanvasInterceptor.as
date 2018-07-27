@@ -72,10 +72,11 @@ package com.alisacasino.bingo.platform.canvas
 		
 		public function loadPolicyFiles():void
 		{
+			
 			//if (!Constants.isLocalBuild)
 				Security.allowDomain("*");
 			Security.allowInsecureDomain("*");
-			Security.loadPolicyFile('http://54.146.172.237:8080/crossdomain.xml');
+			Security.loadPolicyFile('http://54.146.172.237:8082/crossdomain.xml');
 			return;	
 			Security.loadPolicyFile('https://fbcdn-profile-a.akamaihd.net/crossdomain.xml');
 			Security.loadPolicyFile("https://graph.facebook.com/crossdomain.xml");

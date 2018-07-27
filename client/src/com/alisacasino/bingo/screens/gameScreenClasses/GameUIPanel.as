@@ -85,6 +85,8 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			
 			
 			menuButton = new XButton(XButtonStyle.LobbyMenuButtonStyle);
+			menuButton.width = 105 * layoutHelper.specialScale;
+			menuButton.height = 90 * layoutHelper.specialScale;
 			var menuButtonQuad:Quad = new Quad(135, 160, 0xFF0000);
 			menuButtonQuad.alpha = 0.0;
 			menuButtonQuad.y = -50 * pxScale;
@@ -92,11 +94,11 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			menuButton.addChild(menuButtonQuad);
 			menuButton.addEventListener(Event.TRIGGERED, menuButton_triggeredHandler);
 			addChild(menuButton);
+	
 			
-			
-			cardScrollButton = new XButton(XButtonStyle.BlueButtonStyle);
-			cardScrollButton.scale9Grid = new Rectangle(25 * pxScale, 0, 35 * pxScale, cardScrollButton.upState.height);
-			cardScrollButton.width = 90;
+			cardScrollButton = new XButton(XButtonStyle.BlueButtonStyleNew);
+			cardScrollButton.scale9Grid = new Rectangle(13 , 13, 2, 2)
+			cardScrollButton.width = 80*layoutHelper.specialScale;
 			cardScrollButton.useHandCursor = true;
 			cardScrollButton.text = 'SPY';
 			cardScrollButton.alignPivot();
@@ -233,13 +235,13 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 				
 			sosTrace( "GameUIPanel.resize continue", SOSLog.DEBUG);	
 			
-			
-			menuButton.y = (isTabletLayout ? 11 : 0)*pxScale;
+	
+			menuButton.y = 11* layoutHelper.specialScale
 			
 			cardScrollButton.scale = gameManager.layoutHelper.independentScaleFromEtalonMin;
 				//cardScrollButton.validate();
 			cardScrollButton.x = getCardScrollButtonX();
-			cardScrollButton.y = cardScrollButton.pivotY + 10 * gameUILayoutScale;
+			cardScrollButton.y = cardScrollButton.pivotY + 10 * layoutHelper.specialScale;
 		}
 		
 		public function jumpUI(maxScale:Number = 1.05):void
@@ -292,7 +294,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 		
 		private function getCardScrollButtonX():Number
 		{
-			return width - 60 * layoutHelper.independentScaleFromEtalonMin//cardScrollButton.width + cardScrollButton.pivotX - 10 * layoutHelper.independentScaleFromEtalonMin;
+			return width - 45 * layoutHelper.specialScale//cardScrollButton.width + cardScrollButton.pivotX - 10 * layoutHelper.independentScaleFromEtalonMin;
 		}
 		
 		override public function dispose():void

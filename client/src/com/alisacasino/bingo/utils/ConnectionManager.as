@@ -205,8 +205,8 @@ package com.alisacasino.bingo.utils
 					}
 				}
 				
-				
-				sendJoin();
+				//1 + 1
+				//sendJoin();
 			}
 			
 			
@@ -240,13 +240,24 @@ package com.alisacasino.bingo.utils
 			}
 			
 			
+			if (raw.name == "gameOver")
+			{
+				if (Game.current && Game.current.gameScreen && Game.current.gameScreen.gameUI && !Game.current.gameScreen.gameUI.exitGameSent)
+				{
+					Game.current.gameScreen.gameUI.handleExit('ENEMY LEAVE THE GAME! WAIT FOR EXIT!');
+					
+					//gameScreen.backToLobby();
+				}
+				
+				
+			}
 			
 			//<>>>>>  {"id":0,"name":"roundResponse","payload":{"gameId":3,"status":"CLOSED","firstPlayerInfo":{"playerId":5,"gameId":3,"pets":[{"id":0,"catProtoId":3,"health":3,"role":"HARVESTER","targetCatId":-1},{"id":1,"catProtoId":3,"health":3,"role":"DEFENDER","targetCatId":3},{"id":2,"catProtoId":3,"health":3,"role":"FIGHTER","targetCatId":5}]},"secondPlayerInfo":{"playerId":6,"gameId":3,"pets":[{"id":0,"catProtoId":3,"health":3,"role":"HARVESTER","targetCatId":-1},{"id":1,"catProtoId":3,"health":3,"role":"HARVESTER","targetCatId":-1},{"id":2,"catProtoId":3,"health":3,"role":"DEFENDER","targetCatId":5}]}},"timeMillis":1532103837977,"clientLocalAddr":null}
 
 			
 		}
 		
-		private function sendJoin():void
+		public function sendJoin():void
 		{
 			var json:Object = {
 			   id: 0,

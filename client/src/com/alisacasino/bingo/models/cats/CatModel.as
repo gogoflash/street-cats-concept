@@ -19,6 +19,7 @@ package com.alisacasino.bingo.models.cats
 		
 		public var targetCat:int = -1;
 		
+		public var isPlayer:Boolean;
 		
 		public var active:Boolean;
 		

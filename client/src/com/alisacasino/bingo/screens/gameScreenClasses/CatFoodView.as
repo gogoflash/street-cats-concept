@@ -90,18 +90,18 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			}	
 		}
 		
-		private function showFoodDrop(value:int):void 
+		public function showFoodDrop(value:int):void 
 		{
 			var image:Image = new Image(AtlasAsset.CommonAtlas.getTexture('cats/fish'));
 			image.alignPivot();
 			image.scale = 1;
 			//foodImage.x = shiftX + i % columns * 150 * foodImageScale;
 			image.alpha = 0;
-			image.y = -170 * layoutHelper.specialScale;
+			image.y = -170 //* layoutHelper.specialScale;
 			touchable = false;
 			addChild(image);
 			
-			TweenHelper.tween(image, 1.2, {transition:Transitions.EASE_OUT, alpha:7, delay:0.99, y: -250 * layoutHelper.specialScale, onComplete:image.removeFromParent});
+			TweenHelper.tween(image, 1.2, {transition:Transitions.EASE_OUT, alpha:7, delay:0.7, y: -250 /** layoutHelper.specialScale*/, onComplete:image.removeFromParent});
 		}
 	}
 

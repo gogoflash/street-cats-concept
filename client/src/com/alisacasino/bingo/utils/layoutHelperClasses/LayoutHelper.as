@@ -68,7 +68,7 @@ package com.alisacasino.bingo.utils.layoutHelperClasses
 				mRealScreenHeight = width;
 			}
 		
-			if (canvasLayoutMode) {
+			if (false || canvasLayoutMode) {
 				mStageWidth = mRealScreenWidth;
 				mStageHeight = mRealScreenHeight;
 				
@@ -269,7 +269,7 @@ package com.alisacasino.bingo.utils.layoutHelperClasses
 		}
 		
 		public function get specialScale():Number {
-			return canvasLayoutMode ? 1 : _independentScaleFromEtalonMin;
+			return (canvasLayoutMode ? 1 : _independentScaleFromEtalonMin)*pxScale;
 		}
 		
 		/* следующие 2 метода - определяют эталонные размеры: ширину и высоту.

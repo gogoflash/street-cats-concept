@@ -491,8 +491,11 @@ package com.alisacasino.bingo.utils.keyboard
 			
 			if (e.keyCode == Keyboard.B)
 			{
+				//Game.current.gameScreen.gameUI.handleExitFromServer();
+				
 				//var json:Object = {
-				   //id: 0,
+				
+				//id: 0,
 				   //session: gameManager.connectionManager.sessionId,
 				   //name: "joinGame",
 				   //payload: {playerId:Player.current.playerId} 

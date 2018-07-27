@@ -399,6 +399,8 @@ import starling.display.Quad;
 			else
 			{
 				gameScreen.backToLobby();
+				
+				
 			}
 			
 			gameManager.tutorialManager.handleBackFromMenu();

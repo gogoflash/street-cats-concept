@@ -9,6 +9,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 	import com.alisacasino.bingo.models.cats.CatRole;
 	import com.alisacasino.bingo.utils.EffectsManager;
 	import com.alisacasino.bingo.utils.JumpWithHintHelper;
+	import flash.geom.Point;
 	import starling.animation.Transitions;
 	import starling.core.Starling;
 	import starling.display.DisplayObjectContainer;
@@ -29,6 +30,10 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 		
 		private var _state:String = 'STATE_IDLE';
 		public static var STATE_IDLE:String = 'STATE_IDLE';
+		public static var STATE_HUNGRY:String = 'STATE_HUNGRY';
+		public static var STATE_ANGRY:String = 'STATE_ANGRY';
+	
+		
 		public static var STATE_WALK:String = 'STATE_WALK';
 		public static var STATE_WALK_HARVEST:String = 'STATE_WALK_HARVEST';
 		public static var STATE_FIGHT:String = 'STATE_FIGHT';
@@ -37,11 +42,17 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 		public static var STATE_HARVEST:String = 'STATE_HARVEST';
 		public static var STATE_HARVEST_STANDOFF:String = 'STATE_HARVEST_STANDOFF';
 		public static var STATE_DAMAGE:String = 'STATE_DAMAGE';
+		public static var STATE_CONFUSE:String = 'STATE_CONFUSE';
+		public static var STATE_DEAD:String = 'STATE_DEAD';
 		
+		public static var CURSOR_ANIM:String = 'CURSOR_ANIM';
+		public static var STARS_ANIM:String = 'STARS_ANIM';
 		
 		public function CatView() 
 		{
 		}
+		
+		public var index:int;
 		
 		public var roleVisible:Boolean;
 		
@@ -74,12 +85,17 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 		public var storedX_0:Number = 0;
 		public var storedY_0:Number = 0;
 		
+		public var basePosition:Point = new Point();
+		
+		public var defenderPositionId:int = -1;
+		
+		
 		public function refreshStoreds():void 
 		{
 			storedParent = parent;
 			storedX = x;
 			storedY = y;
-			storedScale = parent.scale;
+			storedScale = /*parent.*/scale;
 		}
 		
 		public function set cat(value:CatModel):void 
@@ -125,7 +141,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 		
 		public var catBaseScale:Number = 0.77; 
 		
-		public function setState(value:String, invertHorisontal:Boolean = false, explicit:Boolean = false):void 
+		public function setState(value:String, invertHorisontal:Boolean = false, explicit:Boolean = false, frame:int = 0):void 
 		{
 			if (_state == value && !explicit)
 				return;
@@ -137,9 +153,9 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 				catShadow = new Image(AtlasAsset.CommonAtlas.getTexture('cats/sdw'));
 				catShadow.alignPivot();
 				//catShadow.x = 50 * layoutHelper.specialScale;
-				catShadow.y = 75 * layoutHelper.specialScale;
+				catShadow.y = 103 //* layoutHelper.specialScale;
 				catShadow.touchable = false;
-				//image.scale = 0.4;
+				catShadow.scale = 1.2;
 				addChild(catShadow);
 				
 				catAnimator = FrameAnimator.getCatAnimator(_cat.catUID);//new Image(gameManager.catsModel.getCatTexture(_cat.catUID, isLeft, _state));
@@ -165,9 +181,23 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			
 			var fps:int = 7;
 			
+			starsVisible = false;
+			catShadow.y = 103;
+			catShadow.x = 0;
+			
 			if (_state == STATE_IDLE)
 			{
-				catAnimator.gotoAndPlay(_state, 0, showLeftAnimation, 0, fps);	
+				catAnimator.gotoAndPlay(_state, 0, showLeftAnimation, -1, 25);	
+			}
+			else if (_state == STATE_ANGRY)
+			{
+				catAnimator.cycleFps = 3;
+				catAnimator.gotoAndPlay(_state, 0, showLeftAnimation, -1, fps, 0, 3);	
+			}
+			else if (_state == STATE_HUNGRY)
+			{
+				catAnimator.cycleFps = 1.4;
+				catAnimator.gotoAndPlay(_state, 0, showLeftAnimation, -1, fps, 0, 7);	
 			}
 			else if (_state == STATE_WALK)
 			{
@@ -175,19 +205,27 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			}
 			else if (_state == STATE_DEFENCE)
 			{
-				catAnimator.gotoAndPlay(_state, 0, showLeftAnimation, 0, fps);
+				if(frame == 0)
+					catShadow.y = 73;
+				else if(frame == 2)
+					catShadow.y = 53;
+				
+				if (frame == -1)
+					frame = 0;
+					
+				catAnimator.gotoAndPlay(_state, frame, showLeftAnimation, 0, fps, frame);
 			}
 			else if (_state == STATE_FIGHT)
 			{
-				catAnimator.gotoAndPlay(_state, 0, showLeftAnimation, 0, fps);
+				catAnimator.gotoAndPlay(_state, 0, showLeftAnimation, 1, 3, 3);
 			}
 			else if (_state == STATE_FIGHT_STANDOFF)
 			{
-				catAnimator.gotoAndPlay(_state, 0, showLeftAnimation, 0, 2);
+				catAnimator.gotoAndPlay(_state, 0, showLeftAnimation, 1, 3, 2);
 			}
 			else if (_state == STATE_HARVEST)
 			{
-				catAnimator.gotoAndPlay(_state, 0, showLeftAnimation, 1, 3, 5);
+				catAnimator.gotoAndPlay(_state, 0, showLeftAnimation, 1, 5, 5);
 			}
 			else if (_state == STATE_HARVEST_STANDOFF)
 			{
@@ -200,6 +238,24 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 				Starling.juggler.delayCall(function():void {fishVisible = true}, 0.0);
 				//fishVisible = true;
 				//showFish
+			}
+			else if (_state == STATE_DAMAGE)
+			{
+				fishVisible = false;
+				catAnimator.gotoAndPlay(_state, 0, showLeftAnimation, 1, 3, 3);	
+			}
+			else if (_state == STATE_CONFUSE)
+			{
+				catAnimator.gotoAndPlay(_state, 0, showLeftAnimation, -1, 3);	
+				starsVisible = true;
+			}
+			else if (_state == STATE_DEAD)
+			{
+				fishVisible = false;
+				starsVisible = true;
+				catShadow.y = 90;
+				catShadow.x = -25;
+				catAnimator.gotoAndPlay(_state, 0, showLeftAnimation, -1, fps);	
 			}
 			
 			catAnimator.scaleX = catBaseScale;//isLeft ? catBaseScale : -catBaseScale;
@@ -403,7 +459,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 					fishImage = new Image(AtlasAsset.CommonAtlas.getTexture('cats/fish'));
 					fishImage.alignPivot();
 					//fishImage.x = 50 * layoutHelper.specialScale;
-					fishImage.y = -85 * layoutHelper.specialScale;
+					fishImage.y = -85 /** layoutHelper.specialScale*/;
 					fishImage.touchable = false;
 					//image.scale = 0.4;
 					addChild(fishImage);
@@ -421,6 +477,53 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 		public function get fishVisible():Boolean
 		{
 			return _fishVisible;
+		}	
+		
+		
+		/*********************************************************************************************************************
+		*
+		*
+		* 
+		*********************************************************************************************************************/	
+		
+		private var _starsVisible:Boolean;
+		
+		private var starsAnim:FrameAnimator;
+		
+		public function set starsVisible(value:Boolean):void
+		{
+			if (value == _starsVisible)
+				return;
+				
+			_starsVisible = value;
+			
+			if (_starsVisible)
+			{
+				if (!starsAnim) {
+					starsAnim = FrameAnimator.getStarsAnimator();
+					starsAnim.touchable = false;
+					//fishImage.x = 50 * layoutHelper.specialScale;
+					starsAnim.y = -85 /** layoutHelper.specialScale*/;
+					starsAnim.touchable = false;
+					starsAnim.scale = 0.65;
+					addChild(starsAnim);
+				}
+				
+				starsAnim.gotoAndPlay(CatView.STARS_ANIM, 0, false, -1, 7);
+			}
+			else
+			{
+				if (starsAnim) {
+					starsAnim.clean();
+					starsAnim.removeFromParent();
+					starsAnim = null;
+				}
+			}	
+		}
+		
+		public function get starsVisible():Boolean
+		{
+			return _starsVisible;
 		}	
 		
 		/*********************************************************************************************************************
@@ -444,7 +547,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 					
 				}
 				
-				hpLabel.y = -130 * layoutHelper.specialScale;//isLeft ? -130 : 123;
+				hpLabel.y = -130 /** layoutHelper.specialScale*/;//isLeft ? -130 : 123;
 				hpLabel.format.color = _cat.health > 0 ? 0x00E100 : 0xE10000;
 				hpLabel.text = 'health:' + _cat.health.toString();
 				
@@ -462,7 +565,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 					
 				}
 				
-				healthProgress.y = -130 * layoutHelper.specialScale//isLeft ? -130 : 123;
+				healthProgress.y = -130 /** layoutHelper.specialScale*///isLeft ? -130 : 123;
 				healthProgress.animateValues(_cat.health / 3, 1, 0);
 				//healthProgress.format.color = _cat.health > 0 ? 0x00E100 : 0xE10000;
 				//healthProgress.text = 'health:' + _cat.health.toString();

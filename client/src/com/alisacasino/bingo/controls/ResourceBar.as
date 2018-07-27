@@ -31,10 +31,13 @@ package com.alisacasino.bingo.controls
 			this.hidePlusButton = hidePlusButton;
 			var scale:Number = pxScale;
 			
-			mBase = new Image(mAtlas.getTexture("bars/base"));
+			mBase = new Image(mAtlas.getTexture("buttons/dark_blue"));
+			mBase.scale9Grid = new Rectangle(13 , 13, 2, 2);
+			mBase.width = 155 * layoutHelper.specialScale;
+			mBase.height = 62 * layoutHelper.specialScale;
 			mBtn = new XButton(getPlusButtonStyle(saleType));
 			
-			mLabel = new XTextField(125 * scale, 50 * scale, XTextFieldStyle.ResourceBarTextFieldStyle, '0');
+			mLabel = new XTextField(125 * scale, 50 * scale, XTextFieldStyle.getChateaudeGarage(45), '0');
 			mLabel.touchable = false;
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			
@@ -69,13 +72,14 @@ package com.alisacasino.bingo.controls
 			mLabel.pivotX = mLabel.width / 2;
 			mLabel.pivotY = mLabel.height / 2;
 			mLabel.x = mBase.width * 0.445 + 18;
-			mLabel.y = mBase.height * 0.54;
+			mLabel.y = mBase.height * 0.50;
 			addChild(mLabel);
 			
+			icon.scale = 1.25;
 			icon.pivotX = icon.width / 2;
 			icon.pivotY = icon.height / 2;
-			icon.x = mBase.width - 204 * pxScale + icon.pivotX;
-			icon.y = mBase.height / 2 + 3;
+			icon.x = mBase.width - 202 * layoutHelper.specialScale + icon.pivotX;
+			icon.y = mBase.height / 2 + 15;
 			addChild(icon);
 			
 			mBtn.pivotX = mBtn.width / 2;
@@ -131,7 +135,7 @@ package com.alisacasino.bingo.controls
 			var duration:Number = getAnimationDuration(div);
 				
 			Starling.juggler.removeTweens(mLabel);
-			EffectsManager.removeJump(icon);
+			//EffectsManager.removeJump(icon);
 			EffectsManager.removeJump(mLabel);
 
 			if (animate)
@@ -142,7 +146,7 @@ package com.alisacasino.bingo.controls
 				
 					var jumpsCount:int = Math.max(5, duration/0.11);
 					
-					EffectsManager.jump(icon, jumpsCount, 1, 1.4, 0.07, 0.04, 0.0, 0, 0, 1.8, true, false);
+					//EffectsManager.jump(icon, jumpsCount, 1, 1.4, 0.07, 0.04, 0.0, 0, 0, 1.8, true, false);
 					EffectsManager.jump(mLabel, jumpsCount, 1, 1.3, 0.07, 0.04, 0.0, 0, 0, 2.8, true, false);
 				}
 				else
@@ -174,7 +178,7 @@ package com.alisacasino.bingo.controls
 				
 			lastCheckCriticalValue = mLabel.numValue;
 			
-			mLabel.textStyle = mLabel.numValue <= mCriticalValue ? XTextFieldStyle.ResourceBarRedTextFieldStyle : XTextFieldStyle.ResourceBarTextFieldStyle;
+			//mLabel.textStyle = mLabel.numValue <= mCriticalValue ? XTextFieldStyle.ResourceBarRedTextFieldStyle : XTextFieldStyle.ResourceBarTextFieldStyle;
 		}
 	}
 }

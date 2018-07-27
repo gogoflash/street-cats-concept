@@ -5,6 +5,7 @@ package com.alisacasino.bingo.models.cats
 	import starling.textures.Texture;
 	public class CatRole 
 	{
+		public static const NONE:String = "NONE";
 		public static const FIGHTER:String = "FIGHTER";
 		public static const DEFENDER:String = "DEFENDER";
 		public static const HARVESTER:String = "HARVESTER";

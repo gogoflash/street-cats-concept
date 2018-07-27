@@ -166,7 +166,7 @@ package com.alisacasino.bingo.screens
 				cat.id = 3 + gameManager.playerCats.length;//gameManager.catsModel.getNextCatID();
 				cat.health = 3;
 				cat.catUID = 0;//gameManager.catsModel.getRandomCatUID();
-				
+				cat.isPlayer = true;
 				cat.role = CatRole.HARVESTER;//CatRole.getRandom();
 				//cat.targetCat = Math.floor(Math.random()*3);
 				
@@ -350,13 +350,30 @@ package com.alisacasino.bingo.screens
 		
 		public function backToLobby():void
 		{
-			Game.connectionManager.sendReturnFromRoundMessage();
+			//Game.connectionManager.sendReturnFromRoundMessage();
 			
-			gameScreenController.startLeaveProcedure();
+			//gameScreenController.startLeaveProcedure();
+			
+			
+			Game.connectionManager.gameId = 0;
+			gameManager.pvpUserReady = false;
+			gameManager.playerCatsSetted = false;
+			gameManager.pvpEnemySetted = false;
+			
+			
 			
 			createLobbyUI(false, true);
-            gameUI.hide();
-            state = STATE_PRE_GAME;
+			
+            gameUI.sendExitGame();
+			gameUI.hide();
+			
+			//Game.current.gameScreen.gameUI.handleExit('ENEMY LEAVE THE GAME! WAIT FOR EXIT!');
+            
+			state = STATE_PRE_GAME;
+			
+			
+			
+			
 			
 			/*var shouldShowConfirmationDialog:Boolean = state == STATE_IN_GAME || (mPlayer.cards.length > 0);
 			

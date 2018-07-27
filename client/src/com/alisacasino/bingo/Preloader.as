@@ -25,7 +25,7 @@ package com.alisacasino.bingo
 	 * ...
 	 * @author Dmitriy Barabanschikov
 	 */
-//	[SWF(width = '1080', height = '1920', frameRate = '60', backgroundColor = '#FFFFFF')] //PHONE_MODE
+	//[SWF(width = '1080', height = '1920', frameRate = '60', backgroundColor = '#FFFFFF')] //PHONE_MODE
 	[SWF(width = '540', height = '960', frameRate = '60', backgroundColor = '#FFFFFF')] //PHONE_MODE
 	
 	//[SWF(width = '720', height = '1280', frameRate = '60', backgroundColor = '#FFFFFF')] //PHONE_MODE

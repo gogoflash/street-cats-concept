@@ -549,6 +549,19 @@ package com.alisacasino.bingo.controls
 			})
 		});
 		
+		public static const BlueButtonStyleNew:XButtonStyle = new XButtonStyle({
+			upState:		"buttons/dark_blue",
+			atlas:			AtlasAsset.CommonAtlas,
+			width:			218,
+			height:			80,
+			labelYShift:    -2,
+			textFieldStyle: new XTextFieldStyle({
+				fontSize:		24.0,
+				fontColor:		0xffffff
+			})
+		});
+		
+		
 		public static const StoreButton:XButtonStyle = new XButtonStyle({
 			upState:		"buttons/button_blue",
 			atlas:			AtlasAsset.CommonAtlas,

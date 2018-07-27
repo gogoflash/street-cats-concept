@@ -71,6 +71,7 @@ package com.alisacasino.bingo.screens
 		
 		private var blackFillBackground:Quad;
 		private var backgroundImage:Image;
+		private var bg:Image;
 		//private var mLoadingBar:LoadingBar;
 		
 		private var currentAssetQueue:AssetQueue;
@@ -141,6 +142,7 @@ package com.alisacasino.bingo.screens
 			
 			backgroundImage = new Image(gameManager.preloaderBackgroundTexture);
 			
+			
 			preloaderFadeContainer.addChild(backgroundImage);
 			
 			addChild(preloaderFadeContainer);
@@ -157,6 +159,8 @@ package com.alisacasino.bingo.screens
 			addChild(leftTopTouchQuad);
 			
 			Game.addToHistory('load_screen');
+			
+			
 		}
 		
 		override public function resize():void
@@ -201,16 +205,27 @@ package com.alisacasino.bingo.screens
 			splashBg.y = (layoutHelper.stageHeight - splashBg.height) / 2;*/
 		
 			
-			if (logoGlow) {
+			if (logoGlow) 
+			{
+				logoGlow.alpha = 0;
+				logoGlow.visible = false;
 				logoGlow.scale = viewScale*2;
+				
 				alisaLogoImage.scale = viewScale;
 				alisaLogoImage.x = layoutHelper.stageWidth/2 - alisaLogoImage.width / 2;
-				alisaLogoImage.y = layoutHelper.stageHeight * 0.284// * pxScale//205/720 * pxScale;
+				alisaLogoImage.y = layoutHelper.stageHeight * 0.084// * pxScale//205/720 * pxScale;
 				
 				logoText.x = alisaLogoImage.x + (alisaLogoImage.width - logoText.width)/2;
 				logoText.y = alisaLogoImage.y + 205;
+				logoText.visible = false;
 				
 				alignLogoImages();
+				
+				
+				ResizeUtils.resizeBackground(bg);
+				bg.alignPivot();
+				bg.x = bg.pivotX + (layoutHelper.stageWidth - bg.texture.frameWidth) / 2;
+				bg.y = bg.pivotY + (layoutHelper.stageHeight - bg.texture.frameHeight) / 2;
 			}
 			
 			if (connectToFacebookButton) {
@@ -260,6 +275,8 @@ package com.alisacasino.bingo.screens
 			//alisaLogoImage.alpha = 0;
 			
 			//gameManager.preloader.backgroundContainer.alpha = 0;
+			
+			//addChild(bg);
 		}
 		
 		private function onEnterFrame(e:EnterFrameEvent):void
@@ -370,7 +387,7 @@ package com.alisacasino.bingo.screens
 			removeEventListener(starling.events.Event.ENTER_FRAME, onEnterFrame);
 			
 			Starling.juggler.removeTweens(backgroundImage);
-			backgroundImage.alpha = 0;
+			//backgroundImage.alpha = 0;
 			
 			if (alisaLogoImage) {
 				Starling.juggler.removeTweens(alisaLogoImage);
@@ -486,7 +503,11 @@ package com.alisacasino.bingo.screens
 			if(leftTopTouchQuad)
 				addChild(leftTopTouchQuad);
 			
-			logoGlow = new Image(AtlasAsset.LoadingAtlas.getTexture("logo_glow"));
+				
+			bg = new Image(AtlasAsset.LoadingAtlas.getTexture('start_bg'));
+			addChild(bg);	
+				
+			logoGlow = new Image(AtlasAsset.getEmptyTexture());
 			logoGlow.scale = 2;
 			logoGlow.alpha = 0;
 			logoGlow.touchable = false;
@@ -595,7 +616,7 @@ package com.alisacasino.bingo.screens
 			logoGlow.y = alisaLogoImage.y - 80 * pxScale * viewScale;
 			
 			logoText.x = alisaLogoImage.x + (alisaLogoImage.width - logoText.width)/2;
-			logoText.y = alisaLogoImage.y + 205 * layoutHelper.specialScale;
+			logoText.y = alisaLogoImage.y + 215 /** layoutHelper.specialScale*/;
 		}
 		
 		override public function get requiredAssets():Array

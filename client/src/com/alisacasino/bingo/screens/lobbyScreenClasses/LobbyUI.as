@@ -14,6 +14,7 @@ package com.alisacasino.bingo.screens.lobbyScreenClasses
 	import com.alisacasino.bingo.controls.FullscreenButton;
 	import com.alisacasino.bingo.controls.XButton;
 	import com.alisacasino.bingo.controls.XButtonStyle;
+	import com.alisacasino.bingo.controls.XTextField;
 	import com.alisacasino.bingo.controls.XTextFieldStyle;
 	import com.alisacasino.bingo.controls.XpBar;
 	import com.alisacasino.bingo.dialogs.DialogsManager;
@@ -136,31 +137,31 @@ package com.alisacasino.bingo.screens.lobbyScreenClasses
 			cashBar.visible = false;
 			addChild(cashBar);
 			
-			collectionsButton = new LobbyCollectionButton(XButtonStyle.BlueButtonStyle);
+			collectionsButton = new LobbyCollectionButton(XButtonStyle.BlueButtonStyleNew);
 			collectionsButton.addEventListener(Event.TRIGGERED, handler_collectionsClick);
-			collectionsButton.scale9Grid = new Rectangle(25 * pxScale, 0, 35 * pxScale, collectionsButton.upState.height);
+			collectionsButton.scale9Grid =new Rectangle(13 , 13, 2, 2)
 			//collectionsButton.width = 250 * pxScale;
 			collectionsButton.text = 'HEAL CATS';
 			collectionsButton.visible = false;
 			
 			addChild(collectionsButton);
 			
-			tourneyButton = new XButton(XButtonStyle.BlueButtonStyle);
-			tourneyButton.scale9Grid = new Rectangle(25 * pxScale, 0, 35 * pxScale, collectionsButton.upState.height);
+			tourneyButton = new XButton(XButtonStyle.BlueButtonStyleNew);
+			tourneyButton.scale9Grid = new Rectangle(13 , 13, 2, 2)
 			tourneyButton.text = 'PVE 12 FOOD';
 			tourneyButton.visible = false;
 			tourneyButton.addEventListener(Event.TRIGGERED, tourneyButton_triggeredHandler);
 			addChild(tourneyButton);
 			
-			rightButton = new XButton(XButtonStyle.BlueButtonStyle);
-			rightButton.scale9Grid = new Rectangle(25 * pxScale, 0, 35 * pxScale, rightButton.upState.height);
+			rightButton = new XButton(XButtonStyle.BlueButtonStyleNew);
+			rightButton.scale9Grid = new Rectangle(13 , 13, 2, 2)
 			rightButton.text = 'PVE 4 FOOD';
 			//rightButton.visible = false;
 			rightButton.addEventListener(Event.TRIGGERED, rightButton_triggeredHandler);
 			addChild(rightButton);
 			
-			pvpButton = new XButton(XButtonStyle.BlueButtonStyle);
-			pvpButton.scale9Grid = new Rectangle(25 * pxScale, 0, 35 * pxScale, pvpButton.upState.height);
+			pvpButton = new XButton(XButtonStyle.BlueButtonStyleNew);
+			pvpButton.scale9Grid = new Rectangle(13 , 13, 2, 2)
 			pvpButton.text = 'PVP WAIT FOR PLAYER';
 			pvpButton.addEventListener(Event.TRIGGERED, pvpButton_triggeredHandler);
 			addChild(pvpButton);
@@ -257,7 +258,7 @@ package com.alisacasino.bingo.screens.lobbyScreenClasses
 		private function set viewsVisible(value:Boolean):void
 		{
 			menuButton.visible = value;
-			xpBar.visible = value;
+			//xpBar.visible = value;
 			cashBar.visible = value;
 			collectionsButton.visible = value;
 			tourneyButton.visible = value;
@@ -411,6 +412,7 @@ package com.alisacasino.bingo.screens.lobbyScreenClasses
 		
 			cashBar.x = cashBarX;
 			cashBar.y = 36 * complexScale;
+			cashBar.scale = globalUIScale;
 			
 			collectionsButton.scale = globalUIScale;
 			collectionsButton.x = 17 * complexScale + uiCornersShiftX;
@@ -535,13 +537,27 @@ package com.alisacasino.bingo.screens.lobbyScreenClasses
 		
 		private function pvpButton_triggeredHandler(e:Event):void 
 		{
-			if(!gameManager.pvpUserReady)
+			if (gameManager.pvpUserReady)
+			{
+				//gameManager.connectionManager.sendJoin();
+				GameUI.foodCount = 4;
+				gameManager.gameMode = GameManager.GAME_MODE_PVP;
+				gameScreen.showGame(false);
+			}
+			else
+			{
+				gameManager.connectionManager.sendJoin();
+				waitingForPvp = true;
+				FadeQuad.show(this);
+				showInfoLabel('WAIT FOR ENEMY...');
+			}
+			
+		/*	if(!gameManager.pvpUserReady)
 				return;
 				
 			GameUI.foodCount = 4;
 			gameManager.gameMode = GameManager.GAME_MODE_PVP;
-			gameScreen.showGame(false);
-			//DialogsManager.addDialog(new LeaderboardDialog());
+			gameScreen.showGame(false);*/
 		}
 		
 		private function get menuButtonX():int {
@@ -564,18 +580,75 @@ package com.alisacasino.bingo.screens.lobbyScreenClasses
 		{
 			if (state == STATE_TO_GAME)
 				return;
-			
-		
 		}
 		
+		public var waitingForPvp:Boolean;
 		
 		public function showReadyForPvP():void
 		{
+			if (waitingForPvp || FadeQuad.quad)
+			{
+				FadeQuad.hide();
+				showInfoLabel(null);
+				
+				GameUI.foodCount = 4;
+				gameManager.gameMode = GameManager.GAME_MODE_PVP;
+				gameScreen.showGame(false);
+			}
+			else
+			{
+				
+			}
+			
+			waitingForPvp = false;
+			
 			if(gameManager.pvpUserReady)
 				pvpButton.text = 'PVP READY! ID:' + gameManager.connectionManager.gameId.toString();
 			else
-				pvpButton.text = 'PVP WAIT FOR PLAYER';
+				pvpButton.text = 'PVP REQUEST';
 		}
-	
+		
+		public function hidePvPWaiting():void
+		{
+			FadeQuad.hide();
+			showInfoLabel(null);
+			waitingForPvp = false;
+		}
+		
+		private var roundInfoLabel:XTextField;
+		
+		public function showInfoLabel(text:String):void
+		{
+			if (text)
+			{
+				if (!roundInfoLabel)
+				{
+					roundInfoLabel= new XTextField(480*pxScale, 390*pxScale, XTextFieldStyle.houseHolidaySans(70, 0xFFFFFF).setStroke(1), '');
+					roundInfoLabel.touchable = false;
+					//roundInfoLabel.x = - 50;
+					//roundInfoLabel.y = layoutHelper.stageHeight / 2;
+					roundInfoLabel.alignPivot();
+				}
+				
+				roundInfoLabel.x = layoutHelper.stageWidth / 2;
+				roundInfoLabel.y = layoutHelper.stageHeight / 2;
+				roundInfoLabel.scale = 0;
+				roundInfoLabel.text = text;
+				addChild(roundInfoLabel);
+				
+				TweenHelper.tween(roundInfoLabel, 0.5, {delay:0.05, transition:Transitions.EASE_OUT_BACK, scale:layoutHelper.independentScaleFromEtalonMin})	
+				
+			}
+			else
+			{
+				if (roundInfoLabel)
+				{
+					roundInfoLabel.removeFromParent();
+					roundInfoLabel = null;
+				}
+			}
+			
+		}
+		
 	}
 }

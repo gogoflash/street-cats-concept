@@ -1,8 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker https://www.codeandweb.com/texturepacker -->
-<!-- $TexturePacker:SmartUpdate:c7cad9a8dfc086e6bd051daf7f43036b:9296c4d756f82847c8e0db878f48dba0:293ff51e18584c947f5c94456ed60ce6$ -->
-<TextureAtlas imagePath="scratch_card.png" width="1024" height="2048">
-    <SubTexture name="backgrounds/1" x="1" y="566" rotated="true" width="1000" height="562"/>
-    <SubTexture name="backgrounds/2" x="1" y="1" rotated="true" width="1000" height="563"/>
-    <SubTexture name="backgrounds/3" x="1" y="1130" rotated="true" width="960" height="680"/>
+<!-- $TexturePacker:SmartUpdate:7e21d7a7b25d333c606bbd8d9cbd64cf:0693677b56c6c601b1c27dac9632fc5d:293ff51e18584c947f5c94456ed60ce6$ -->
+<TextureAtlas imagePath="scratch_card.png" width="2048" height="2048">
+    <SubTexture name="backgrounds/1" x="1" y="1" width="562" height="1000"/>
+    <SubTexture name="cats/angry/blue_01" x="353" y="1719" width="259" height="313" frameX="-10" frameY="-71" frameWidth="274" frameHeight="390"/>
+    <SubTexture name="cats/angry/blue_02" x="1" y="1767" rotated="true" width="350" height="268" frameX="-1" frameY="-34" frameWidth="274" frameHeight="390"/>
+    <SubTexture name="cats/angry/blue_03" x="212" y="1003" width="208" height="356" frameX="-33" frameY="-28" frameWidth="274" frameHeight="390"/>
+    <SubTexture name="cats/angry/blue_04" x="1" y="1003" width="209" height="380" frameX="-33" frameY="-4" frameWidth="274" frameHeight="390"/>
+    <SubTexture name="cats/angry/blue_05" x="422" y="1355" width="226" height="344" frameX="-15" frameY="-40" frameWidth="274" frameHeight="390"/>
+    <SubTexture name="cats/angry/red_01" x="650" y="1355" width="259" height="313" frameX="-10" frameY="-71" frameWidth="274" frameHeight="390"/>
+    <SubTexture name="cats/angry/red_02" x="422" y="1003" width="268" height="350" frameX="-1" frameY="-34" frameWidth="274" frameHeight="390"/>
+    <SubTexture name="cats/angry/red_03" x="212" y="1361" width="208" height="356" frameX="-33" frameY="-28" frameWidth="274" frameHeight="390"/>
+    <SubTexture name="cats/angry/red_04" x="1" y="1385" width="209" height="380" frameX="-33" frameY="-4" frameWidth="274" frameHeight="390"/>
+    <SubTexture name="cats/angry/red_05" x="614" y="1701" width="226" height="344" frameX="-15" frameY="-40" frameWidth="274" frameHeight="390"/>
+    <SubTexture name="cats/dead/blue_01" x="715" y="554" width="207" height="246"/>
+    <SubTexture name="cats/dead/blue_02" x="719" y="290" width="207" height="246"/>
+    <SubTexture name="cats/dead/blue_03" x="725" y="1" width="207" height="246"/>
+    <SubTexture name="cats/dead/blue_04" x="692" y="993" width="207" height="246"/>
+    <SubTexture name="cats/dead/blue_05" x="924" y="538" width="207" height="246"/>
+    <SubTexture name="cats/dead/blue_06" x="928" y="249" width="207" height="246"/>
+    <SubTexture name="cats/dead/red_01" x="934" y="1" width="207" height="246"/>
+    <SubTexture name="cats/dead/red_02" x="901" y="980" width="207" height="246"/>
+    <SubTexture name="cats/dead/red_03" x="1133" y="497" width="207" height="246"/>
+    <SubTexture name="cats/dead/red_04" x="1137" y="249" width="207" height="246"/>
+    <SubTexture name="cats/dead/red_05" x="1143" y="1" width="207" height="246"/>
+    <SubTexture name="cats/dead/red_06" x="911" y="1228" width="207" height="246"/>
+    <SubTexture name="cats/hiding/blue_01" x="1110" y="940" width="209" height="228"/>
+    <SubTexture name="cats/hiding/blue_02" x="842" y="1670" width="158" height="287"/>
+    <SubTexture name="cats/hiding/blue_03" x="565" y="815" width="238" height="176"/>
+    <SubTexture name="cats/hiding/red_01" x="1342" y="497" width="209" height="228"/>
+    <SubTexture name="cats/hiding/red_02" x="565" y="1" width="158" height="287"/>
+    <SubTexture name="cats/hiding/red_03" x="805" y="802" width="238" height="176"/>
+    <SubTexture name="cats/stars/01" x="565" y="290" rotated="true" width="152" height="262" frameX="-19" frameY="-6" frameWidth="290" frameHeight="170"/>
+    <SubTexture name="cats/stars/02" x="1045" y="786" width="202" height="152" frameX="-33" frameY="-14" frameWidth="290" frameHeight="170"/>
+    <SubTexture name="cats/stars/03" x="1249" y="745" width="208" height="137" frameX="-53" frameY="-27" frameWidth="290" frameHeight="170"/>
+    <SubTexture name="cats/stars/04" x="911" y="1476" width="211" height="143" frameX="-67" frameY="-12" frameWidth="290" frameHeight="170"/>
+    <SubTexture name="cats/stars/05" x="565" y="554" rotated="true" width="148" height="259" frameX="-24" frameY="-5" frameWidth="290" frameHeight="170"/>
 </TextureAtlas>

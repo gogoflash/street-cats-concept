@@ -8,6 +8,7 @@ package com.alisacasino.bingo.components
 	import flash.utils.clearInterval;
 	import flash.utils.setInterval;
 	import starling.animation.Transitions;
+	import starling.animation.Tween;
 	import starling.core.Starling;
 	import starling.display.Image;
 	import starling.display.Quad;
@@ -27,7 +28,7 @@ package com.alisacasino.bingo.components
 		
 		public var interval:Number = 0.5;
 		
-		public var left:Boolean = true;
+		public var up:Boolean = true;
 		
 		private var _rect:Rectangle;
 		
@@ -45,17 +46,17 @@ package com.alisacasino.bingo.components
 		
 		public function set rect(value:Rectangle):void
 		{
-			if (value == _rect)
+			if (value == _rect || (_rect && value && _rect.equals(value)))
 				return;
 				
 			_rect = value;
 			
 			if (_rect) 
 			{
-				if (left)
+				if (up)
 				{
-					start = new Point(_rect.x + _rect.width, _rect.y + _rect.height);
-					finish = new Point(_rect.x, _rect.y);
+					start = new Point(_rect.x, _rect.y);
+					finish = new Point(_rect.x + _rect.width, _rect.y + _rect.height);
 					bezier = new Point(_rect.x + _rect.width, _rect.y + _rect.height/2);
 					
 					
@@ -64,10 +65,9 @@ package com.alisacasino.bingo.components
 				{
 					start = new Point(_rect.x, _rect.y + _rect.height);
 					finish = new Point(_rect.x + _rect.width, _rect.y);
-					bezier = new Point(_rect.x, _rect.y + _rect.height/2);
+					bezier = new Point(_rect.x + _rect.width, _rect.y + _rect.height/2);
 				}
 			}
-			
 			
 			redraw();
 		}
@@ -88,6 +88,7 @@ package com.alisacasino.bingo.components
 			}
 			
 			if (arrowImage) {
+				Starling.juggler.removeTweens(arrowImage);
 				arrowImage.removeFromParent();
 			}
 			
@@ -115,14 +116,18 @@ package com.alisacasino.bingo.components
 			
 			intervalId = setInterval(tweenParticle, interval * 1000);
 			
-			if (hasArrow) {
+			if (hasArrow) 
+			{
 				if (!arrowImage) {
 					
 					arrowImage = new Image(AtlasAsset.CommonAtlas.getTexture('icons/arrow'));
-					arrowImage.pivotX = 11;	
-					arrowImage.pivotY = 4;
+					//arrowImage.pivotX = 11;	
+					//arrowImage.pivotY = 4;
+					arrowImage.alignPivot();
 				}
-					
+				
+				arrowImage.scale = 0;
+				arrowImage.alpha = 0.8;
 				
 				var a:Number = 0//Vector3D.angleBetween(new Vector3D(bezier.x, bezier.y, 1, 1), new Vector3D(finish.x, finish.y, 1, 1));
 					
@@ -130,11 +135,14 @@ package com.alisacasino.bingo.components
 				arrowImage.y = finish.y;
 				
 				if (Math.abs(finish.x - start.x) > 80) {
-					arrowImage.rotation = (left ? -1 : 1) * (2*a + Vector3D.angleBetween(new Vector3D(1, 1, 1, 1), new Vector3D(finish.x, finish.y, 1,1)));
+					arrowImage.rotation = (up ? -1 : 1) * (2*a + Vector3D.angleBetween(new Vector3D(1, 1, 1, 1), new Vector3D(finish.x, finish.y, 1,1)));
 				}
 				else {
 					arrowImage.rotation = 0;
 				}
+				
+				Starling.juggler.tween(arrowImage, 1, {transition:Transitions.LINEAR, /*alpha:0, */scale:1.2, repeatCount:0});
+				//Starling.juggler.tween(arrowImage, 0.2, {delay:0.8, transition:Transitions.LINEAR, alpha:0, repeatCount:0});
 				
 				addChild(arrowImage);
 			}
@@ -150,6 +158,8 @@ package com.alisacasino.bingo.components
 			}
 			else {
 				curve = new Image(AtlasAsset.CommonAtlas.getTexture('icons/round_dot'));
+				curve.alpha = 0.8;
+				curve.alignPivot();
 			}
 			
 			addChild(curve);
