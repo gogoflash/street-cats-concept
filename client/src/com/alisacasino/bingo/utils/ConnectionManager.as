@@ -189,7 +189,7 @@ package com.alisacasino.bingo.utils
 				
 				Game.dispatchEventWith(ConnectionManager.SIGN_IN_COMPLETE_EVENT);
 				
-				var mGameManager:GameManager = GameManager.instance;
+				/*var mGameManager:GameManager = GameManager.instance;
 				var mFacebookManager:IFacebookManager = PlatformServices.facebookManager;
 				if (PlatformServices.isMobile) {
 				// first time login as a guest -> we save playerId/pwdHash
@@ -203,9 +203,9 @@ package com.alisacasino.bingo.utils
 						mGameManager.playerId = null;
 						mGameManager.pwdHash = null;
 					}
-				}
+				}*/
 				
-				//1 + 1
+				
 				//sendJoin();
 			}
 			
@@ -264,6 +264,22 @@ package com.alisacasino.bingo.utils
 			   session: gameManager.connectionManager.sessionId,
 			   name: "joinGame",
 			   payload: {playerId:Player.current.playerId} 
+			}
+		
+			ServerConnection.current.sendMessageNew(json);
+		}
+		
+		public function sendExit():void
+		{
+			var json:Object = {
+			   id: 0,
+			   session: gameManager.connectionManager.sessionId,
+			   name: "exitGame",
+			   payload: 
+			   {
+				   playerId:Player.current.playerId,
+				   gameId:gameManager.connectionManager.gameId
+			   } 
 			}
 		
 			ServerConnection.current.sendMessageNew(json);

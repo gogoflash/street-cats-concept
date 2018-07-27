@@ -543,13 +543,32 @@ package com.alisacasino.bingo.screens.lobbyScreenClasses
 				GameUI.foodCount = 4;
 				gameManager.gameMode = GameManager.GAME_MODE_PVP;
 				gameScreen.showGame(false);
+				
+				
+				
+				
 			}
 			else
 			{
 				gameManager.connectionManager.sendJoin();
 				waitingForPvp = true;
-				FadeQuad.show(this);
+				FadeQuad.show(this, 0.2, 0.6, true);
 				showInfoLabel('WAIT FOR ENEMY...');
+				
+				
+				
+				if (!cancelButton)
+				{
+					cancelButton = new XButton(XButtonStyle.BlueButtonStyleNew);
+					cancelButton.scale9Grid = new Rectangle(13 , 13, 2, 2)
+					cancelButton.text = 'CANCEL';
+					cancelButton.alignPivot();
+					cancelButton.x = layoutHelper.stageWidth / 2;
+					cancelButton.y = layoutHelper.stageHeight - cancelButton.height - 20;
+					cancelButton.scale = layoutHelper.independentScaleFromEtalonMin;
+					cancelButton.addEventListener(Event.TRIGGERED, cancelButton_triggeredHandler);
+					addChild(cancelButton);
+				}
 			}
 			
 		/*	if(!gameManager.pvpUserReady)
@@ -558,6 +577,12 @@ package com.alisacasino.bingo.screens.lobbyScreenClasses
 			GameUI.foodCount = 4;
 			gameManager.gameMode = GameManager.GAME_MODE_PVP;
 			gameScreen.showGame(false);*/
+		}
+		
+		private function cancelButton_triggeredHandler(e:Event):void 
+		{
+			gameManager.connectionManager.sendExit();
+			hidePvPWaiting();
 		}
 		
 		private function get menuButtonX():int {
@@ -588,12 +613,12 @@ package com.alisacasino.bingo.screens.lobbyScreenClasses
 		{
 			if (waitingForPvp || FadeQuad.quad)
 			{
-				FadeQuad.hide();
-				showInfoLabel(null);
+				hidePvPWaiting();
 				
 				GameUI.foodCount = 4;
 				gameManager.gameMode = GameManager.GAME_MODE_PVP;
 				gameScreen.showGame(false);
+				
 			}
 			else
 			{
@@ -613,9 +638,16 @@ package com.alisacasino.bingo.screens.lobbyScreenClasses
 			FadeQuad.hide();
 			showInfoLabel(null);
 			waitingForPvp = false;
+			
+			if (cancelButton)
+			{
+				cancelButton.removeFromParent();
+				cancelButton = null;
+			}	
 		}
 		
 		private var roundInfoLabel:XTextField;
+		public var cancelButton:XButton;
 		
 		public function showInfoLabel(text:String):void
 		{

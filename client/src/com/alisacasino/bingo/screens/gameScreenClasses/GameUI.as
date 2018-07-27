@@ -1415,18 +1415,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			{
 				// я сделал метод exitGame, параметры gameId, playerId (edited)
 				
-				var json:Object = {
-				   id: 0,
-				   session: gameManager.connectionManager.sessionId,
-				   name: "exitGame",
-				   payload: 
-				   {
-					   playerId:Player.current.playerId,
-					   gameId:gameManager.connectionManager.gameId
-				   } 
-				}
-			
-				ServerConnection.current.sendMessageNew(json);
+				gameManager.connectionManager.sendExit();
 			}
 		}
 		
@@ -1489,7 +1478,9 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 						{
 							actionTime = showCatAction(catView_1, CatRole.FIGHTER, catView_2, catView_2.cat.role);
 							catView_1.cat.active = false;
-							catView_2.cat.active = (catView_2.cat.role == CatRole.DEFENDER) || (catView_2.cat.role == CatRole.FIGHTER);
+							
+							if(catView_2.cat.active)
+								catView_2.cat.active = (catView_2.cat.role == CatRole.DEFENDER) || (catView_2.cat.role == CatRole.FIGHTER);
 							
 							return actionTime;
 						}

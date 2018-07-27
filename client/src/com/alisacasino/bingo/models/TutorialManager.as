@@ -1873,16 +1873,17 @@ package com.alisacasino.bingo.models
 				
 				//if (i == 2)
 					//cat.role = CatRole.FIGHTER
+				cat.role = CatRole.HARVESTER;
+				if (i == 0)
+					cat.role = CatRole.FIGHTER;
 				
-			//	if (i == 0)
-					//cat.role = CatRole.DEFENDER;
 				
-					
+				
 				//cat.targetCat = 5//(opponents[0] as CatModel).id;
 				// enemy 0,1,2, player 3,4,5
 				//cat.role = CatRole.HARVESTER;
 				//cat.role = CatRole.FIGHTER;
-				//cat.targetCat = i + 3;
+				cat.targetCat = i + 3;
 			}
 		}
 		
