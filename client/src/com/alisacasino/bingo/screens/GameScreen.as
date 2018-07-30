@@ -160,7 +160,7 @@ package com.alisacasino.bingo.screens
 			gameScreenController.init();
 			
 			
-			while (gameManager.playerCats.length < gameManager.CAT_SLOTS_MAX) 
+			/*while (gameManager.playerCats.length < gameManager.CAT_SLOTS_MAX) 
 			{
 				var cat:CatModel = new CatModel();
 				cat.id = 3 + gameManager.playerCats.length;//gameManager.catsModel.getNextCatID();
@@ -171,7 +171,9 @@ package com.alisacasino.bingo.screens
 				//cat.targetCat = Math.floor(Math.random()*3);
 				
 				gameManager.playerCats.push(cat);
-			}
+			}*/
+			
+			resetGameCatCount();
 			
 			mBackgroundImage = new Image(AtlasAsset.ScratchCardAtlas.getTexture('backgrounds/' + '1'/*Math.ceil(Math.random()*5).toString()*/));
 			addChild(mBackgroundImage);
@@ -198,6 +200,31 @@ package com.alisacasino.bingo.screens
 			
 			new LoadSoundsAndAnimations().execute();
 		}
+		
+		public function resetGameCatCount(count:int = -1):void
+		{
+			if(count >= 0)
+				gameManager.CAT_SLOTS_MAX = count;
+			
+			while (gameManager.playerCats.length > gameManager.CAT_SLOTS_MAX) 
+			{
+				gameManager.playerCats.pop();
+			}
+			
+			while (gameManager.playerCats.length < gameManager.CAT_SLOTS_MAX) 
+			{
+				var cat:CatModel = new CatModel();
+				cat.id = 3 + gameManager.playerCats.length;//gameManager.catsModel.getNextCatID();
+				cat.health = 3;
+				cat.catUID = 0;//gameManager.catsModel.getRandomCatUID();
+				cat.isPlayer = true;
+				cat.role = CatRole.HARVESTER;//CatRole.getRandom();
+				//cat.targetCat = Math.floor(Math.random()*3);
+				
+				gameManager.playerCats.push(cat);
+			}
+		}
+	
 		
 		override public function dispose():void 
 		{

@@ -78,6 +78,7 @@ package com.alisacasino.bingo.screens.lobbyScreenClasses
 		public var tourneyButton:XButton;
 		public var rightButton:XButton;
 		public var pvpButton:XButton;
+		public var tutorButton:XButton;
 
 		private var hideCallback:Function;
 		
@@ -165,6 +166,12 @@ package com.alisacasino.bingo.screens.lobbyScreenClasses
 			pvpButton.text = 'PVP WAIT FOR PLAYER';
 			pvpButton.addEventListener(Event.TRIGGERED, pvpButton_triggeredHandler);
 			addChild(pvpButton);
+			
+			tutorButton = new XButton(XButtonStyle.BlueButtonStyleNew);
+			tutorButton.scale9Grid = new Rectangle(13 , 13, 2, 2)
+			tutorButton.text = 'PVE 1 CAT';
+			tutorButton.addEventListener(Event.TRIGGERED, tutorButton_triggeredHandler);
+			addChild(tutorButton);
 			
 			connectionProblemIndicator = new ConnectionProblemIndicator();
 			addChild(connectionProblemIndicator);
@@ -434,6 +441,11 @@ package com.alisacasino.bingo.screens.lobbyScreenClasses
 			pvpButton.width = UI_BUTTONS_WIDTH * complexScale;
 			pvpButton.x = layoutHelper.stageWidth - pvpButton.width - 17 * complexScale - uiCornersShiftX;
 			
+			tutorButton.scale = globalUIScale;
+			tutorButton.y = pvpButton.y - 90*layoutHelper.specialScale;
+			tutorButton.width = UI_BUTTONS_WIDTH * complexScale;
+			tutorButton.x = layoutHelper.stageWidth - tutorButton.width - 17 * complexScale - uiCornersShiftX;
+			
 			connectionProblemIndicator.scale = globalUIScale;
 			connectionProblemIndicator.x = layoutHelper.stageWidth / 2;
 			connectionProblemIndicator.y = layoutHelper.stageHeight / 2;
@@ -521,6 +533,8 @@ package com.alisacasino.bingo.screens.lobbyScreenClasses
 		
 		private function tourneyButton_triggeredHandler(e:Event):void 
 		{
+			Game.current.gameScreen.resetGameCatCount(3);
+			
 			GameUI.foodCount = 12;
 			gameManager.gameMode = GameManager.GAME_MODE_GROUP;
 			gameScreen.showGame(false);
@@ -529,6 +543,8 @@ package com.alisacasino.bingo.screens.lobbyScreenClasses
 		
 		private function rightButton_triggeredHandler(e:Event):void 
 		{
+			Game.current.gameScreen.resetGameCatCount(3);
+			
 			GameUI.foodCount = 4;
 			gameManager.gameMode = GameManager.GAME_MODE_GROUP;
 			gameScreen.showGame(false);
@@ -539,6 +555,8 @@ package com.alisacasino.bingo.screens.lobbyScreenClasses
 		{
 			if (gameManager.pvpUserReady)
 			{
+				Game.current.gameScreen.resetGameCatCount(3);
+				
 				//gameManager.connectionManager.sendJoin();
 				GameUI.foodCount = 4;
 				gameManager.gameMode = GameManager.GAME_MODE_PVP;
@@ -584,6 +602,16 @@ package com.alisacasino.bingo.screens.lobbyScreenClasses
 			gameManager.connectionManager.sendExit();
 			hidePvPWaiting();
 		}
+		
+		private function tutorButton_triggeredHandler(e:Event):void 
+		{
+			Game.current.gameScreen.resetGameCatCount(1);
+			
+			GameUI.foodCount = 2;
+			gameManager.gameMode = GameManager.GAME_MODE_GROUP;
+			gameScreen.showGame(false);
+		}
+		
 		
 		private function get menuButtonX():int {
 			return (-38 + (layoutHelper.isIPhoneX ? 10 : 0)) * pxScale;

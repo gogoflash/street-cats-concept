@@ -19,7 +19,7 @@ package com.alisacasino.bingo.utils
 			return false;
 		}
 		
-		public static const CANVAS_VERSION:String = "0.00.21";
+		public static const CANVAS_VERSION:String = "0.00.23";
 		
 		static public var devCheatMode:Boolean = false;
 		
