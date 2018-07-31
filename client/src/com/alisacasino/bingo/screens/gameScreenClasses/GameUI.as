@@ -6,6 +6,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 	import com.alisacasino.bingo.assets.MovieClipAsset;
 	import com.alisacasino.bingo.assets.SoundAsset;
 	import com.alisacasino.bingo.commands.player.UpdateLobbyBarsTrueValue;
+	import com.alisacasino.bingo.components.CatActionArrow;
 	import com.alisacasino.bingo.components.DottedLine;
 	import com.alisacasino.bingo.components.FadeQuad;
 	import com.alisacasino.bingo.components.FrameAnimator;
@@ -74,6 +75,8 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 		private const DELAY_CALL_GAME_UI_BUNDLE:String = 'DELAY_CALL_GAME_UI_BUNDLE';
 		static public const READY_GO_COMPLETE:String = "readyGoComplete";
 		
+		
+		private var arrowsContainerBottom:Sprite;
 		private var playerCatViewsContainer:Sprite;
 		private var enemyCatViewsContainer:Sprite;
 		private var foodViewsContainer:Sprite;
@@ -83,6 +86,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 		public var enemyCatsViews:Array = [];
 		
 		public var playerActionHelpersViews:Array = [];
+		public var playerCatActionHelpersViews:Array = [];
 		
 		public static var foodCount:int;
 		
@@ -117,6 +121,8 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 		public var foodInfo:FoodInfo;
 		public var enemyBar:EnemyBar;
 		
+		public var statusBar:RoundStatusBar;
+		
 		public function GameUI(gameScreen:GameScreen) 
 		{
 			this.gameScreen = gameScreen;
@@ -142,7 +148,8 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			//gameUIPanel.visible = false;
 			addChild(gameUIPanel);
 			
-			
+			arrowsContainerBottom = new Sprite();
+			addChild(arrowsContainerBottom);
 			
 			foodViewsContainer = new Sprite();
 			addChild(foodViewsContainer);
@@ -250,6 +257,13 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			
 			addChild(arrowsContainer);
 			
+			statusBar = new RoundStatusBar(Math.max(480*layoutHelper.independentScaleFromEtalonMin, layoutHelper.stageWidth - 40*layoutHelper.specialScale), 102*layoutHelper.specialScale*layoutHelper.independentScaleFromEtalonMin);
+			//statusBar.scale = layoutHelper.specialScale;
+			statusBar.x = layoutHelper.stageWidth / 2;
+			statusBar.y = layoutHelper.stageHeight - 50*layoutHelper.specialScale*layoutHelper.independentScaleFromEtalonMin - 15*layoutHelper.specialScale*layoutHelper.independentScaleFromEtalonMin;
+			statusBar.alpha = 0;
+			addChild(statusBar);
+			
 			addChild(topLayer);
 			
 			addChild(roundResultsLabel);
@@ -260,9 +274,8 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			//1+1
 			
 			
-			playerBar = new CashBar(false);
+			playerBar = new CashBar(false, null, true);
 			playerBar.touchable = false;
-			playerBar.custom = true;
 			addChild(playerBar);
 			
 			enemyBar = new EnemyBar();
@@ -271,6 +284,8 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			
 			foodInfo = new FoodInfo();
 			addChild(foodInfo);
+			
+			
 		}
 		
 		override protected function draw():void 
@@ -343,6 +358,8 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			gameUIPanel.state = GameUIPanel.STATE_GAME;
 			gameUIPanel.enableControls();
 			gameUIPanel.invalidate(INVALIDATION_FLAG_SIZE);
+			
+			statusBar.show(null, null);
 			
 			if (showReadyGo)
 			{
@@ -481,6 +498,16 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 				dottedLine = new DottedLine();
 				playerActionHelpersViews.push(dottedLine);
 				arrowsContainer.addChild(dottedLine);
+			}
+			
+			var catActionArrow:CatActionArrow;
+			while (playerCatActionHelpersViews.length < playerCatsViews.length) 
+			{
+				catActionArrow = new CatActionArrow();
+				catActionArrow.shiftX = 0;
+				catActionArrow.shiftY = 60;
+				playerCatActionHelpersViews.push(catActionArrow);
+				arrowsContainerBottom.addChild(catActionArrow);
 			}
 			
 			Starling.juggler.delayCall(refreshEnemyTargetMarks, 2);
@@ -959,12 +986,13 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 					hideEnemyActionHelpers();
 					
 			
-					
+					addChild(arrowsContainerBottom);
 					addChild(foodViewsContainer);
 					addChild(playerCatViewsContainer);
 					addChild(enemyCatViewsContainer);
 					addChild(foodCoverImage);
 					addChild(arrowsContainer);
+					addChild(statusBar);
 					addChild(topLayer);
 					addChild(roundResultsLabel);
 					
@@ -1130,12 +1158,17 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 		
 			
 			var dottedLine:DottedLine;
+			var catActionArrow:CatActionArrow;
 			var startPoint:Point;
 			var finishPoint:Point;
 			for (i = 0; i < playerCatsViews.length; i++) 
 			{
 				playerCatView = playerCatsViews[i] as CatView;
 				dottedLine = playerActionHelpersViews[i] as DottedLine;
+				
+				//catActionArrow = playerCatActionHelpersViews[i] as CatActionArrow;
+				//catActionArrow.actionType = playerCatView.cat.role;
+				//catActionArrow.alpha = 0;
 				if (playerCatView.cat.active && playerCatView.cat.role == CatRole.FIGHTER || playerCatView.cat.role == CatRole.DEFENDER) 
 				{
 					catView = getCatById(enemyCatsViews, playerCatView.cat.targetCat);
@@ -1144,22 +1177,16 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 					{
 						startPoint = playerCatView.parent.localToGlobal(new Point(playerCatView.x, playerCatView.y));
 						finishPoint = catView.parent.localToGlobal(new Point(catView.x, catView.y));
-						//finishPoint.y += CatView.HEIGHT / 4;
+					
+						dottedLine.up = startPoint.x < finishPoint.x;
 						
-						//dottedLine.x = finishPoint.x;
-						//dottedLine.y = finishPoint.y;
-						
-						
-						dottedLine.up = startPoint.x < finishPoint.x;//startPoint.y < finishPoint.y;
-						
-						//if(Math.abs(startPoint.x - finishPoint.x) > 40*layoutHelper.independentScaleFromEtalonMin)
-							//finishPoint.x += (dottedLine.up ? 1 : -1)*CatView.WIDTH / 4;
-						
-						dottedLine.rect = new Rectangle(startPoint.x, startPoint.y, Math.abs(finishPoint.x-startPoint.x), finishPoint.y - startPoint.y);
+						dottedLine.rect = new Rectangle(startPoint.x, startPoint.y, Math.abs(finishPoint.x - startPoint.x), finishPoint.y - startPoint.y);
+						//catActionArrow.rect = new Rectangle(startPoint.x, startPoint.y, Math.abs(finishPoint.x - startPoint.x), finishPoint.y - startPoint.y);
 					}
 					else
 					{
 						dottedLine.rect = null;
+						//catActionArrow.rect = null;
 					}
 				}
 				else if (playerCatView.cat.active && playerCatView.cat.role == CatRole.HARVESTER) 
@@ -1168,18 +1195,16 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 					
 					startPoint = playerCatView.parent.localToGlobal(new Point(playerCatView.x, playerCatView.y));
 					finishPoint = foodImage.parent.localToGlobal(new Point(foodImage.x, foodImage.y));
-					//finishPoint.y += CatView.HEIGHT / 4;
 					
 					dottedLine.up = startPoint.x < finishPoint.x;
 					
-					//if(Math.abs(startPoint.x - finishPoint.x) > 40*layoutHelper.independentScaleFromEtalonMin)
-						//finishPoint.x += (dottedLine.up ? 1 : -1)*CatView.WIDTH / 4;
-					
-					dottedLine.rect = new Rectangle(startPoint.x, startPoint.y, Math.abs(finishPoint.x-startPoint.x), finishPoint.y - startPoint.y);
+					dottedLine.rect = new Rectangle(startPoint.x, startPoint.y, Math.abs(finishPoint.x - startPoint.x), finishPoint.y - startPoint.y);
+					//catActionArrow.rect = new Rectangle(startPoint.x, startPoint.y, Math.abs(finishPoint.x - startPoint.x), finishPoint.y - startPoint.y);
 				}
 				else
 				{
 					dottedLine.rect = null;
+					//catActionArrow.rect = null;
 				}
 			
 			}
@@ -1201,6 +1226,8 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 				gameUIPanel.state = GameUIPanel.STATE_TO_RESULTS;
 				//gameUIPanel.visible = false;
 			}
+			
+			statusBar.show(null, null);
 			
 			hideVSandStartButton();
 			
@@ -1315,8 +1342,10 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			//Starling.juggler.tween(charV, 0.4, {transition:Transitions.EASE_OUT, x:charV.x - 50, alpha:0});
 			//Starling.juggler.tween(charS, 0.4, {transition:Transitions.EASE_OUT, x:charV.x + 50, alpha:0});
 			
-			if(startButton.scale != 0)
+			if (startButton.scale != 0) {
+				statusBar.show(null, null);
 				EffectsManager.scaleJumpDisappear(startButton);
+			}
 		}
 		
 		public function nextFightAction():void 
@@ -1551,6 +1580,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			
 			EffectsManager.scaleJumpAppearBase(startButton, layoutHelper.specialScale);
 			
+			statusBar.show(null, null);
 			
 			if (gameManager.gameMode != GameManager.GAME_MODE_PVP)
 				TutorialManager.refreshCatTargets(gameManager.enemyCats, gameManager.playerCats);
@@ -1815,6 +1845,7 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			//topLayer.addChild(particleEffect);
 			//Starling.juggler.delayCall(particleEffect.play, 1.7, 1000, 70, 0);
 			
+			statusBar.showSimple(catView_1, catView_2);
 			
 			
 			if (role_1 == role_2) 
@@ -1902,6 +1933,8 @@ package com.alisacasino.bingo.screens.gameScreenClasses
 			
 				
 			actionTime = 0.3 + timeToFood + 1.4 + timeToFood;
+			
+			statusBar.showHarvestSimple(catView_1);
 			
 			return actionTime;
 		}

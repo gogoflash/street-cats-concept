@@ -1,73 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker https://www.codeandweb.com/texturepacker -->
-<!-- $TexturePacker:SmartUpdate:e7ac278f4392abc03ad40423bc2a2fa4:d78f28dda19d741ed6d0f0dee28cd4e8:bf474e6deddfb213345187fa4d0f9838$ -->
+<!-- $TexturePacker:SmartUpdate:791c7b3e9d16b63762060d030446a1b1:d1a2abd85a6b28cb354d99f7cf7d351f:bf474e6deddfb213345187fa4d0f9838$ -->
 <TextureAtlas imagePath="loading.png" width="1024" height="2048">
-    <SubTexture name="cats/hungry/blue_01" x="601" y="1096" rotated="true" width="197" height="143" frameX="-28" frameY="0" frameWidth="207" frameHeight="206"/>
-    <SubTexture name="cats/hungry/blue_02" x="195" y="1414" rotated="true" width="192" height="157" frameX="-42" frameY="-5" frameWidth="207" frameHeight="205"/>
-    <SubTexture name="cats/hungry/blue_03" x="583" y="1424" rotated="true" width="192" height="156" frameX="-40" frameY="-5" frameWidth="207" frameHeight="205"/>
-    <SubTexture name="cats/hungry/blue_04" x="195" y="1573" rotated="true" width="192" height="146" frameX="-50" frameY="-5" frameWidth="207" frameHeight="205"/>
-    <SubTexture name="cats/hungry/blue_05" x="195" y="1254" rotated="true" width="192" height="158" frameX="-38" frameY="-5" frameWidth="207" frameHeight="205"/>
-    <SubTexture name="cats/hungry/blue_06" x="1" y="482" width="198" height="192" frameX="-1" frameY="-5" frameWidth="207" frameHeight="205"/>
-    <SubTexture name="cats/hungry/blue_07" x="399" y="1178" rotated="true" width="192" height="181" frameX="-18" frameY="-5" frameWidth="207" frameHeight="205"/>
-    <SubTexture name="cats/hungry/blue_08" x="787" y="1384" rotated="true" width="192" height="159" frameX="-40" frameY="-5" frameWidth="207" frameHeight="205"/>
-    <SubTexture name="cats/hungry/blue_09" x="777" y="1545" rotated="true" width="190" height="162" frameX="-36" frameY="-7" frameWidth="207" frameHeight="205"/>
-    <SubTexture name="cats/hungry/red_01" x="800" y="1239" rotated="true" width="197" height="143" frameX="-28" frameY="0" frameWidth="207" frameHeight="206"/>
-    <SubTexture name="cats/hungry/red_02" x="1" y="1415" rotated="true" width="192" height="157" frameX="-42" frameY="-5" frameWidth="207" frameHeight="205"/>
-    <SubTexture name="cats/hungry/red_03" x="389" y="1521" rotated="true" width="192" height="156" frameX="-40" frameY="-5" frameWidth="207" frameHeight="205"/>
-    <SubTexture name="cats/hungry/red_04" x="1" y="1574" rotated="true" width="192" height="146" frameX="-50" frameY="-5" frameWidth="207" frameHeight="205"/>
-    <SubTexture name="cats/hungry/red_05" x="389" y="1361" rotated="true" width="192" height="158" frameX="-38" frameY="-5" frameWidth="207" frameHeight="205"/>
-    <SubTexture name="cats/hungry/red_06" x="201" y="482" width="198" height="192" frameX="-1" frameY="-5" frameWidth="207" frameHeight="205"/>
-    <SubTexture name="cats/hungry/red_07" x="593" y="1241" rotated="true" width="192" height="181" frameX="-18" frameY="-5" frameWidth="207" frameHeight="205"/>
-    <SubTexture name="cats/hungry/red_08" x="1" y="1254" rotated="true" width="192" height="159" frameX="-40" frameY="-5" frameWidth="207" frameHeight="205"/>
-    <SubTexture name="cats/hungry/red_09" x="583" y="1582" rotated="true" width="190" height="162" frameX="-36" frameY="-7" frameWidth="207" frameHeight="205"/>
-    <SubTexture name="cats/idle/blue_01" x="801" y="805" rotated="true" width="198" height="143" frameX="-3" frameY="-2" frameWidth="153" frameHeight="200"/>
-    <SubTexture name="cats/idle/blue_02" x="812" y="367" rotated="true" width="199" height="144" frameX="-3" frameY="-1" frameWidth="153" frameHeight="200"/>
-    <SubTexture name="cats/idle/blue_03" x="1" y="335" rotated="true" width="199" height="145" frameX="-2" frameY="-1" frameWidth="153" frameHeight="200"/>
+    <SubTexture name="cats/actions_icons/angry_blue" x="611" y="56" rotated="true" width="67" height="60" frameX="-1" frameY="0" frameWidth="67" frameHeight="67"/>
+    <SubTexture name="cats/actions_icons/angry_red" x="922" y="71" rotated="true" width="67" height="60" frameX="-1" frameY="0" frameWidth="67" frameHeight="67"/>
+    <SubTexture name="cats/actions_icons/defence_blue" x="922" y="133" rotated="true" width="67" height="50" frameX="-9" frameY="0" frameWidth="67" frameHeight="67"/>
+    <SubTexture name="cats/actions_icons/defence_red" x="922" y="185" rotated="true" width="67" height="50" frameX="-9" frameY="0" frameWidth="67" frameHeight="67"/>
+    <SubTexture name="cats/actions_icons/hungry_blue" x="611" y="118" width="66" height="66" frameX="-1" frameY="-1" frameWidth="67" frameHeight="67"/>
+    <SubTexture name="cats/actions_icons/hungry_red" x="611" y="186" width="66" height="66" frameX="-1" frameY="-1" frameWidth="67" frameHeight="67"/>
+    <SubTexture name="cats/hungry/blue_01" x="801" y="1020" rotated="true" width="197" height="143" frameX="-28" frameY="0" frameWidth="207" frameHeight="206"/>
+    <SubTexture name="cats/hungry/blue_02" x="1" y="1535" rotated="true" width="192" height="157" frameX="-42" frameY="-5" frameWidth="207" frameHeight="205"/>
+    <SubTexture name="cats/hungry/blue_03" x="588" y="1450" rotated="true" width="192" height="156" frameX="-40" frameY="-5" frameWidth="207" frameHeight="205"/>
+    <SubTexture name="cats/hungry/blue_04" x="195" y="1551" rotated="true" width="192" height="146" frameX="-50" frameY="-5" frameWidth="207" frameHeight="205"/>
+    <SubTexture name="cats/hungry/blue_05" x="394" y="1387" rotated="true" width="192" height="158" frameX="-38" frameY="-5" frameWidth="207" frameHeight="205"/>
+    <SubTexture name="cats/hungry/blue_06" x="403" y="598" width="198" height="192" frameX="-1" frameY="-5" frameWidth="207" frameHeight="205"/>
+    <SubTexture name="cats/hungry/blue_07" x="200" y="1208" rotated="true" width="192" height="181" frameX="-18" frameY="-5" frameWidth="207" frameHeight="205"/>
+    <SubTexture name="cats/hungry/blue_08" x="394" y="1226" rotated="true" width="192" height="159" frameX="-40" frameY="-5" frameWidth="207" frameHeight="205"/>
+    <SubTexture name="cats/hungry/blue_09" x="195" y="1699" rotated="true" width="190" height="162" frameX="-36" frameY="-7" frameWidth="207" frameHeight="205"/>
+    <SubTexture name="cats/hungry/red_01" x="601" y="1144" rotated="true" width="197" height="143" frameX="-28" frameY="0" frameWidth="207" frameHeight="206"/>
+    <SubTexture name="cats/hungry/red_02" x="782" y="1309" rotated="true" width="192" height="157" frameX="-42" frameY="-5" frameWidth="207" frameHeight="205"/>
+    <SubTexture name="cats/hungry/red_03" x="389" y="1547" rotated="true" width="192" height="156" frameX="-40" frameY="-5" frameWidth="207" frameHeight="205"/>
+    <SubTexture name="cats/hungry/red_04" x="1" y="1694" rotated="true" width="192" height="146" frameX="-50" frameY="-5" frameWidth="207" frameHeight="205"/>
+    <SubTexture name="cats/hungry/red_05" x="195" y="1391" rotated="true" width="192" height="158" frameX="-38" frameY="-5" frameWidth="207" frameHeight="205"/>
+    <SubTexture name="cats/hungry/red_06" x="603" y="661" width="198" height="192" frameX="-1" frameY="-5" frameWidth="207" frameHeight="205"/>
+    <SubTexture name="cats/hungry/red_07" x="1" y="1352" rotated="true" width="192" height="181" frameX="-18" frameY="-5" frameWidth="207" frameHeight="205"/>
+    <SubTexture name="cats/hungry/red_08" x="588" y="1289" rotated="true" width="192" height="159" frameX="-40" frameY="-5" frameWidth="207" frameHeight="205"/>
+    <SubTexture name="cats/hungry/red_09" x="1" y="1842" rotated="true" width="190" height="162" frameX="-36" frameY="-7" frameWidth="207" frameHeight="205"/>
+    <SubTexture name="cats/idle/blue_01" x="880" y="237" width="143" height="198" frameX="-3" frameY="-2" frameWidth="153" frameHeight="200"/>
+    <SubTexture name="cats/idle/blue_02" x="604" y="515" rotated="true" width="199" height="144" frameX="-3" frameY="-1" frameWidth="153" frameHeight="200"/>
+    <SubTexture name="cats/idle/blue_03" x="812" y="437" rotated="true" width="199" height="145" frameX="-2" frameY="-1" frameWidth="153" frameHeight="200"/>
     <SubTexture name="cats/idle/blue_04" x="410" y="7" rotated="true" width="199" height="146" frameX="-2" frameY="-1" frameWidth="153" frameHeight="200"/>
-    <SubTexture name="cats/idle/blue_05" x="707" y="71" rotated="true" width="199" height="146" frameX="-2" frameY="-1" frameWidth="153" frameHeight="200"/>
+    <SubTexture name="cats/idle/blue_05" x="721" y="71" rotated="true" width="199" height="146" frameX="-2" frameY="-1" frameWidth="153" frameHeight="200"/>
     <SubTexture name="cats/idle/blue_06" x="410" y="155" rotated="true" width="199" height="146" frameX="-2" frameY="-1" frameWidth="153" frameHeight="200"/>
-    <SubTexture name="cats/idle/blue_07" x="202" y="335" rotated="true" width="199" height="145" frameX="-2" frameY="-1" frameWidth="153" frameHeight="200"/>
-    <SubTexture name="cats/idle/blue_08" x="812" y="513" rotated="true" width="199" height="144" frameX="-2" frameY="-1" frameWidth="153" frameHeight="200"/>
-    <SubTexture name="cats/idle/blue_09" x="401" y="598" rotated="true" width="198" height="144" frameX="-2" frameY="-2" frameWidth="153" frameHeight="200"/>
-    <SubTexture name="cats/idle/blue_10" x="1" y="676" rotated="true" width="198" height="143" frameX="-2" frameY="-2" frameWidth="153" frameHeight="200"/>
-    <SubTexture name="cats/idle/blue_11" x="201" y="676" rotated="true" width="198" height="143" frameX="-2" frameY="-2" frameWidth="153" frameHeight="200"/>
-    <SubTexture name="cats/idle/blue_12" x="401" y="744" rotated="true" width="198" height="143" frameX="-2" frameY="-2" frameWidth="153" frameHeight="200"/>
-    <SubTexture name="cats/idle/blue_13" x="1" y="1110" rotated="true" width="197" height="142" frameX="-3" frameY="-3" frameWidth="153" frameHeight="200"/>
-    <SubTexture name="cats/idle/blue_14" x="801" y="1095" rotated="true" width="198" height="142" frameX="-3" frameY="-2" frameWidth="153" frameHeight="200"/>
-    <SubTexture name="cats/idle/blue_15" x="1" y="966" rotated="true" width="198" height="142" frameX="-3" frameY="-2" frameWidth="153" frameHeight="200"/>
-    <SubTexture name="cats/idle/blue_16" x="601" y="806" rotated="true" width="198" height="143" frameX="-3" frameY="-2" frameWidth="153" frameHeight="200"/>
-    <SubTexture name="cats/idle/blue_17" x="801" y="805" rotated="true" width="198" height="143" frameX="-3" frameY="-2" frameWidth="153" frameHeight="200"/>
-    <SubTexture name="cats/idle/red_01" x="801" y="950" rotated="true" width="198" height="143" frameX="-3" frameY="-2" frameWidth="153" frameHeight="200"/>
-    <SubTexture name="cats/idle/red_02" x="604" y="514" rotated="true" width="199" height="144" frameX="-3" frameY="-1" frameWidth="153" frameHeight="200"/>
-    <SubTexture name="cats/idle/red_03" x="611" y="367" rotated="true" width="199" height="145" frameX="-2" frameY="-1" frameWidth="153" frameHeight="200"/>
-    <SubTexture name="cats/idle/red_04" x="611" y="219" rotated="true" width="199" height="146" frameX="-2" frameY="-1" frameWidth="153" frameHeight="200"/>
+    <SubTexture name="cats/idle/blue_07" x="1" y="335" rotated="true" width="199" height="145" frameX="-2" frameY="-1" frameWidth="153" frameHeight="200"/>
+    <SubTexture name="cats/idle/blue_08" x="805" y="584" rotated="true" width="199" height="144" frameX="-2" frameY="-1" frameWidth="153" frameHeight="200"/>
+    <SubTexture name="cats/idle/blue_09" x="803" y="730" rotated="true" width="198" height="144" frameX="-2" frameY="-2" frameWidth="153" frameHeight="200"/>
+    <SubTexture name="cats/idle/blue_10" x="201" y="628" rotated="true" width="198" height="143" frameX="-2" frameY="-2" frameWidth="153" frameHeight="200"/>
+    <SubTexture name="cats/idle/blue_11" x="201" y="773" rotated="true" width="198" height="143" frameX="-2" frameY="-2" frameWidth="153" frameHeight="200"/>
+    <SubTexture name="cats/idle/blue_12" x="1" y="774" rotated="true" width="198" height="143" frameX="-2" frameY="-2" frameWidth="153" frameHeight="200"/>
+    <SubTexture name="cats/idle/blue_13" x="800" y="1165" rotated="true" width="197" height="142" frameX="-3" frameY="-3" frameWidth="153" frameHeight="200"/>
+    <SubTexture name="cats/idle/blue_14" x="1" y="1064" rotated="true" width="198" height="142" frameX="-3" frameY="-2" frameWidth="153" frameHeight="200"/>
+    <SubTexture name="cats/idle/blue_15" x="801" y="876" rotated="true" width="198" height="142" frameX="-3" frameY="-2" frameWidth="153" frameHeight="200"/>
+    <SubTexture name="cats/idle/blue_16" x="401" y="792" rotated="true" width="198" height="143" frameX="-3" frameY="-2" frameWidth="153" frameHeight="200"/>
+    <SubTexture name="cats/idle/blue_17" x="880" y="237" width="143" height="198" frameX="-3" frameY="-2" frameWidth="153" frameHeight="200"/>
+    <SubTexture name="cats/idle/red_01" x="201" y="918" rotated="true" width="198" height="143" frameX="-3" frameY="-2" frameWidth="153" frameHeight="200"/>
+    <SubTexture name="cats/idle/red_02" x="1" y="482" rotated="true" width="199" height="144" frameX="-3" frameY="-1" frameWidth="153" frameHeight="200"/>
+    <SubTexture name="cats/idle/red_03" x="202" y="335" rotated="true" width="199" height="145" frameX="-2" frameY="-1" frameWidth="153" frameHeight="200"/>
+    <SubTexture name="cats/idle/red_04" x="679" y="219" rotated="true" width="199" height="146" frameX="-2" frameY="-1" frameWidth="153" frameHeight="200"/>
     <SubTexture name="cats/idle/red_05" x="410" y="303" rotated="true" width="199" height="146" frameX="-2" frameY="-1" frameWidth="153" frameHeight="200"/>
-    <SubTexture name="cats/idle/red_06" x="812" y="219" rotated="true" width="199" height="146" frameX="-2" frameY="-1" frameWidth="153" frameHeight="200"/>
+    <SubTexture name="cats/idle/red_06" x="611" y="367" rotated="true" width="199" height="146" frameX="-2" frameY="-1" frameWidth="153" frameHeight="200"/>
     <SubTexture name="cats/idle/red_07" x="403" y="451" rotated="true" width="199" height="145" frameX="-2" frameY="-1" frameWidth="153" frameHeight="200"/>
-    <SubTexture name="cats/idle/red_08" x="805" y="659" rotated="true" width="199" height="144" frameX="-2" frameY="-1" frameWidth="153" frameHeight="200"/>
-    <SubTexture name="cats/idle/red_09" x="601" y="660" rotated="true" width="198" height="144" frameX="-2" frameY="-2" frameWidth="153" frameHeight="200"/>
-    <SubTexture name="cats/idle/red_10" x="1" y="821" rotated="true" width="198" height="143" frameX="-2" frameY="-2" frameWidth="153" frameHeight="200"/>
-    <SubTexture name="cats/idle/red_11" x="201" y="821" rotated="true" width="198" height="143" frameX="-2" frameY="-2" frameWidth="153" frameHeight="200"/>
-    <SubTexture name="cats/idle/red_12" x="401" y="889" rotated="true" width="198" height="143" frameX="-2" frameY="-2" frameWidth="153" frameHeight="200"/>
-    <SubTexture name="cats/idle/red_13" x="200" y="1110" rotated="true" width="197" height="142" frameX="-3" frameY="-3" frameWidth="153" frameHeight="200"/>
-    <SubTexture name="cats/idle/red_14" x="201" y="966" rotated="true" width="198" height="142" frameX="-3" frameY="-2" frameWidth="153" frameHeight="200"/>
-    <SubTexture name="cats/idle/red_15" x="401" y="1034" rotated="true" width="198" height="142" frameX="-3" frameY="-2" frameWidth="153" frameHeight="200"/>
-    <SubTexture name="cats/idle/red_16" x="601" y="951" rotated="true" width="198" height="143" frameX="-3" frameY="-2" frameWidth="153" frameHeight="200"/>
-    <SubTexture name="cats/idle/red_17" x="801" y="950" rotated="true" width="198" height="143" frameX="-3" frameY="-2" frameWidth="153" frameHeight="200"/>
+    <SubTexture name="cats/idle/red_08" x="202" y="482" rotated="true" width="199" height="144" frameX="-2" frameY="-1" frameWidth="153" frameHeight="200"/>
+    <SubTexture name="cats/idle/red_09" x="1" y="628" rotated="true" width="198" height="144" frameX="-2" frameY="-2" frameWidth="153" frameHeight="200"/>
+    <SubTexture name="cats/idle/red_10" x="1" y="919" rotated="true" width="198" height="143" frameX="-2" frameY="-2" frameWidth="153" frameHeight="200"/>
+    <SubTexture name="cats/idle/red_11" x="601" y="855" rotated="true" width="198" height="143" frameX="-2" frameY="-2" frameWidth="153" frameHeight="200"/>
+    <SubTexture name="cats/idle/red_12" x="401" y="937" rotated="true" width="198" height="143" frameX="-2" frameY="-2" frameWidth="153" frameHeight="200"/>
+    <SubTexture name="cats/idle/red_13" x="1" y="1208" rotated="true" width="197" height="142" frameX="-3" frameY="-3" frameWidth="153" frameHeight="200"/>
+    <SubTexture name="cats/idle/red_14" x="601" y="1000" rotated="true" width="198" height="142" frameX="-3" frameY="-2" frameWidth="153" frameHeight="200"/>
+    <SubTexture name="cats/idle/red_15" x="401" y="1082" rotated="true" width="198" height="142" frameX="-3" frameY="-2" frameWidth="153" frameHeight="200"/>
+    <SubTexture name="cats/idle/red_16" x="201" y="1063" rotated="true" width="198" height="143" frameX="-3" frameY="-2" frameWidth="153" frameHeight="200"/>
+    <SubTexture name="cats/idle/red_17" x="201" y="918" rotated="true" width="198" height="143" frameX="-3" frameY="-2" frameWidth="153" frameHeight="200"/>
     <SubTexture name="dialogs/back_bg" x="1002" y="1" width="21" height="21"/>
     <SubTexture name="dialogs/buttons/blue_base" x="611" y="7" width="88" height="47"/>
-    <SubTexture name="dialogs/buttons/close" x="666" y="56" rotated="true" width="39" height="38"/>
+    <SubTexture name="dialogs/buttons/close" x="680" y="56" rotated="true" width="39" height="38"/>
     <SubTexture name="dialogs/buttons/empty_square" x="1019" y="41" width="3" height="3" frameX="0" frameY="0" frameWidth="7" frameHeight="7"/>
-    <SubTexture name="dialogs/buttons/green_button_big_slice" x="611" y="56" rotated="true" width="53" height="25"/>
+    <SubTexture name="dialogs/buttons/green_button_big_slice" x="991" y="139" width="25" height="53"/>
     <SubTexture name="dialogs/window_bg" x="1019" y="24" rotated="true" width="3" height="15"/>
     <SubTexture name="logo_full" x="722" y="1" width="278" height="68"/>
     <SubTexture name="misc/progress_ball" x="1002" y="40" width="15" height="9"/>
     <SubTexture name="misc/progress_bg" x="1002" y="51" rotated="true" width="12" height="28"/>
     <SubTexture name="misc/progress_line" x="410" y="1" width="310" height="4" frameX="-2" frameY="0" frameWidth="312" frameHeight="4"/>
-    <SubTexture name="misc/star_0" x="641" y="83" rotated="true" width="23" height="24" frameX="0" frameY="-1" frameWidth="24" frameHeight="24"/>
+    <SubTexture name="misc/star_0" x="991" y="194" width="24" height="23" frameX="0" frameY="-1" frameWidth="24" frameHeight="24"/>
     <SubTexture name="misc/star_1" x="1016" y="51" width="5" height="5"/>
-    <SubTexture name="misc/star_2" x="611" y="83" width="28" height="27" frameX="0" frameY="-1" frameWidth="28" frameHeight="28"/>
-    <SubTexture name="misc/star_4" x="666" y="96" width="28" height="27" frameX="0" frameY="-1" frameWidth="28" frameHeight="28"/>
+    <SubTexture name="misc/star_2" x="991" y="81" width="28" height="27" frameX="0" frameY="-1" frameWidth="28" frameHeight="28"/>
+    <SubTexture name="misc/star_4" x="991" y="110" width="28" height="27" frameX="0" frameY="-1" frameWidth="28" frameHeight="28"/>
     <SubTexture name="misc/white_star" x="1002" y="24" width="15" height="14"/>
     <SubTexture name="start_bg" x="1" y="1" rotated="true" width="407" height="332"/>
 </TextureAtlas>

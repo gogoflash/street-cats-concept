@@ -29,11 +29,13 @@ package com.alisacasino.bingo.controls
 		
 		public var custom:Boolean;
 		
-		public function CashBar(hidePlusButton:Boolean = false, onTriggeredCallback:Function = null)
+		public function CashBar(hidePlusButton:Boolean = false, onTriggeredCallback:Function = null, custom:Boolean = false)
 		{
 			super(Settings.instance.saleType, hidePlusButton);
 			
 			this.onTriggeredCallback = onTriggeredCallback;
+			this.custom = custom;
+			
 			icon = new Image(mAtlas.getTexture("cats/fish_blue"));
 			mCriticalValue = Constants.CRITICAL_VALUE_CASH;
 			
